@@ -1,1593 +1,722 @@
-<!DOCTYPE html>
+<write_to_file>
+<path>rioops2/index.html</path>
+<content><!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover">
-<meta name="theme-color" content="#1a2a3d">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="android-fullscreen" content="yes">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="theme-color" content="#0a1410">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Rio Ops">
-<meta name="msapplication-tap-highlight" content="no">
-<meta name="full-screen" content="yes">
-<meta name="browsermode" content="application">
-<meta name="x5-fullscreen" content="true">
-<meta name="x5-page-mode" content="app">
-<meta name="x5-orientation" content="portrait">
-<meta name="360-fullscreen" content="true">
+<meta name="mobile-web-app-capable" content="yes">
+<title>RIO OPS 2 · Sistema Tático de Patrulha Fluvial</title>
 <link rel="manifest" href="manifest.json">
-<title>Rio Ops</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-html{height:100%;width:100%;overflow:hidden;background:#1a2a3d}
-body{font-family:'Segoe UI',system-ui,sans-serif;font-size:14px;background:#f0f4f8;color:#1a2535;
-  height:100%;width:100%;overflow:hidden;
-  -webkit-tap-highlight-color:transparent;
-  -webkit-touch-callout:none;
-  -webkit-user-select:none;
-  -moz-user-select:none;
-  user-select:none;
-  overscroll-behavior:none;
-  overscroll-behavior-y:none;
-  -webkit-overflow-scrolling:touch;
-  touch-action:pan-y;
-  position:fixed;
-  top:0;left:0;right:0;bottom:0;
-}
-/* Permite seleção apenas em inputs e textareas */
-input,textarea,select{-webkit-user-select:auto;user-select:auto;touch-action:auto}
-.screen{display:none;height:100%;width:100%;flex-direction:column;position:absolute;inset:0}.screen.show{display:flex}
-/* LOGIN */
-#scLogin{align-items:center;justify-content:center;padding:28px 16px;background:#1a2a3d;height:100%;overflow-y:auto;overscroll-behavior:contain}
-.lbox{width:100%;max-width:400px;background:#243548;border-radius:16px;padding:26px 22px;border:1px solid #2e4560}
-.brand{text-align:center;margin-bottom:22px}
-.bi{width:52px;height:52px;background:#1e3a5c;border:2px solid #c9a040;border-radius:12px;display:flex;align-items:center;justify-content:center;margin:0 auto 10px}
-.bn{font-size:19px;font-weight:600;color:#e8f0f8}.bs{font-size:10px;color:#6a8aaa;letter-spacing:1.5px;text-transform:uppercase;margin-top:3px}
-.pgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px}
-.pb{background:#1a2a3d;border:2px solid #2e4560;border-radius:11px;padding:14px 8px;cursor:pointer;text-align:center;transition:all .2s}
-.pb.sel{border-color:#c9a040;background:#1e3250}
-.pbi{width:40px;height:40px;border-radius:50%;margin:0 auto 8px;display:flex;align-items:center;justify-content:center}
-.pi-cmd{background:#1a3020;color:#4abf70}.pi-crew{background:#101e38;color:#5090e0}
-.pbn{font-size:12px;font-weight:600;color:#c8d8e8}.pbr{font-size:10px;color:#6a8aaa;margin-top:2px}
-.plbl{font-size:11px;color:#8aaac0;text-align:center;margin-bottom:8px}
-.prow{display:flex;gap:7px;justify-content:center;margin-bottom:14px}
-.pd{width:46px;height:54px;border:2px solid #2e4560;border-radius:9px;background:#1a2a3d;color:#e8f0f8;font-size:22px;text-align:center;outline:none;transition:border-color .2s}
-.pd:focus{border-color:#c9a040}
-.lerr{color:#f07070;font-size:11px;text-align:center;min-height:18px;margin-bottom:8px}
-.lbtn{width:100%;padding:13px;border-radius:10px;border:none;background:#1e5fa0;color:#fff;font-size:14px;font-weight:600;cursor:pointer}
-/* APP */
-#scApp{background:#f0f4f8;flex-direction:column}
-.topbar{background:#1a2a3d;height:52px;padding:0 14px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
-.tbl{display:flex;align-items:center;gap:9px}
-.tbn{font-size:14px;font-weight:600;color:#c9a040}.tbm{font-size:10px;color:#6a8aaa;margin-top:1px}
-.tbr{display:flex;align-items:center;gap:10px}
-.tbc{font-size:16px;font-weight:600;color:#f0c840;letter-spacing:2px;font-variant-numeric:tabular-nums}
-.tbu{display:flex;align-items:center;gap:5px;font-size:11px;color:#8aaac0}
-.udot{width:7px;height:7px;border-radius:50%}.ud-cmd{background:#4abf70}.ud-crew{background:#5090e0}
-.bout{background:transparent;border:1px solid #3a5570;border-radius:6px;color:#8aaac0;font-size:11px;padding:4px 10px;cursor:pointer}
-.navtabs{background:#243548;border-bottom:1px solid #2e4560;display:flex;flex-shrink:0;overflow-x:scroll;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;scroll-snap-type:x proximity}
-.navtabs::-webkit-scrollbar{display:none}
-.navtabs::after{content:'';flex-shrink:0;width:8px}
-.nt{padding:11px 16px;font-size:11px;font-weight:500;letter-spacing:.4px;color:#6a8aaa;cursor:pointer;border:none;background:none;border-bottom:3px solid transparent;white-space:nowrap;transition:all .18s;scroll-snap-align:start;flex-shrink:0;touch-action:pan-x}
-.nt.act{color:#c9a040;border-bottom-color:#c9a040;background:#1e3250}
-.pages{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;overscroll-behavior-y:contain}
-.page{display:none;padding:16px;max-width:900px;margin:0 auto}.page.show{display:block}
-/* CARDS */
-.card{background:#fff;border:1px solid #d8e4f0;border-radius:11px;padding:16px;margin-bottom:12px}
-.ctitle{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.8px;color:#6a8aaa;margin-bottom:12px;display:flex;align-items:center;gap:6px}
-.ctitle::before{content:'';display:block;width:3px;height:13px;background:#c9a040;border-radius:2px}
-/* FORMS */
-.frow{display:flex;gap:10px;margin-bottom:12px;flex-wrap:wrap}
-.fg{flex:1;min-width:140px}
-.fl{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.6px;color:#7a9ab8;margin-bottom:4px}
-.fi{width:100%;padding:9px 11px;background:#f5f8fc;border:1.5px solid #c8d8e8;border-radius:7px;color:#1a2535;font-size:13px;outline:none;font-family:inherit;transition:border-color .2s;-webkit-appearance:none;appearance:none}
-.fi:focus{border-color:#1e5fa0;background:#fff}
-.fi:disabled{opacity:.6;cursor:not-allowed;background:#eef2f7}
-textarea.fi{resize:vertical;min-height:72px;line-height:1.5}
-/* BUTTONS */
-.btn{padding:8px 16px;border-radius:7px;border:none;cursor:pointer;font-size:12px;font-weight:500;transition:all .15s;display:inline-flex;align-items:center;gap:5px;touch-action:manipulation}
-.btn:active{opacity:.82}.btn:disabled{opacity:.38;cursor:not-allowed}
-.btn-blue{background:#1e5fa0;color:#fff}.btn-green{background:#1a8a5a;color:#fff}
-.btn-amber{background:#c9a040;color:#1a1000}.btn-red{background:#c03030;color:#fff}
-.btn-ghost{background:#fff;color:#4a6a8a;border:1.5px solid #c8d8e8}
-.btn-purple{background:#5a3a9a;color:#fff}
-.btn-sm{padding:5px 12px;font-size:11px;border-radius:6px}
-.badge{display:inline-block;padding:2px 8px;border-radius:20px;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.4px}
-.b-active{background:#d0ffe8;color:#0a6a40;border:1px solid #70d0a0}
-/* DASHBOARD */
-.dgrid{display:grid;grid-template-columns:1.4fr .6fr;gap:12px;margin-bottom:12px}
-@media(max-width:580px){.dgrid{grid-template-columns:1fr}.frow .fg{min-width:120px}}
-.wcard{background:#1a2a3d;border-radius:13px;padding:18px;text-align:center;color:#e8f0f8}
-.wlbl{font-size:10px;text-transform:uppercase;letter-spacing:1.2px;color:#6a8aaa;margin-bottom:5px}
-.wteam{font-size:24px;font-weight:600;color:#fff;margin-bottom:2px}
-.wtype{font-size:11px;color:#8aaac0;margin-bottom:14px}
-.ring{width:130px;height:130px;position:relative;margin:0 auto 14px}
-.ring svg{transform:rotate(-90deg)}
-.rc{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center}
-.rt{font-size:24px;font-weight:600;color:#f0c840;font-variant-numeric:tabular-nums;line-height:1}
-.rl{font-size:9px;color:#6a8aaa;text-transform:uppercase;letter-spacing:.5px;margin-top:2px}
-.nstrip{background:#243548;border-radius:9px;padding:10px 12px;display:flex;justify-content:space-between;align-items:center}
-.nsl{font-size:9px;text-transform:uppercase;letter-spacing:.8px;color:#6a8aaa}
-.nsv{font-size:13px;font-weight:500;color:#c8d8e8;margin-top:2px}
-.nst{font-size:10px;color:#6a8aaa;margin-top:1px}
-.scol{display:flex;flex-direction:column;gap:9px}
-.scard{background:#fff;border:1px solid #d8e4f0;border-radius:11px;padding:12px}
-.slbl{font-size:10px;text-transform:uppercase;letter-spacing:.8px;color:#8aaac0;margin-bottom:3px}
-.sval{font-size:19px;font-weight:600;color:#1a2535;font-variant-numeric:tabular-nums}
-.ssub{font-size:10px;color:#8aaac0;margin-top:2px}
-.mbrow{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
-/* LIST */
-.li{background:#fff;border:1px solid #d8e4f0;border-radius:9px;padding:11px 13px;margin-bottom:7px;display:flex;align-items:flex-start;gap:10px}
-.av{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;flex-shrink:0}
-.lin{font-size:13px;font-weight:600;color:#1a2535}.lis{font-size:11px;color:#8aaac0;margin-top:1px}
-/* LOG */
-.logi{background:#fff;border:1px solid #d8e4f0;border-left-width:3px;border-radius:0 9px 9px 0;padding:11px 13px;margin-bottom:7px}
-.lhdr{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin-bottom:5px}
-.lts{font-size:10px;color:#8aaac0;font-variant-numeric:tabular-nums}
-.lgps{font-size:10px;color:#1a8a5a;font-weight:500}
-.ltxt{font-size:13px;color:#2a3a4d;line-height:1.5}
-/* MSGS */
-.mok{background:#edfaf3;border:1px solid #70d0a0;border-radius:7px;padding:9px 13px;color:#0a6a40;font-size:12px;margin-bottom:10px}
-.merr{background:#fef0f0;border:1px solid #f0a0a0;border-radius:7px;padding:9px 13px;color:#a02020;font-size:12px;margin-bottom:10px}
-.empty{text-align:center;padding:36px 16px;color:#8aaac0;font-size:13px}
-.shdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
-.stitle{font-size:14px;font-weight:600;color:#1a2535}
-.srow{display:flex;align-items:center;gap:9px;padding:8px 0;border-bottom:1px solid #e8eef5}
-.srow:last-child{border:none}
-/* TABS */
-.stabs{display:flex;gap:6px;flex-wrap:wrap}
-.stab{padding:6px 14px;border-radius:20px;border:1.5px solid #c8d8e8;background:#fff;color:#4a6a8a;font-size:12px;font-weight:500;cursor:pointer;transition:all .18s}
-.stab.act{background:#1e5fa0;color:#fff;border-color:#1e5fa0}
-/* ORDER */
-.order-list{border:1px solid #d8e4f0;border-radius:9px;overflow:hidden}
-.order-item{display:flex;align-items:center;gap:10px;padding:10px 13px;border-bottom:1px solid #e8eef5;background:#fff;cursor:grab;user-select:none}
-.order-item:last-child{border:none}
-.order-item.over{background:#e8f0ff}
-.order-item.dragging{opacity:.4}
-.drag-handle{color:#c8d8e8;font-size:18px;cursor:grab;flex-shrink:0}
-.order-num{width:22px;height:22px;border-radius:50%;background:#e8eef5;color:#4a6a8a;font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-/* MODAL */
-.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:200;align-items:center;justify-content:center;padding:16px}
-.overlay.show{display:flex}
-.modal{background:#fff;border-radius:14px;padding:22px;width:100%;max-width:480px;max-height:90vh;overflow-y:auto;box-shadow:0 8px 40px rgba(0,0,0,.18)}
-.modal-title{font-size:15px;font-weight:600;color:#1a2535;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between}
-.modal-close{background:none;border:none;font-size:22px;color:#8aaac0;cursor:pointer;line-height:1}
-/* SAVED MISSIONS */
-.mcard{background:#fff;border:1px solid #d8e4f0;border-radius:10px;padding:13px;margin-bottom:8px}
-.mc-name{font-size:13px;font-weight:600;color:#1a2535}.mc-sub{font-size:11px;color:#8aaac0;margin-top:2px}
-.mc-btns{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}
-/* INLINE EDIT */
-.inline-sel{padding:3px 7px;font-size:11px;border:1.5px solid #c8d8e8;border-radius:6px;background:#f5f8fc;color:#1a2535;outline:none;-webkit-appearance:none;appearance:none}
-.inline-sel:focus{border-color:#1e5fa0}
+:root{--bg-primary:#0a1410;--bg-secondary:#0f1d18;--bg-tertiary:#142822;--bg-card:#1a3329;--bg-elevated:#1f3d31;--border:#2d4a3c;--border-light:#3d5f4d;--accent:#c9a961;--accent-bright:#e6c77a;--accent-dim:#8a7340;--success:#4a8f5c;--success-bright:#5fa870;--danger:#b04848;--danger-bright:#d15858;--warning:#c99640;--info:#4a7a8f;--text-primary:#e8e4d8;--text-secondary:#a8a090;--text-dim:#6b6355;--text-muted:#4a4438;--night:#1a2840;--day:#2a4838;--font-display:'Oswald',sans-serif;--font-mono:'JetBrains Mono',monospace;--font-body:'Inter',sans-serif;--radius:8px;--radius-lg:12px;--shadow:0 4px 12px rgba(0,0,0,0.4);--shadow-lg:0 8px 24px rgba(0,0,0,0.6)}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;width:100%;overflow:hidden;overscroll-behavior:none;touch-action:manipulation}
+body{font-family:var(--font-body);background:var(--bg-primary);color:var(--text-primary);user-select:none;-webkit-user-select:none;position:fixed;top:0;left:0;right:0;bottom:0;background-image:radial-gradient(circle at 20% 30%,rgba(74,143,92,0.08) 0%,transparent 50%),radial-gradient(circle at 80% 70%,rgba(201,169,97,0.05) 0%,transparent 50%)}
+input,textarea,select{user-select:text;-webkit-user-select:text;font-family:inherit}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+::-webkit-scrollbar{width:6px;height:6px}::-webkit-scrollbar-track{background:var(--bg-secondary)}::-webkit-scrollbar-thumb{background:var(--border-light);border-radius:3px}::-webkit-scrollbar-thumb:hover{background:var(--accent-dim)}
+.login-screen{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0a1410 0%,#142822 50%,#0a1410 100%);z-index:9999;padding:20px}
+.login-box{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:40px 30px;max-width:400px;width:100%;box-shadow:var(--shadow-lg);text-align:center}
+.login-emblem{width:100px;height:100px;margin:0 auto 20px;background:radial-gradient(circle,var(--accent) 0%,var(--accent-dim) 100%);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:48px;box-shadow:0 0 40px rgba(201,169,97,0.3);border:3px solid var(--accent-dim)}
+.login-title{font-family:var(--font-display);font-size:32px;letter-spacing:4px;color:var(--accent);margin-bottom:4px}
+.login-subtitle{font-size:11px;letter-spacing:3px;color:var(--text-secondary);margin-bottom:30px;text-transform:uppercase}
+.login-field{margin-bottom:15px;text-align:left}
+.login-field label{display:block;font-size:11px;letter-spacing:2px;color:var(--text-secondary);margin-bottom:6px;text-transform:uppercase}
+.login-field input,.login-field select{width:100%;padding:12px 15px;background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius);color:var(--text-primary);font-size:14px;font-family:var(--font-mono)}
+.login-field input:focus,.login-field select:focus{outline:none;border-color:var(--accent)}
+.login-btn{width:100%;padding:14px;background:var(--accent);color:var(--bg-primary);font-family:var(--font-display);font-size:14px;letter-spacing:3px;border-radius:var(--radius);font-weight:700;margin-top:10px;transition:all 0.2s;text-transform:uppercase}
+.login-btn:active{transform:scale(0.98);background:var(--accent-bright)}
+.login-error{color:var(--danger-bright);font-size:12px;margin-top:10px;min-height:16px}
+.login-hint{font-size:10px;color:var(--text-dim);margin-top:20px;letter-spacing:1px}
+.app{display:none;height:100vh;width:100vw;flex-direction:column}
+.app.active{display:flex}
+.app-header{background:var(--bg-secondary);border-bottom:1px solid var(--border);padding:8px 12px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;min-height:52px}
+.app-brand{display:flex;align-items:center;gap:10px}
+.brand-icon{width:32px;height:32px;background:var(--accent);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;box-shadow:0 0 12px rgba(201,169,97,0.3)}
+.brand-text{font-family:var(--font-display);letter-spacing:3px;font-size:16px;color:var(--accent)}
+.brand-sub{font-size:9px;letter-spacing:2px;color:var(--text-dim);text-transform:uppercase}
+.app-status{display:flex;align-items:center;gap:12px;font-family:var(--font-mono);font-size:11px}
+.status-chip{display:flex;align-items:center;gap:4px;color:var(--text-secondary)}
+.status-chip.online{color:var(--success-bright)}
+.status-chip.offline{color:var(--danger-bright)}
+.status-dot{width:6px;height:6px;border-radius:50%;background:currentColor;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+.header-time{font-size:14px;color:var(--accent);font-weight:600}
+.nav-tabs{display:flex;background:var(--bg-secondary);border-bottom:1px solid var(--border);overflow-x:auto;overflow-y:hidden;flex-shrink:0;-webkit-overflow-scrolling:touch;scrollbar-width:none;touch-action:pan-x}
+.nav-tabs::-webkit-scrollbar{display:none}
+.nav-tabs::after{content:'';flex-shrink:0;width:10px}
+.tab-btn{padding:10px 14px;background:transparent;color:var(--text-secondary);font-size:11px;letter-spacing:1.5px;white-space:nowrap;flex-shrink:0;border-bottom:2px solid transparent;text-transform:uppercase;font-family:var(--font-display);font-weight:500;transition:all 0.2s}
+.tab-btn.active{color:var(--accent);border-bottom-color:var(--accent);background:rgba(201,169,97,0.05)}
+.tab-btn:active{background:rgba(201,169,97,0.1)}
+.main{flex:1;overflow-y:auto;overflow-x:hidden;padding:12px;-webkit-overflow-scrolling:touch}
+.tab-content{display:none}
+.tab-content.active{display:block;animation:fadeIn 0.3s}
+@keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+.card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:14px;margin-bottom:10px}
+.card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+.card-title{font-family:var(--font-display);font-size:12px;letter-spacing:2px;color:var(--accent);text-transform:uppercase;font-weight:600}
+.card-badge{font-size:9px;padding:3px 8px;background:var(--accent-dim);color:var(--bg-primary);border-radius:10px;letter-spacing:1px;text-transform:uppercase;font-weight:700}
+.hero-panel{background:linear-gradient(135deg,var(--bg-card) 0%,var(--bg-tertiary) 100%);border:1px solid var(--border-light);border-radius:var(--radius-lg);padding:18px;margin-bottom:12px;position:relative;overflow:hidden}
+.hero-panel::before{content:'';position:absolute;top:0;right:0;width:120px;height:120px;background:radial-gradient(circle,rgba(201,169,97,0.1) 0%,transparent 70%)}
+.hero-mission{font-size:10px;letter-spacing:3px;color:var(--text-dim);text-transform:uppercase;margin-bottom:2px}
+.hero-title{font-family:var(--font-display);font-size:22px;color:var(--text-primary);letter-spacing:2px;margin-bottom:2px}
+.hero-vessel{font-size:11px;color:var(--accent);letter-spacing:1px}
+.time-display{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+.time-box{background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius);padding:12px;text-align:center}
+.time-label{font-size:9px;letter-spacing:2px;color:var(--text-dim);text-transform:uppercase;margin-bottom:4px}
+.time-value{font-family:var(--font-mono);font-size:22px;color:var(--accent);font-weight:700;letter-spacing:1px}
+.time-value.big{font-size:28px}
+.time-sub{font-size:10px;color:var(--text-secondary);margin-top:2px}
+.quarter-active{background:linear-gradient(135deg,rgba(74,143,92,0.15) 0%,rgba(74,143,92,0.05) 100%);border:1px solid var(--success);border-radius:var(--radius);padding:14px;margin-bottom:12px}
+.quarter-active.night{background:linear-gradient(135deg,rgba(26,40,64,0.4) 0%,rgba(26,40,64,0.2) 100%);border-color:var(--info)}
+.qa-label{font-size:10px;letter-spacing:2px;color:var(--text-secondary);text-transform:uppercase;margin-bottom:4px;display:flex;align-items:center;gap:6px}
+.qa-team{font-family:var(--font-display);font-size:20px;color:var(--accent);letter-spacing:2px;margin-bottom:4px}
+.qa-countdown{font-family:var(--font-mono);font-size:28px;color:var(--text-primary);font-weight:700}
+.qa-progress{height:4px;background:var(--bg-secondary);border-radius:2px;margin-top:8px;overflow:hidden}
+.qa-progress-bar{height:100%;background:var(--success-bright);transition:width 1s linear}
+.compass-box{background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius);padding:12px;margin-bottom:12px;display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:center}
+.compass-visual{width:90px;height:90px;position:relative;border:2px solid var(--accent-dim);border-radius:50%;background:radial-gradient(circle,var(--bg-card) 0%,var(--bg-secondary) 100%)}
+.compass-needle{position:absolute;top:50%;left:50%;width:3px;height:36px;background:linear-gradient(to top,var(--danger-bright) 50%,var(--text-primary) 50%);transform-origin:bottom center;transform:translate(-50%,-100%);transition:transform 0.3s;border-radius:2px}
+.compass-center{position:absolute;top:50%;left:50%;width:8px;height:8px;background:var(--accent);border-radius:50%;transform:translate(-50%,-50%)}
+.compass-mark{position:absolute;font-size:9px;font-family:var(--font-mono);color:var(--text-dim);font-weight:700}
+.compass-mark.n{top:4px;left:50%;transform:translateX(-50%);color:var(--danger-bright)}
+.compass-mark.s{bottom:4px;left:50%;transform:translateX(-50%)}
+.compass-mark.e{right:4px;top:50%;transform:translateY(-50%)}
+.compass-mark.w{left:4px;top:50%;transform:translateY(-50%)}
+.compass-data{display:flex;flex-direction:column;gap:8px}
+.compass-row{display:flex;justify-content:space-between;font-size:11px}
+.compass-row span:first-child{color:var(--text-dim);letter-spacing:1px;text-transform:uppercase;font-size:9px}
+.compass-row span:last-child{font-family:var(--font-mono);color:var(--text-primary);font-weight:600}
+.gps-box{background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius);padding:12px;margin-bottom:12px}
+.gps-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.gps-title{font-size:10px;letter-spacing:2px;color:var(--text-dim);text-transform:uppercase}
+.gps-status{font-size:10px;padding:2px 8px;border-radius:10px;font-weight:700;letter-spacing:1px}
+.gps-status.ok{background:rgba(74,143,92,0.2);color:var(--success-bright)}
+.gps-status.search{background:rgba(201,150,64,0.2);color:var(--warning)}
+.gps-status.err{background:rgba(176,72,72,0.2);color:var(--danger-bright)}
+.gps-coords{font-family:var(--font-mono);font-size:13px;color:var(--text-primary);letter-spacing:0.5px;line-height:1.6}
+.gps-meta{display:flex;gap:14px;margin-top:8px;font-size:10px;color:var(--text-secondary);font-family:var(--font-mono)}
+.status-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:12px}
+.stat-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:10px}
+.stat-label{font-size:9px;letter-spacing:1.5px;color:var(--text-dim);text-transform:uppercase;margin-bottom:4px}
+.stat-value{font-family:var(--font-mono);font-size:16px;color:var(--accent);font-weight:700}
+.stat-meta{font-size:10px;color:var(--text-secondary);margin-top:2px}
+.control-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:12px}
+.ctrl-btn{padding:14px 10px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);display:flex;flex-direction:column;align-items:center;gap:6px;transition:all 0.2s}
+.ctrl-btn:active{transform:scale(0.97);background:var(--bg-elevated)}
+.ctrl-btn.primary{background:var(--accent);color:var(--bg-primary);border-color:var(--accent)}
+.ctrl-btn.primary:active{background:var(--accent-bright)}
+.ctrl-btn.danger{border-color:var(--danger);color:var(--danger-bright)}
+.ctrl-btn.success{border-color:var(--success);color:var(--success-bright)}
+.ctrl-btn-icon{font-size:20px}
+.ctrl-btn-label{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600}
+.schedule-row{display:flex;align-items:center;gap:10px;padding:8px;background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:6px;font-size:12px}
+.schedule-row.active{border-color:var(--accent);background:rgba(201,169,97,0.08)}
+.schedule-time{font-family:var(--font-mono);font-size:11px;color:var(--text-secondary);min-width:80px}
+.schedule-team{flex:1;display:flex;align-items:center;gap:6px}
+.team-dot{width:10px;height:10px;border-radius:50%;border:2px solid currentColor}
+.schedule-tag{font-size:9px;padding:2px 6px;border-radius:8px;letter-spacing:1px;text-transform:uppercase;font-weight:700}
+.schedule-tag.day{background:rgba(201,169,97,0.2);color:var(--accent)}
+.schedule-tag.night{background:rgba(74,122,143,0.2);color:var(--info)}
+.form-group{margin-bottom:12px}
+.form-group label{display:block;font-size:10px;letter-spacing:2px;color:var(--text-secondary);margin-bottom:5px;text-transform:uppercase}
+.form-group input,.form-group select,.form-group textarea{width:100%;padding:10px 12px;background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius);color:var(--text-primary);font-size:13px}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{outline:none;border-color:var(--accent)}
+.form-group textarea{resize:vertical;min-height:70px;font-family:var(--font-body)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.form-row.three{grid-template-columns:1fr 1fr 1fr}
+.btn{padding:11px 16px;background:var(--bg-elevated);border:1px solid var(--border);border-radius:var(--radius);color:var(--text-primary);font-size:12px;letter-spacing:1px;text-transform:uppercase;font-weight:600;transition:all 0.2s;display:inline-flex;align-items:center;gap:6px}
+.btn:active{transform:scale(0.98)}
+.btn-primary{background:var(--accent);color:var(--bg-primary);border-color:var(--accent)}
+.btn-danger{background:var(--danger);color:#fff;border-color:var(--danger)}
+.btn-success{background:var(--success);color:#fff;border-color:var(--success)}
+.btn-block{width:100%;justify-content:center}
+.btn-sm{padding:7px 12px;font-size:10px}
+.list-item{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:12px;margin-bottom:8px;display:flex;align-items:center;gap:10px}
+.list-icon{width:36px;height:36px;border-radius:50%;background:var(--bg-elevated);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.list-body{flex:1;min-width:0}
+.list-title{font-size:13px;font-weight:600;color:var(--text-primary);margin-bottom:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.list-sub{font-size:11px;color:var(--text-secondary);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.list-meta{font-size:10px;color:var(--text-dim);font-family:var(--font-mono);margin-top:2px}
+.list-actions{display:flex;gap:4px;flex-shrink:0}
+.icon-btn{width:30px;height:30px;border-radius:50%;background:var(--bg-secondary);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--text-secondary)}
+.icon-btn:active{background:var(--bg-elevated)}
+.icon-btn.danger{color:var(--danger-bright);border-color:var(--danger)}
+.log-entry{background:var(--bg-card);border-left:3px solid var(--accent);border-radius:var(--radius);padding:10px 12px;margin-bottom:8px}
+.log-entry.nav{border-left-color:var(--info)}
+.log-entry.com{border-left-color:var(--accent)}
+.log-entry.occ{border-left-color:var(--danger-bright)}
+.log-entry.met{border-left-color:var(--success-bright)}
+.log-entry.obs{border-left-color:var(--text-secondary)}
+.log-header{display:flex;justify-content:space-between;margin-bottom:6px;font-size:10px}
+.log-type{letter-spacing:1.5px;text-transform:uppercase;font-weight:700}
+.log-type.nav{color:var(--info)}
+.log-type.com{color:var(--accent)}
+.log-type.occ{color:var(--danger-bright)}
+.log-type.met{color:var(--success-bright)}
+.log-type.obs{color:var(--text-secondary)}
+.log-time{font-family:var(--font-mono);color:var(--text-dim)}
+.log-text{font-size:12px;color:var(--text-primary);line-height:1.5;margin-bottom:4px}
+.log-meta{font-size:10px;color:var(--text-dim);font-family:var(--font-mono);display:flex;gap:10px;flex-wrap:wrap}
+.waypoint{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:10px;margin-bottom:6px;display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center}
+.wp-marker{width:32px;height:32px;border-radius:50%;background:var(--accent);color:var(--bg-primary);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:700;font-size:14px}
+.wp-body{min-width:0}
+.wp-name{font-size:12px;font-weight:600;color:var(--text-primary);margin-bottom:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.wp-coords{font-size:10px;color:var(--text-secondary);font-family:var(--font-mono)}
+.wp-time{font-size:9px;color:var(--text-dim);font-family:var(--font-mono);margin-top:2px}
+.resource{margin-bottom:10px}
+.resource-header{display:flex;justify-content:space-between;margin-bottom:4px;font-size:11px}
+.resource-name{color:var(--text-secondary);text-transform:uppercase;letter-spacing:1px;font-size:10px}
+.resource-value{font-family:var(--font-mono);color:var(--accent);font-weight:700}
+.resource-bar{height:8px;background:var(--bg-secondary);border-radius:4px;overflow:hidden;border:1px solid var(--border)}
+.resource-fill{height:100%;background:var(--success-bright);transition:width 0.3s}
+.resource-fill.warn{background:var(--warning)}
+.resource-fill.crit{background:var(--danger-bright)}
+.check-item{display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:4px;font-size:12px}
+.check-item.done{opacity:0.6}
+.check-item.done .check-text{text-decoration:line-through}
+.check-box{width:20px;height:20px;border:2px solid var(--border-light);border-radius:4px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:12px;color:transparent;transition:all 0.2s}
+.check-item.done .check-box{background:var(--success);border-color:var(--success);color:#fff}
+.check-text{flex:1;color:var(--text-primary)}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,0.85);display:none;align-items:center;justify-content:center;z-index:1000;padding:15px;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);overflow-y:auto}
+.modal.active{display:flex}
+.modal-box{background:var(--bg-card);border:1px solid var(--border-light);border-radius:var(--radius-lg);max-width:480px;width:100%;max-height:90vh;overflow-y:auto;padding:20px;box-shadow:var(--shadow-lg)}
+.modal-title{font-family:var(--font-display);font-size:16px;letter-spacing:2px;color:var(--accent);margin-bottom:14px;text-transform:uppercase;padding-bottom:10px;border-bottom:1px solid var(--border)}
+.modal-actions{display:flex;gap:8px;margin-top:16px}
+.modal-actions .btn{flex:1}
+.badge{display:inline-block;padding:2px 8px;border-radius:10px;font-size:9px;letter-spacing:1px;text-transform:uppercase;font-weight:700}
+.badge.team{background:var(--accent-dim);color:var(--bg-primary)}
+.badge.day{background:rgba(201,169,97,0.2);color:var(--accent)}
+.badge.night{background:rgba(74,122,143,0.2);color:var(--info)}
+.badge.ok{background:rgba(74,143,92,0.2);color:var(--success-bright)}
+.badge.warn{background:rgba(201,150,64,0.2);color:var(--warning)}
+.badge.crit{background:rgba(176,72,72,0.2);color:var(--danger-bright)}
+.empty{text-align:center;padding:30px 20px;color:var(--text-dim);font-size:12px}
+.empty-icon{font-size:40px;margin-bottom:10px;opacity:0.5}
+.toast{position:fixed;bottom:70px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--bg-elevated);border:1px solid var(--accent);color:var(--text-primary);padding:10px 20px;border-radius:var(--radius);font-size:12px;z-index:2000;opacity:0;transition:all 0.3s;box-shadow:var(--shadow-lg);letter-spacing:1px;max-width:90%;text-align:center}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+.toast.err{border-color:var(--danger-bright);color:var(--danger-bright)}
+.toast.ok{border-color:var(--success-bright);color:var(--success-bright)}
+.drag-handle{color:var(--text-dim);cursor:grab;padding:4px;font-size:14px}
+.drag-handle:active{cursor:grabbing}
+.drag-item{transition:all 0.2s}
+.drag-item.dragging{opacity:0.5;background:var(--bg-elevated)}
+.drag-over{border-top:2px solid var(--accent)!important}
+.sub-tabs{display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap}
+.sub-tab{padding:6px 12px;background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius);font-size:10px;letter-spacing:1.5px;color:var(--text-secondary);text-transform:uppercase;font-weight:600}
+.sub-tab.active{background:var(--accent);color:var(--bg-primary);border-color:var(--accent)}
+.divider{height:1px;background:var(--border);margin:14px 0}
+.row{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.row-label{font-size:11px;color:var(--text-secondary);text-transform:uppercase;letter-spacing:1px}
+.row-value{font-family:var(--font-mono);font-size:12px;color:var(--text-primary);font-weight:600}
+.text-accent{color:var(--accent)}
+.text-dim{color:var(--text-dim)}
+.text-mono{font-family:var(--font-mono)}
+.mt-10{margin-top:10px}
+.mb-10{margin-bottom:10px}
+.cmd-only{display:none}
+body.role-cmd .cmd-only{display:block}
+body.role-cmd .cmd-only.inline{display:inline-flex}
+@media(min-width:720px){.time-display{grid-template-columns:1fr 1fr 1fr}.status-grid{grid-template-columns:repeat(4,1fr)}.control-grid{grid-template-columns:repeat(4,1fr)}.main{padding:16px 20px}}
 </style>
 </head>
 <body>
-
-<!-- LOGIN -->
-<div id="scLogin" class="screen show">
-  <div class="lbox">
-    <div class="brand">
-      <div class="bi"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#c9a040" stroke-width="1.6"><path d="M3 17l9-10 9 10M5 15v4h14v-4"/><circle cx="12" cy="6" r="2"/></svg></div>
-      <div class="bn">Rio Ops</div><div class="bs">Sistema de Missões Fluviais</div>
-    </div>
-    <div class="pgrid">
-      <div class="pb sel" id="pb_cmd" onclick="selP('cmd')">
-        <div class="pbi pi-cmd"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div>
-        <div class="pbn">Comandante</div><div class="pbr">Acesso total</div>
-      </div>
-      <div class="pb" id="pb_crew" onclick="selP('crew')">
-        <div class="pbi pi-crew"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="7" r="3"/><path d="M2 20c0-3.3 3.1-6 7-6s7 2.7 7 6"/><circle cx="17" cy="8" r="2.5"/><path d="M20 20c0-2.2-1.8-4-4-4"/></svg></div>
-        <div class="pbn">Tripulação</div><div class="pbr">Acesso restrito</div>
-      </div>
-    </div>
-    <div class="plbl">Digite a senha</div>
-    <div class="prow">
-      <input class="pd" type="password" maxlength="1" id="p0" inputmode="numeric">
-      <input class="pd" type="password" maxlength="1" id="p1" inputmode="numeric">
-      <input class="pd" type="password" maxlength="1" id="p2" inputmode="numeric">
-      <input class="pd" type="password" maxlength="1" id="p3" inputmode="numeric">
-      <input class="pd" type="password" maxlength="1" id="p4" inputmode="numeric">
-    </div>
-    <div class="lerr" id="lErr"></div>
-    <button class="lbtn" onclick="doLogin()">Entrar no Sistema</button>
-  </div>
+<div class="login-screen" id="loginScreen">
+<div class="login-box">
+<div class="login-emblem">⚓</div>
+<div class="login-title">RIO OPS 2</div>
+<div class="login-subtitle">Sistema Tático de Patrulha Fluvial</div>
+<div class="login-field">
+<label>Perfil de Acesso</label>
+<select id="loginRole">
+<option value="cmd">Comandante</option>
+<option value="crew">Tripulação</option>
+</select>
 </div>
-
-<!-- APP -->
-<div id="scApp" class="screen">
-  <div class="topbar">
-    <div class="tbl">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c9a040" stroke-width="1.6"><path d="M3 17l9-10 9 10M5 15v4h14v-4"/><circle cx="12" cy="6" r="2"/></svg>
-      <div><div class="tbn">Rio Ops</div><div class="tbm" id="tbM">—</div></div>
-    </div>
-    <div class="tbr">
-      <div class="tbc" id="tbC">--:--:--</div>
-      <div class="tbu"><div class="udot" id="ud"></div><span id="un"></span></div>
-      <button class="bout" onclick="doLogout()">Sair</button>
-    </div>
-  </div>
-  <div class="navtabs" id="navTabs"></div>
-  <div class="pages">
-
-    <!-- DASHBOARD -->
-    <div class="page show" id="pgDash">
-      <div id="dMsg"></div>
-      <div class="dgrid">
-        <div>
-          <div class="wcard">
-            <div class="wlbl">Equipe em Serviço</div>
-            <div class="wteam" id="wcT">—</div>
-            <div class="wtype" id="wcTp">Missão não iniciada</div>
-            <div class="ring">
-              <svg width="130" height="130" viewBox="0 0 130 130">
-                <circle cx="65" cy="65" r="54" stroke="#2e4560" stroke-width="8" fill="none"/>
-                <circle cx="65" cy="65" r="54" stroke="#c9a040" stroke-width="8" fill="none"
-                  stroke-dasharray="339" stroke-dashoffset="339" stroke-linecap="round"
-                  id="rArc" style="transition:stroke-dashoffset 1s linear"/>
-              </svg>
-              <div class="rc"><div class="rt" id="rTime">--:--</div><div class="rl">restante</div></div>
-            </div>
-            <div class="nstrip">
-              <div><div class="nsl">Próxima equipe</div><div class="nsv" id="nxT">—</div><div class="nst" id="nxTm">—</div></div>
-              <div style="text-align:right"><div class="nsl">Turno</div><div class="nsv" id="nxS">—</div></div>
-            </div>
-          </div>
-          <div class="mbrow" id="mBtns">
-            <button class="btn btn-purple" onclick="novaMissao()">✦ Nova</button>
-            <button class="btn btn-green" id="bStart" onclick="startMission()">▶ Iniciar</button>
-            <button class="btn btn-amber" id="bPause" onclick="pauseMission()" disabled>⏸ Pausar</button>
-            <button class="btn btn-blue" id="bResume" onclick="resumeMission()" disabled>▶ Retomar</button>
-            <button class="btn btn-red" id="bEnd" onclick="endMission()" disabled>■ Finalizar</button>
-          </div>
-        </div>
-        <div class="scol">
-          <div class="scard"><div class="slbl">Missão</div><div class="sval" id="sMN" style="font-size:12px;line-height:1.3">—</div><div class="ssub" id="sMS">Não iniciada</div></div>
-          <div class="scard"><div class="slbl">Tempo de Missão</div><div class="sval" id="sEl">00:00:00</div><div class="ssub" id="sSt">—</div></div>
-          <div class="scard"><div class="slbl">Equipes / Tripulantes</div><div class="sval" id="sTe">0 / 0</div></div>
-          <div class="scard"><div class="slbl">Passageiros / Diário</div><div class="sval" id="sPL">0 / 0</div></div>
-          <button class="btn btn-amber" onclick="gerarRelatorio()" style="width:100%;justify-content:center;padding:11px;margin-top:2px">📋 Gerar Relatório</button>
-        </div>
-      </div>
-      <div class="card"><div class="ctitle">Escala de Quartos — Hoje</div><div id="schedRows"></div></div>
-    </div>
-
-    <!-- MISSÃO -->
-    <div class="page" id="pgMiss">
-      <div id="mMsg"></div>
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;gap:8px;flex-wrap:wrap">
-        <div class="stabs" id="missTabsBar">
-          <button class="stab act" onclick="showMissTab('mDados',this)">Dados</button>
-          <button class="stab" onclick="showMissTab('mTurnos',this)">Turnos</button>
-          <button class="stab" onclick="showMissTab('mSalvas',this)">Missões Salvas</button>
-        </div>
-        <button class="btn btn-purple btn-sm" id="bNewMiss" onclick="novaMissao()">✦ Nova Missão</button>
-      </div>
-
-      <div id="mDados">
-        <div class="card">
-          <div class="ctitle">Dados da Missão</div>
-          <div class="frow">
-            <div class="fg"><div class="fl">Nome da Missão</div><input class="fi" id="mName" placeholder="Ex: Operação Rio Amazonas"></div>
-            <div class="fg"><div class="fl">Comandante</div><input class="fi" id="mCmd" placeholder="Nome do comandante"></div>
-          </div>
-          <div class="frow">
-            <div class="fg"><div class="fl">Embarcação</div><input class="fi" id="mVes" placeholder="Ex: BV-01 Amazonas"></div>
-            <div class="fg"><div class="fl">Área de Operação</div><input class="fi" id="mArea" placeholder="Ex: Rio Amazonas — Santarém"></div>
-          </div>
-          <div style="margin-bottom:12px"><div class="fl">Observações</div><textarea class="fi" id="mObs" rows="2" placeholder="Condições, objetivos..."></textarea></div>
-          <button class="btn btn-blue" onclick="saveMiss()">💾 Salvar Dados</button>
-        </div>
-      </div>
-
-      <div id="mTurnos" style="display:none">
-        <div class="card">
-          <div class="ctitle">Configuração dos Turnos</div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px">
-            <div style="background:#fff8e8;border:1px solid #e8d080;border-radius:9px;padding:12px">
-              <div style="font-size:11px;font-weight:600;color:#8a6010;margin-bottom:10px">☀️ Turno Diurno</div>
-              <div class="frow" style="margin-bottom:7px">
-                <div class="fg"><div class="fl">Início</div><input type="time" class="fi" id="dS" value="06:00" oninput="calcShifts()"></div>
-                <div class="fg"><div class="fl">Fim</div><input type="time" class="fi" id="dE" value="22:00" oninput="calcShifts()"></div>
-              </div>
-              <div style="font-size:11px;color:#8a6010;background:#fff3c8;border-radius:6px;padding:6px 9px" id="dInfo">Duração: 16h</div>
-            </div>
-            <div style="background:#e8f0ff;border:1px solid #90b0e0;border-radius:9px;padding:12px">
-              <div style="font-size:11px;font-weight:600;color:#1a4080;margin-bottom:10px">🌙 Turno Noturno</div>
-              <div class="frow" style="margin-bottom:7px">
-                <div class="fg"><div class="fl">Início</div><input type="time" class="fi" id="nS" value="22:00" oninput="calcShifts()"></div>
-                <div class="fg"><div class="fl">Fim</div><input type="time" class="fi" id="nE" value="06:00" oninput="calcShifts()"></div>
-              </div>
-              <div style="font-size:11px;color:#1a4080;background:#d0e0ff;border-radius:6px;padding:6px 9px" id="nInfo">Duração: 8h</div>
-            </div>
-          </div>
-          <div style="background:#f0f4f8;border-radius:7px;padding:9px 12px;font-size:11px;color:#4a6a8a;margin-bottom:12px" id="shiftSummary">Configure as equipes para calcular.</div>
-          <button class="btn btn-blue" onclick="saveMiss()">💾 Salvar Turnos</button>
-        </div>
-        <div class="card">
-          <div class="ctitle">Ordem das Equipes nos Quartos</div>
-          <p style="font-size:11px;color:#8aaac0;margin-bottom:10px">Arraste para reordenar. A sequência define a ordem dos quartos de hora.</p>
-          <div class="order-list" id="teamOrderList"></div>
-          <div style="margin-top:10px"><button class="btn btn-green btn-sm" onclick="saveTeamOrder()">✓ Confirmar Ordem</button></div>
-        </div>
-      </div>
-
-      <div id="mSalvas" style="display:none">
-        <div class="shdr"><div class="stitle">Missões Salvas</div></div>
-        <div id="savedList"><div class="empty">Nenhuma missão salva ainda.<br><small>Finalize e salve uma missão para vê-la aqui.</small></div></div>
-      </div>
-    </div>
-
-    <!-- EQUIPES -->
-    <div class="page" id="pgTeams">
-      <div id="tMsg"></div>
-      <div class="shdr">
-        <div class="stitle">Equipes de Vigilância</div>
-        <button class="btn btn-blue btn-sm" id="addTBtn" onclick="toggleF('addTForm','tN')">+ Nova Equipe</button>
-      </div>
-      <div id="addTForm" style="display:none;margin-bottom:12px">
-        <div class="card">
-          <div class="ctitle">Nova Equipe</div>
-          <div class="frow">
-            <div class="fg"><div class="fl">Nome da Equipe</div><input class="fi" id="tN" placeholder="Ex: Equipe Alpha"></div>
-            <div class="fg"><div class="fl">Cor</div>
-              <select class="fi" id="tC"><option value="blue">Azul</option><option value="green">Verde</option><option value="amber">Âmbar</option><option value="red">Vermelho</option><option value="gray">Cinza</option></select>
-            </div>
-          </div>
-          <div style="display:flex;gap:7px">
-            <button class="btn btn-green btn-sm" onclick="saveTeam()">Criar Equipe</button>
-            <button class="btn btn-ghost btn-sm" onclick="hideF('addTForm')">Cancelar</button>
-          </div>
-        </div>
-      </div>
-      <div id="tList"></div>
-    </div>
-
-    <!-- TRIPULAÇÃO -->
-    <div class="page" id="pgCrew">
-      <div id="cMsg"></div>
-      <div class="shdr">
-        <div class="stitle">Tripulação</div>
-        <button class="btn btn-blue btn-sm" id="addCBtn" onclick="toggleF('addCForm','cN')">+ Novo Tripulante</button>
-      </div>
-      <div id="addCForm" style="display:none;margin-bottom:12px">
-        <div class="card">
-          <div class="ctitle">Novo Tripulante</div>
-          <div class="frow">
-            <div class="fg"><div class="fl">Nome Completo</div><input class="fi" id="cN" placeholder="Nome completo"></div>
-            <div class="fg"><div class="fl">Nome de Guerra</div><input class="fi" id="cNG" placeholder="Ex: Silva"></div>
-          </div>
-          <div class="frow">
-            <div class="fg"><div class="fl">Graduação / Posto</div><input class="fi" id="cRk" placeholder="Ex: 1º Sargento"></div>
-            <div class="fg"><div class="fl">Função a Bordo</div>
-              <select class="fi" id="cRo">
-                <option>Comandante</option><option>Imediato</option><option>Timoneiro</option><option>Vigia</option>
-                <option>Patrulheiro</option><option>Mecânico</option><option>Comunicador</option>
-                <option>Marinheiro</option><option>Cozinheiro</option><option>Médico / Socorrista</option>
-              </select>
-            </div>
-          </div>
-          <div class="frow">
-            <div class="fg"><div class="fl">Equipe</div><select class="fi" id="cTm"></select></div>
-            <div class="fg"><div class="fl">Local de Pernoite</div>
-              <select class="fi" id="cCam">
-                <option>Camarote 1</option><option>Camarote 2</option><option>Camarote 3</option><option>Camarote 4</option>
-                <option>Cozinha</option><option>VTR</option><option>Corredor</option>
-                <option>Praça de Máquinas</option><option>Balsa</option><option>Outros</option>
-              </select>
-            </div>
-          </div>
-          <div class="frow">
-            <div class="fg"><div class="fl">OM</div><input class="fi" id="cOM" placeholder="Organização Militar"></div>
-            <div class="fg"><div class="fl">Contato / Rádio</div><input class="fi" id="cTel" placeholder="Opcional"></div>
-          </div>
-          <div style="display:flex;gap:7px">
-            <button class="btn btn-green btn-sm" onclick="saveCrew()">Adicionar</button>
-            <button class="btn btn-ghost btn-sm" onclick="hideF('addCForm')">Cancelar</button>
-          </div>
-        </div>
-      </div>
-      <div id="cList"></div>
-    </div>
-
-    <!-- PASSAGEIROS -->
-    <div class="page" id="pgPass">
-      <div id="pMsg"></div>
-      <div class="shdr">
-        <div class="stitle">Passageiros</div>
-        <button class="btn btn-blue btn-sm" id="addPBtn" onclick="toggleF('addPForm','pNome')">+ Novo Passageiro</button>
-      </div>
-      <div id="addPForm" style="display:none;margin-bottom:12px">
-        <div class="card">
-          <div class="ctitle">Novo Passageiro</div>
-          <div class="frow">
-            <div class="fg"><div class="fl">Nome Completo</div><input class="fi" id="pNome" placeholder="Nome completo"></div>
-            <div class="fg"><div class="fl">Nome de Guerra</div><input class="fi" id="pNG" placeholder="Ex: Costa"></div>
-          </div>
-          <div class="frow">
-            <div class="fg"><div class="fl">Posto / Graduação</div><input class="fi" id="pPosto" placeholder="Ex: Capitão"></div>
-            <div class="fg"><div class="fl">Data de Nascimento</div><input type="date" class="fi" id="pDN"></div>
-          </div>
-          <div class="frow">
-            <div class="fg"><div class="fl">CPF</div><input class="fi" id="pCPF" placeholder="000.000.000-00" inputmode="numeric"></div>
-            <div class="fg"><div class="fl">IDT (Identidade)</div><input class="fi" id="pIDT" placeholder="Número IDT"></div>
-          </div>
-          <div class="frow">
-            <div class="fg"><div class="fl">OM (Organização Militar)</div><input class="fi" id="pOM" placeholder="Ex: 8º BIS"></div>
-            <div class="fg"><div class="fl">Local de Pernoite</div>
-              <select class="fi" id="pPernoite">
-                <option>Camarote 1</option><option>Camarote 2</option><option>Camarote 3</option><option>Camarote 4</option>
-                <option>Cozinha</option><option>VTR</option><option>Corredor</option>
-                <option>Praça de Máquinas</option><option>Balsa</option><option>Outros</option>
-              </select>
-            </div>
-          </div>
-          <div style="display:flex;gap:7px">
-            <button class="btn btn-green btn-sm" onclick="savePassenger()">Adicionar Passageiro</button>
-            <button class="btn btn-ghost btn-sm" onclick="hideF('addPForm')">Cancelar</button>
-          </div>
-        </div>
-      </div>
-      <div id="passList"></div>
-    </div>
-
-    <!-- DIÁRIO -->
-    <div class="page" id="pgLog">
-      <div id="lMsg"></div>
-      <div class="card">
-        <div class="ctitle">Novo Registro no Diário</div>
-        <div class="frow">
-          <div class="fg"><div class="fl">Equipe</div><select class="fi" id="lgTm"></select></div>
-          <div class="fg"><div class="fl">Data</div><input type="date" class="fi" id="lgDt"></div>
-          <div class="fg"><div class="fl">Hora</div><input type="time" class="fi" id="lgHr"></div>
-        </div>
-        <div class="frow">
-          <div class="fg"><div class="fl">Tipo</div>
-            <select class="fi" id="lgTp">
-              <option value="nav">Navegação</option><option value="com">Comunicação</option>
-              <option value="occ">Ocorrência</option><option value="met">Meteorologia</option><option value="obs">Observação</option>
-            </select>
-          </div>
-          <div class="fg" style="flex:2">
-            <div class="fl" style="display:flex;align-items:center;justify-content:space-between">
-              Posição GPS
-              <button type="button" onclick="atualizarGPS()" id="btnGps" style="background:#1e5fa0;color:#fff;border:none;border-radius:5px;padding:2px 8px;font-size:10px;cursor:pointer;font-weight:500">📍 Atualizar</button>
-            </div>
-            <div style="position:relative">
-              <input class="fi" id="lgGps" placeholder="Toque em Atualizar para capturar...">
-              <div id="gpsStatus" style="font-size:10px;margin-top:3px;color:#8aaac0"></div>
-            </div>
-          </div>
-        </div>
-        <div style="margin-bottom:10px"><div class="fl">Descrição do Evento</div><textarea class="fi" id="lgTxt" rows="3" placeholder="Descreva o evento..."></textarea></div>
-        <button class="btn btn-blue" onclick="addLog()">Registrar no Diário</button>
-      </div>
-      <div class="shdr" style="margin-top:4px"><div class="stitle" style="font-size:13px">Registros da Missão</div></div>
-      <div id="logList"><div class="empty">Nenhum registro ainda.</div></div>
-    </div>
-
-  </div>
+<div class="login-field">
+<label>Senha Operacional</label>
+<input type="password" id="loginPass" placeholder="••••••" autocomplete="off">
 </div>
-
-<!-- MODAIS -->
-<div class="overlay" id="ovNova">
-  <div class="modal">
-    <div class="modal-title">✦ Nova Missão<button class="modal-close" onclick="closeOv('ovNova')">×</button></div>
-    <p style="font-size:13px;color:#4a6a8a;margin-bottom:8px">Como deseja iniciar?</p>
-    <p style="font-size:11px;color:#c03030;background:#fef0f0;border-radius:7px;padding:8px 12px;margin-bottom:14px">⚠ Os dados atuais serão limpos conforme a opção escolhida.</p>
-    <div style="display:flex;flex-direction:column;gap:9px">
-      <button class="btn btn-blue" style="justify-content:flex-start;padding:12px 14px;text-align:left;height:auto;line-height:1.4" onclick="novaMissaoManter()">
-        <span style="font-size:20px;flex-shrink:0">🔄</span>
-        <div><div style="font-weight:600">Manter equipes e tripulação</div><div style="font-size:11px;opacity:.8;margin-top:2px">Limpa missão, logs e passageiros. Equipes e tripulantes permanecem.</div></div>
-      </button>
-      <button class="btn btn-purple" style="justify-content:flex-start;padding:12px 14px;text-align:left;height:auto;line-height:1.4" onclick="novaMissaoCompleta()">
-        <span style="font-size:20px;flex-shrink:0">🆕</span>
-        <div><div style="font-weight:600">Missão completamente nova</div><div style="font-size:11px;opacity:.8;margin-top:2px">Zera tudo — missão, equipes, tripulação, passageiros e logs.</div></div>
-      </button>
-      <button class="btn btn-ghost" onclick="closeOv('ovNova')">Cancelar</button>
-    </div>
-  </div>
+<button class="login-btn" onclick="doLogin()">Acessar Sistema</button>
+<div class="login-error" id="loginErr"></div>
+<div class="login-hint">COMANDANTE: 54321 · TRIPULAÇÃO: 12345</div>
 </div>
-
-<div class="overlay" id="ovSave">
-  <div class="modal">
-    <div class="modal-title">💾 Salvar Missão<button class="modal-close" onclick="closeOv('ovSave')">×</button></div>
-    <p style="font-size:13px;color:#4a6a8a;margin-bottom:14px">Missão finalizada! Deseja salvar todos os dados para consulta futura?</p>
-    <div style="margin-bottom:14px"><div class="fl">Nome para identificação</div><input class="fi" id="saveName" placeholder="Ex: Patrulha Amazonas — Jun/2025"></div>
-    <div style="display:flex;gap:8px">
-      <button class="btn btn-green" onclick="confirmSave()">✓ Salvar Missão</button>
-      <button class="btn btn-ghost" onclick="closeOv('ovSave')">Não salvar</button>
-    </div>
-  </div>
 </div>
-
-<div class="overlay" id="ovView">
-  <div class="modal" style="max-width:520px">
-    <div class="modal-title" id="ovViewTitle">Missão<button class="modal-close" onclick="closeOv('ovView')">×</button></div>
-    <div id="ovViewBody"></div>
-    <div style="margin-top:14px;display:flex;gap:8px;flex-wrap:wrap">
-      <button class="btn btn-blue btn-sm" onclick="loadSaved(curViewIdx)">⬇ Carregar</button>
-      <button class="btn btn-amber btn-sm" onclick="gerarRelatorioSalvo(curViewIdx)">📋 Relatório</button>
-      <button class="btn btn-ghost btn-sm" onclick="closeOv('ovView')">Fechar</button>
-    </div>
-  </div>
+<div class="app" id="app">
+<header class="app-header">
+<div class="app-brand">
+<div class="brand-icon">⚓</div>
+<div>
+<div class="brand-text">RIO OPS 2</div>
+<div class="brand-sub" id="roleLabel">COMANDANTE</div>
 </div>
-
+</div>
+<div class="app-status">
+<span class="status-chip" id="netChip"><span class="status-dot"></span><span id="netLabel">ONLINE</span></span>
+<span class="header-time" id="clockTop">00:00:00</span>
+<button class="icon-btn" onclick="logout()" title="Sair">⏻</button>
+</div>
+</header>
+<nav class="nav-tabs" id="navTabs">
+<button class="tab-btn active" data-tab="dashboard">Painel</button>
+<button class="tab-btn cmd-only" data-tab="mission">Missão</button>
+<button class="tab-btn cmd-only" data-tab="teams">Equipes</button>
+<button class="tab-btn cmd-only" data-tab="crew">Tripulação</button>
+<button class="tab-btn cmd-only" data-tab="passengers">Passageiros</button>
+<button class="tab-btn" data-tab="diary">Diário</button>
+<button class="tab-btn cmd-only" data-tab="navigation">Navegação</button>
+<button class="tab-btn cmd-only" data-tab="logistics">Logística</button>
+<button class="tab-btn cmd-only" data-tab="comms">Comunicações</button>
+<button class="tab-btn cmd-only" data-tab="weather">Meteo</button>
+<button class="tab-btn cmd-only" data-tab="procedures">Procedimentos</button>
+</nav>
+<main class="main">
+<section class="tab-content active" id="tab-dashboard">
+<div class="hero-panel">
+<div class="hero-mission">Missão Atual</div>
+<div class="hero-title" id="heroTitle">SEM MISSÃO ATIVA</div>
+<div class="hero-vessel" id="heroVessel">Configure uma missão para iniciar</div>
+</div>
+<div class="time-display">
+<div class="time-box">
+<div class="time-label">Hora Local</div>
+<div class="time-value big" id="clockMain">00:00:00</div>
+<div class="time-sub" id="dateMain">--</div>
+</div>
+<div class="time-box">
+<div class="time-label">Duração Missão</div>
+<div class="time-value big" id="missionDuration">--:--:--</div>
+<div class="time-sub" id="missionStatus">PARADA</div>
+</div>
+</div>
+<div class="quarter-active" id="quarterBox" style="display:none">
+<div class="qa-label">
+<span id="quarterIcon">☀️</span>
+<span id="quarterType">QUARTO DIURNO</span>
+<span class="badge day" id="quarterBadge">ATIVO</span>
+</div>
+<div class="qa-team" id="quarterTeam">—</div>
+<div class="qa-countdown" id="quarterCountdown">--:--:--</div>
+<div class="qa-progress"><div class="qa-progress-bar" id="quarterProgress" style="width:0%"></div></div>
+</div>
+<div class="compass-box">
+<div class="compass-visual">
+<div class="compass-mark n">N</div>
+<div class="compass-mark s">S</div>
+<div class="compass-mark e">E</div>
+<div class="compass-mark w">W</div>
+<div class="compass-needle" id="compassNeedle"></div>
+<div class="compass-center"></div>
+</div>
+<div class="compass-data">
+<div class="compass-row"><span>Proa</span><span id="heading">---°</span></div>
+<div class="compass-row"><span>Velocidade</span><span id="speed">0.0 nós</span></div>
+<div class="compass-row"><span>Precisão GPS</span><span id="accuracy">-- m</span></div>
+<div class="compass-row"><span>Altitude</span><span id="altitude">-- m</span></div>
+</div>
+</div>
+<div class="gps-box">
+<div class="gps-header">
+<div class="gps-title">📍 Posição Atual (GMS)</div>
+<div class="gps-status search" id="gpsStatus">BUSCANDO</div>
+</div>
+<div class="gps-coords" id="gpsCoords">Aguardando sinal GPS...</div>
+<div class="gps-meta"><span id="gpsUpdate">--</span></div>
+</div>
+<div class="status-grid">
+<div class="stat-card"><div class="stat-label">Equipes</div><div class="stat-value" id="statTeams">0</div></div>
+<div class="stat-card"><div class="stat-label">Tripulantes</div><div class="stat-value" id="statCrew">0</div></div>
+<div class="stat-card"><div class="stat-label">Passageiros</div><div class="stat-value" id="statPax">0</div></div>
+<div class="stat-card"><div class="stat-label">Registros</div><div class="stat-value" id="statLogs">0</div></div>
+</div>
+<div class="control-grid">
+<button class="ctrl-btn primary cmd-only" onclick="openMissionStart()">
+<span class="ctrl-btn-icon">▶</span><span class="ctrl-btn-label">Iniciar</span>
+</button>
+<button class="ctrl-btn cmd-only" onclick="pauseMission()" id="btnPause" style="display:none">
+<span class="ctrl-btn-icon">⏸</span><span class="ctrl-btn-label">Pausar</span>
+</button>
+<button class="ctrl-btn success cmd-only" onclick="resumeMission()" id="btnResume" style="display:none">
+<span class="ctrl-btn-icon">▶</span><span class="ctrl-btn-label">Retomar</span>
+</button>
+<button class="ctrl-btn danger cmd-only" onclick="finishMission()" id="btnFinish" style="display:none">
+<span class="ctrl-btn-icon">■</span><span class="ctrl-btn-label">Finalizar</span>
+</button>
+<button class="ctrl-btn" onclick="generateReport()">
+<span class="ctrl-btn-icon">📄</span><span class="ctrl-btn-label">Relatório</span>
+</button>
+<button class="ctrl-btn cmd-only" onclick="newMission()">
+<span class="ctrl-btn-icon">✦</span><span class="ctrl-btn-label">Nova Missão</span>
+</button>
+</div>
+<div class="card cmd-only">
+<div class="card-header">
+<div class="card-title">Escala de Quartos</div>
+<span class="card-badge" id="scheduleCount">0 turnos</span>
+</div>
+<div id="scheduleList"></div>
+</div>
+</section>
+<section class="tab-content" id="tab-mission">
+<div class="sub-tabs">
+<button class="sub-tab active" data-sub="info">Dados</button>
+<button class="sub-tab" data-sub="shifts">Turnos</button>
+<button class="sub-tab" data-sub="saved">Salvas</button>
+</div>
+<div id="sub-info">
+<div class="card">
+<div class="card-header"><div class="card-title">Dados da Missão</div></div>
+<div class="form-group"><label>Nome da Operação</label><input type="text" id="mName" placeholder="Ex: Operação Sucuri"></div>
+<div class="form-group"><label>Embarcação</label><input type="text" id="mVessel" placeholder="Ex: AVP Rio Negro"></div>
+<div class="form-row">
+<div class="form-group"><label>Área de Operação</label><input type="text" id="mArea" placeholder="Ex: Rio Amazonas"></div>
+<div class="form-group"><label>Código</label><input type="text" id="mCode" placeholder="Ex: OP-001/2025"></div>
+</div>
+<div class="form-group"><label>Objetivo</label><textarea id="mObjective" placeholder="Descreva o objetivo da missão..."></textarea></div>
+<button class="btn btn-primary btn-block" onclick="saveMissionInfo()">Salvar Dados</button>
+</div>
+</div>
+<div id="sub-shifts" style="display:none">
+<div class="card">
+<div class="card-header"><div class="card-title">Configuração dos Turnos</div></div>
+<div class="form-row">
+<div class="form-group"><label>☀️ Turno Diurno (horas)</label><input type="number" id="dayHours" value="16" min="1" max="24"></div>
+<div class="form-group"><label>🌙 Turno Noturno (horas)</label><input type="number" id="nightHours" value="8" min="1" max="24"></div>
+</div>
+<div class="form-row">
+<div class="form-group"><label>Início Diurno</label><input type="time" id="dayStart" value="06:00"></div>
+<div class="form-group"><label>Início Noturno</label><input type="time" id="nightStart" value="22:00"></div>
+</div>
+<button class="btn btn-primary btn-block" onclick="saveShifts()">Salvar Turnos</button>
+</div>
+<div class="card">
+<div class="card-header"><div class="card-title">Ordem das Equipes</div><span class="card-badge">Arraste</span></div>
+<p style="font-size:11px;color:var(--text-secondary);margin-bottom:10px">A sequência define a ordem dos quartos de hora. Arraste para reordenar.</p>
+<div id="teamOrderList"></div>
+</div>
+</div>
+<div id="sub-saved" style="display:none">
+<div class="card">
+<div class="card-header"><div class="card-title">Missões Salvas</div><span class="card-badge" id="savedCount">0</span></div>
+<div id="savedList"></div>
+</div>
+</div>
+</section>
+<section class="tab-content" id="tab-teams">
+<div class="card">
+<div class="card-header"><div class="card-title">Nova Equipe</div></div>
+<div class="form-row">
+<div class="form-group"><label>Nome da Equipe</label><input type="text" id="teamName" placeholder="Ex: Alpha"></div>
+<div class="form-group"><label>Cor</label><input type="color" id="teamColor" value="#c9a961"></div>
+</div>
+<button class="btn btn-primary btn-block" onclick="addTeam()">Adicionar Equipe</button>
+</div>
+<div class="card">
+<div class="card-header"><div class="card-title">Equipes Cadastradas</div><span class="card-badge" id="teamCount">0</span></div>
+<div id="teamList"></div>
+</div>
+</section>
+<section class="tab-content" id="tab-crew">
+<div class="card">
+<div class="card-header"><div class="card-title">Novo Tripulante</div></div>
+<div class="form-row">
+<div class="form-group"><label>Nome Completo</label><input type="text" id="cName" placeholder="Nome"></div>
+<div class="form-group"><label>Nome de Guerra</label><input type="text" id="cWar" placeholder="Guerra"></div>
+</div>
+<div class="form-row">
+<div class="form-group"><label>Posto/Graduação</label><select id="cRank"><option value="">Selecione...</option><option>Capitão-Tenente</option><option>Primeiro-Tenente</option><option>Segundo-Tenente</option><option>Suboficial</option><option>Primeiro-Sargento</option><option>Segundo-Sargento</option><option>Terceiro-Sargento</option><option>Cabo</option><option>Marinheiro</option></select></div>
+<div class="form-group"><label>Função</label><select id="cRole"><option value="">Selecione...</option><option>Comandante</option><option>Imediato</option><option>Encarregado de Navegação</option><option>Timoneiro</option><option>Operador de Rádio</option><option>Mestre</option><option>Maquinista</option><option>Eletricista</option><option>Cozinheiro</option><option>Sentinela</option><option>Atirador</option><option>Saúde</option></select></div>
+</div>
+<div class="form-row">
+<div class="form-group"><label>Equipe</label><select id="cTeam"></select></div>
+<div class="form-group"><label>Local de Pernoite</label><select id="cCabin"><option value="">Selecione...</option><option>Camarote 1</option><option>Camarote 2</option><option>Camarote 3</option><option>Camarote 4</option><option>Cozinha</option><option>VTR</option><option>Corredor</option><option>Praça de Máquinas</option><option>Balsa</option><option>Outros</option></select></div>
+</div>
+<button class="btn btn-primary btn-block" onclick="addCrew()">Adicionar Tripulante</button>
+</div>
+<div class="card">
+<div class="card-header"><div class="card-title">Tripulação</div><span class="card-badge" id="crewCount">0</span></div>
+<div id="crewList"></div>
+</div>
+</section>
+<section class="tab-content" id="tab-passengers">
+<div class="card">
+<div class="card-header"><div class="card-title">Novo Passageiro</div></div>
+<div class="form-row">
+<div class="form-group"><label>Nome Completo</label><input type="text" id="pName" placeholder="Nome"></div>
+<div class="form-group"><label>Nome de Guerra</label><input type="text" id="pWar" placeholder="Guerra"></div>
+</div>
+<div class="form-row">
+<div class="form-group"><label>Posto/Graduação</label><input type="text" id="pRank" placeholder="Ex: 3º Sargento"></div>
+<div class="form-group"><label>OM</label><input type="text" id="pOM" placeholder="Ex: 9º DN"></div>
+</div>
+<div class="form-row three">
+<div class="form-group"><label>Data Nasc.</label><input type="date" id="pBirth"></div>
+<div class="form-group"><label>CPF</label><input type="text" id="pCPF" placeholder="000.000.000-00"></div>
+<div class="form-group"><label>IDT</label><input type="text" id="pIDT" placeholder="Identidade"></div>
+</div>
+<div class="form-group"><label>Local de Pernoite</label><select id="pCabin"><option value="">Selecione...</option><option>Camarote 1</option><option>Camarote 2</option><option>Camarote 3</option><option>Camarote 4</option><option>Cozinha</option><option>VTR</option><option>Corredor</option><option>Praça de Máquinas</option><option>Balsa</option><option>Outros</option></select></div>
+<button class="btn btn-primary btn-block" onclick="addPassenger()">Adicionar Passageiro</button>
+</div>
+<div class="card">
+<div class="card-header"><div class="card-title">Passageiros</div><span class="card-badge" id="paxCount">0</span></div>
+<div id="paxList"></div>
+</div>
+</section>
+<section class="tab-content" id="tab-diary">
+<div class="card">
+<div class="card-header"><div class="card-title">Novo Registro</div></div>
+<div class="form-row">
+<div class="form-group"><label>Tipo</label><select id="logType"><option value="nav">🧭 Navegação</option><option value="com">📡 Comunicação</option><option value="occ">⚠️ Ocorrência</option><option value="met">🌦️ Meteorologia</option><option value="obs">👁️ Observação</option></select></div>
+<div class="form-group"><label>Equipe</label><select id="logTeam"></select></div>
+</div>
+<div class="form-group"><label>Descrição</label><textarea id="logText" placeholder="Descreva o evento..."></textarea></div>
+<div class="row" style="margin-bottom:8px"><span class="row-label">📍 GPS</span><span class="row-value text-mono" id="logGps">Aguardando...</span></div>
+<button class="btn btn-primary btn-block" onclick="addLog()">Registrar no Diário</button>
+</div>
+<div class="card">
+<div class="card-header"><div class="card-title">Diário de Bordo</div><span class="card-badge" id="logCount">0</span></div>
+<div id="logList"></div>
+</div>
+</section>
+<section class="tab-content" id="tab-navigation">
+<div class="card">
+<div class="card-header"><div class="card-title">Marcar Waypoint</div></div>
+<div class="form-row">
+<div class="form-group"><label>Nome do Ponto</label><input type="text" id="wpName" placeholder="Ex: Foz do Tapajós"></div>
+<div class="form-group"><label>Tipo</label><select id="wpType"><option value="check">Ponto de Checagem</option><option value="start">Início</option><option value="end">Destino</option><option value="fuel">Reabastecimento</option><option value="danger">Área de Risco</option><option value="anchor">Fundeadouro</option></select></div>
+</div>
+<div class="form-group"><label>Observação</label><input type="text" id="wpNote" placeholder="Observação (opcional)"></div>
+<button class="btn btn-primary btn-block" onclick="addWaypoint()">Marcar Posição</button>
+</div>
+<div class="card">
+<div class="card-header"><div class="card-title">Track de Navegação</div><span class="card-badge" id="wpCount">0 pontos</span></div>
+<div id="wpList"></div>
+</div>
+</section>
+<section class="tab-content" id="tab-logistics">
+<div class="card">
+<div class="card-header"><div class="card-title">Atualizar Recursos</div></div>
+<div class="form-row three">
+<div class="form-group"><label>Combustível (%)</label><input type="number" id="resFuel" min="0" max="100" value="100"></div>
+<div class="form-group"><label>Água Potável (%)</label><input type="number" id="resWater" min="0" max="100" value="100"></div>
+<div class="form-group"><label>Mantimentos (dias)</label><input type="number" id="resFood" min="0" value="7"></div>
+</div>
+<div class="form-row">
+<div class="form-group"><label>Horímetro Motor (h)</label><input type="number" id="resEngine" step="0.1" value="0"></div>
+<div class="form-group"><label>Consumo Médio (L/h)</label><input type="number" id="resConsumption" step="0.1" value="0"></div>
+</div>
+<button class="btn btn-primary btn-block" onclick="saveLogistics()">Atualizar</button>
+</div>
+<div class="card">
+<div class="card-header"><div class="card-title">Status Logístico</div></div>
+<div id="resourcesList"></div>
+</div>
+</section>
+<section class="tab-content" id="tab-comms">
+<div class="card">
+<div class="card-header"><div class="card-title">Registrar Comunicação</div></div>
+<div class="form-row">
+<div class="form-group"><label>Canal/Frequência</label><input type="text" id="comFreq" placeholder="Ex: VHF CH16"></div>
+<div class="form-group"><label>Contato</label><input type="text" id="comContact" placeholder="Ex: Base Manaus"></div>
+</div>
+<div class="form-group"><label>Tipo</label><select id="comType"><option value="routine">Rotina</option><option value="report">Reporte</option><option value="request">Solicitação</option><option value="emergency">Emergência</option></select></div>
+<div class="form-group"><label>Mensagem</label><textarea id="comMsg" placeholder="Conteúdo da comunicação..."></textarea></div>
+<button class="btn btn-primary btn-block" onclick="addComms()">Registrar</button>
+</div>
+<div class="card">
+<div class="card-header"><div class="card-title">Log de Comunicações</div><span class="card-badge" id="comCount">0</span></div>
+<div id="comList"></div>
+</div>
+</section>
+<section class="tab-content" id="tab-weather">
+<div class="card">
+<div class="card-header"><div class="card-title">Condições Meteorológicas</div></div>
+<div class="form-row three">
+<div class="form-group"><label>Céu</label><select id="wxSky"><option>Limpo</option><option>Parcialmente nublado</option><option>Nublado</option><option>Encoberto</option><option>Chuva leve</option><option>Chuva forte</option><option>Tempestade</option></select></div>
+<div class="form-group"><label>Temp. (°C)</label><input type="number" id="wxTemp" value="28"></div>
+<div class="form-group"><label>Visibilidade</label><select id="wxVis"><option>Excelente (>10km)</option><option>Boa (5-10km)</option><option>Regular (2-5km)</option><option>Ruim (1-2km)</option><option>Péssima (<1km)</option></select></div>
+</div>
+<div class="form-row three">
+<div class="form-group"><label>Direção Vento</label><select id="wxWindDir"><option>N</option><option>NE</option><option>E</option><option>SE</option><option>S</option><option>SO</option><option>O</option><option>NO</option><option>Calmo</option></select></div>
+<div class="form-group"><label>Intensidade</label><select id="wxWind"><option>Calmaria</option><option>Friso</option><option>Moderado</option><option>Forte</option><option>Muito forte</option></select></div>
+<div class="form-group"><label>Estado do Rio</label><select id="wxSea"><option>Calmo</option><option>Leve ondulação</option><option>Ondulado</option><option>Agitado</option></select></div>
+</div>
+<div class="form-group"><label>Observações</label><textarea id="wxNote" placeholder="Observações meteorológicas..."></textarea></div>
+<button class="btn btn-primary btn-block" onclick="saveWeather()">Registrar</button>
+</div>
+<div class="card">
+<div class="card-header"><div class="card-title">Histórico Meteorológico</div></div>
+<div id="wxList"></div>
+</div>
+</section>
+<section class="tab-content" id="tab-procedures">
+<div class="sub-tabs">
+<button class="sub-tab active" data-sub="pre">Pré-Navegação</button>
+<button class="sub-tab" data-sub="emer">Emergência</button>
+<button class="sub-tab" data-sub="radio">Rádio</button>
+</div>
+<div id="sub-pre">
+<div class="card">
+<div class="card-header"><div class="card-title">Checklist Pré-Navegação</div><span class="card-badge" id="checkPreCount">0/0</span></div>
+<div id="checkPreList"></div>
+<button class="btn btn-primary btn-block mt-10" onclick="resetChecklist('pre')">Resetar</button>
+</div>
+</div>
+<div id="sub-emer" style="display:none">
+<div class="card">
+<div class="card-header"><div class="card-title">🚨 Procedimentos de Emergência</div></div>
+<div style="font-size:12px;line-height:1.7;color:var(--text-primary)">
+<p style="margin-bottom:10px"><strong style="color:var(--danger-bright)">MAYDAY (Perigo Iminente):</strong></p>
+<p style="font-family:var(--font-mono);background:var(--bg-secondary);padding:10px;border-radius:var(--radius);margin-bottom:12px;font-size:11px;line-height:1.8">MAYDAY MAYDAY MAYDAY<br>AQUI [EMBARCAÇÃO] [INDICATIVO]<br>POSIÇÃO [COORDENADAS]<br>NATUREZA DA EMERGÊNCIA<br>ASSISTÊNCIA NECESSÁRIA<br>PESSOAS A BORDO: [NÚMERO]<br>OVER</p>
+<p style="margin-bottom:10px"><strong style="color:var(--warning)">PAN-PAN (Urgência):</strong></p>
+<p style="font-family:var(--font-mono);background:var(--bg-secondary);padding:10px;border-radius:var(--radius);margin-bottom:12px;font-size:11px;line-height:1.8">PAN-PAN PAN-PAN PAN-PAN<br>AQUI [EMBARCAÇÃO]<br>POSIÇÃO [COORDENADAS]<br>NATUREZA DA URGÊNCIA<br>ASSISTÊNCIA DESEJADA<br>OVER</p>
+<p style="margin-bottom:10px"><strong style="color:var(--danger-bright)">HOMEM AO MAR:</strong></p>
+<ol style="padding-left:20px;color:var(--text-secondary);font-size:11px">
+<li>Gritar "HOMEM AO MAR" + bordo (BE/BB)</li>
+<li>Lançar boia salva-vidas imediatamente</li>
+<li>Manter contato visual permanente</li>
+<li>Marcar posição GPS no momento</li>
+<li>Executar curva Williamson</li>
+<li>Preparar equipe de resgate</li>
+</ol>
+</div>
+</div>
+</div>
+<div id="sub-radio" style="display:none">
+<div class="card">
+<div class="card-header"><div class="card-title">📻 Chamada de Rádio Padrão</div></div>
+<div style="font-family:var(--font-mono);background:var(--bg-secondary);padding:14px;border-radius:var(--radius);font-size:11px;line-height:2;color:var(--text-primary)">[INDICATIVO CHAMADO], [INDICATIVO CHAMADO]<br>AQUI [SEU INDICATIVO], [SEU INDICATIVO]<br>MENSAGEM: [CONTEÚDO]<br>CÂMBIO</div>
+<div style="margin-top:14px;font-size:11px;line-height:1.8;color:var(--text-secondary)">
+<p><strong style="color:var(--accent)">Alfabeto Fonético:</strong></p>
+<p style="font-family:var(--font-mono);font-size:10px;margin-top:4px">Alpha · Bravo · Charlie · Delta · Echo · Foxtrot · Golf · Hotel · India · Juliet · Kilo · Lima · Mike · November · Oscar · Papa · Quebec · Romeo · Sierra · Tango · Uniform · Victor · Whiskey · X-ray · Yankee · Zulu</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+</div>
+<div class="modal" id="modalMissionStart"><div class="modal-box"><div class="modal-title">Iniciar Missão</div><div id="missionStartBody"></div></div></div>
+<div class="modal" id="modalFinish">
+<div class="modal-box">
+<div class="modal-title">Finalizar Missão</div>
+<p style="color:var(--text-secondary);font-size:12px;margin-bottom:14px">Deseja salvar esta missão antes de finalizar?</p>
+<div class="form-group"><label>Nome para Salvar (opcional)</label><input type="text" id="saveAsName" placeholder="Ex: Patrulha Maio 2025"></div>
+<div class="modal-actions">
+<button class="btn" onclick="closeModal('modalFinish');abortFinish()">Cancelar</button>
+<button class="btn btn-success" onclick="saveAndFinish()">Salvar e Finalizar</button>
+<button class="btn btn-danger" onclick="justFinish()">Apenas Finalizar</button>
+</div>
+</div>
+</div>
+<div class="modal" id="modalNewMission">
+<div class="modal-box">
+<div class="modal-title">Nova Missão</div>
+<p style="color:var(--text-secondary);font-size:12px;margin-bottom:14px">Escolha uma opção:</p>
+<button class="btn btn-block mb-10" onclick="newMissionKeep()">🔄 Manter equipes e tripulação</button>
+<button class="btn btn-danger btn-block" onclick="newMissionClean()">🆕 Missão completamente nova</button>
+<button class="btn btn-block mt-10" onclick="closeModal('modalNewMission')">Cancelar</button>
+</div>
+</div>
+<div class="modal" id="modalSaved"><div class="modal-box"><div class="modal-title">Missão Salva</div><div id="savedDetail"></div></div></div>
+<div class="toast" id="toast"></div>
 <script>
-// ═══════════════════════════════════════════════
-// CONSTANTES
-// ═══════════════════════════════════════════════
-const COLORS={
-  blue:{bg:'#e0eeff',text:'#1e5fa0'},green:{bg:'#e0f5ea',text:'#1a8a5a'},
-  amber:{bg:'#fff3d0',text:'#8a6010'},red:{bg:'#ffe0e0',text:'#b02020'},gray:{bg:'#e8eef5',text:'#4a6a8a'}
-};
-const TYPE_LBL={nav:'Navegação',com:'Comunicação',occ:'Ocorrência',met:'Meteorologia',obs:'Observação'};
-const TYPE_CLR={nav:'#1e5fa0',com:'#1a8a5a',occ:'#c03030',met:'#c9a040',obs:'#7a9ab8'};
+const S={role:null,mission:null,teams:[],crew:[],passengers:[],logs:[],waypoints:[],comms:[],weather:[],resources:{fuel:100,water:100,food:7,engine:0,consumption:0},shifts:{dayHours:16,nightHours:8,dayStart:'06:00',nightStart:'22:00'},teamOrder:[],missionStart:null,missionPaused:null,pauseAccum:0,saved:[],checklists:{pre:{}},currentGps:null,heading:0};
+const PASS={cmd:'54321',crew:'12345'};
 const PERNOITE=['Camarote 1','Camarote 2','Camarote 3','Camarote 4','Cozinha','VTR','Corredor','Praça de Máquinas','Balsa','Outros'];
-
-// ═══════════════════════════════════════════════
-// ESTADO
-// ═══════════════════════════════════════════════
-let D={
-  selP:'cmd',profile:null,
-  miss:{name:'',cmd:'',vessel:'',area:'',obs:'',dayS:'06:00',dayE:'22:00',nightS:'22:00',nightE:'06:00',
-    active:false,paused:false,startTs:null,pauseTs:null,pausedMs:0},
-  teams:[
-    {id:'t1',name:'Equipe Alpha',color:'blue'},{id:'t2',name:'Equipe Bravo',color:'green'},
-    {id:'t3',name:'Equipe Charlie',color:'amber'},{id:'t4',name:'Equipe Delta',color:'red'}
-  ],
-  crew:[
-    {id:'c1',name:'Cap. Roberto Silva',ng:'Silva',rank:'Capitão de Corveta',role:'Comandante',tid:'t1',camarote:'Camarote 1',om:'',tel:''},
-    {id:'c2',name:'Ten. Ana Pereira',ng:'Pereira',rank:'1º Tenente',role:'Imediato',tid:'t1',camarote:'Camarote 1',om:'',tel:''},
-    {id:'c3',name:'Sgt. Carlos Mendes',ng:'Mendes',rank:'Sargento',role:'Timoneiro',tid:'t2',camarote:'Camarote 2',om:'',tel:''},
-    {id:'c4',name:'Cb. Maria Santos',ng:'Santos',rank:'Cabo',role:'Vigia',tid:'t2',camarote:'Camarote 2',om:'',tel:''},
-    {id:'c5',name:'Mar. João Lima',ng:'Lima',rank:'Marinheiro',role:'Patrulheiro',tid:'t3',camarote:'Camarote 3',om:'',tel:''},
-    {id:'c6',name:'Mar. Pedro Costa',ng:'Costa',rank:'Marinheiro',role:'Cozinheiro',tid:'t3',camarote:'Cozinha',om:'',tel:''},
-    {id:'c7',name:'Sgt. Lucas Alves',ng:'Alves',rank:'Sargento',role:'Comunicador',tid:'t4',camarote:'Camarote 4',om:'',tel:''},
-    {id:'c8',name:'Mar. Paula Rocha',ng:'Rocha',rank:'Marinheiro',role:'Marinheiro',tid:'t4',camarote:'Corredor',om:'',tel:''}
-  ],
-  passengers:[],logs:[],savedMissions:[],gps:null,seq:300
-};
-
-// ═══════════════════════════════════════════════
-// PERSISTÊNCIA LOCAL
-// ═══════════════════════════════════════════════
-function SS(){
-  try{localStorage.setItem('rioops6',JSON.stringify(D));}catch(e){console.warn('Storage error:',e);}
-}
-function LS(){
-  try{
-    let r=localStorage.getItem('rioops6')||localStorage.getItem('rioops5')||localStorage.getItem('rioops_v4');
-    if(!r)return;
-    let s=JSON.parse(r);
-    if(s.miss)Object.assign(D.miss,s.miss);
-    if(s.teams&&s.teams.length)D.teams=s.teams;
-    if(s.crew&&s.crew.length)D.crew=s.crew;
-    if(s.passengers)D.passengers=s.passengers;
-    if(s.logs)D.logs=s.logs;
-    if(s.savedMissions)D.savedMissions=s.savedMissions;
-    if(s.seq)D.seq=s.seq;
-  }catch(e){console.warn('Load error:',e);}
-}
-LS();
-
-// ═══════════════════════════════════════════════
-// UTILS
-// ═══════════════════════════════════════════════
-function pad(n){return String(Math.floor(n)).padStart(2,'0')}
-function uid(){return 'x'+(++D.seq)}
-function t2m(t){if(!t||!t.includes(':'))return 0;let[h,m]=t.split(':').map(Number);return h*60+(m||0)}
-function m2s(m){return pad(Math.floor(m/60)%24)+':'+pad(Math.round(m)%60)}
-function fmtHM(m){let h=Math.floor(m/60),mm=Math.round(m%60);return h>0?(h+'h'+(mm?mm+'min':'')):(mm+'min')}
-function fmtDur(ms){let s=Math.floor(ms/1000),m=Math.floor(s/60),h=Math.floor(m/60);return pad(h)+':'+pad(m%60)+':'+pad(s%60)}
-function nowMin(){let n=new Date();return n.getHours()*60+n.getMinutes()+n.getSeconds()/60}
-function teamById(id){return D.teams.find(t=>t.id===id)||{name:'?',color:'gray'}}
-function cloneD(x){return JSON.parse(JSON.stringify(x))}
-
-function shiftDurUI(type){
-  let eDS=document.getElementById('dS'),eDE=document.getElementById('dE'),eNS=document.getElementById('nS'),eNE=document.getElementById('nE');
-  let s,e;
-  if(type==='day'){s=t2m(eDS?eDS.value:D.miss.dayS);e=t2m(eDE?eDE.value:D.miss.dayE);}
-  else{s=t2m(eNS?eNS.value:D.miss.nightS);e=t2m(eNE?eNE.value:D.miss.nightE);}
-  let d=e-s;return d<=0?d+1440:d;
-}
-function shiftDurSaved(type,miss){
-  let s=t2m(type==='day'?miss.dayS:miss.nightS),e=t2m(type==='day'?miss.dayE:miss.nightE),d=e-s;
-  return d<=0?d+1440:d;
-}
-
-function getSegs(){
-  if(!D.teams.length)return[];
-  let n=D.teams.length,dd=shiftDurSaved('day',D.miss),nd=shiftDurSaved('night',D.miss);
-  let pd=dd/n,pn=nd/n,segs=[],ds=t2m(D.miss.dayS),ns=t2m(D.miss.nightS);
-  D.teams.forEach((t,i)=>segs.push({tid:t.id,type:'day',s:(ds+i*pd)%1440,dur:pd}));
-  D.teams.forEach((t,i)=>segs.push({tid:t.id,type:'night',s:(ns+i*pn)%1440,dur:pn}));
-  return segs;
-}
-function curSegIdx(){
-  let segs=getSegs(),now=nowMin();
-  for(let i=0;i<segs.length;i++){
-    let g=segs[i],e=(g.s+g.dur)%1440;
-    let ok=g.s<e?(now>=g.s&&now<e):(now>=g.s||now<e);
-    if(ok)return i;
-  }
-  return 0;
-}
-
-// ═══════════════════════════════════════════════
-// LOGIN
-// ═══════════════════════════════════════════════
-function selP(p){
-  D.selP=p;
-  document.getElementById('pb_cmd').className='pb'+(p==='cmd'?' sel':'');
-  document.getElementById('pb_crew').className='pb'+(p==='crew'?' sel':'');
-  [0,1,2,3,4].forEach(i=>document.getElementById('p'+i).value='');
-  document.getElementById('p0').focus();
-  document.getElementById('lErr').textContent='';
-}
-[0,1,2,3,4].forEach(i=>setTimeout(()=>{
-  let el=document.getElementById('p'+i);if(!el)return;
-  el.addEventListener('input',()=>{if(el.value&&i<4)document.getElementById('p'+(i+1)).focus();if(i===4&&el.value)setTimeout(doLogin,60);});
-  el.addEventListener('keydown',e=>{if(e.key==='Backspace'&&!el.value&&i>0)document.getElementById('p'+(i-1)).focus();if(e.key==='Enter')doLogin();});
-},250));
-function gPin(){return[0,1,2,3,4].map(i=>document.getElementById('p'+i).value).join('')}
-function doLogin(){
-  let pin=gPin(),p=D.selP;
-  if((p==='cmd'&&pin==='54321')||(p==='crew'&&pin==='12345')){
-    D.profile=p;
-    document.getElementById('scLogin').className='screen';
-    document.getElementById('scApp').className='screen show';
-    initApp();
-  } else {
-    document.getElementById('lErr').textContent='Senha incorreta.';
-    [0,1,2,3,4].forEach(i=>document.getElementById('p'+i).value='');
-    document.getElementById('p0').focus();
-  }
-}
-function doLogout(){
-  D.profile=null;[0,1,2,3,4].forEach(i=>document.getElementById('p'+i).value='');
-  document.getElementById('lErr').textContent='';
-  document.getElementById('scApp').className='screen';
-  document.getElementById('scLogin').className='screen show';
-}
-
-// ═══════════════════════════════════════════════
-// INIT
-// ═══════════════════════════════════════════════
-function initApp(){
-  let cmd=D.profile==='cmd';
-  document.getElementById('ud').className='udot '+(cmd?'ud-cmd':'ud-crew');
-  document.getElementById('un').textContent=cmd?'Comandante':'Tripulação';
-
-  // Perfil Comandante: todas as abas
-  // Perfil Tripulação: APENAS Dashboard e Diário de Bordo
-  let tabs=cmd?[
-    {l:'Dashboard',p:'pgDash'},{l:'Missão',p:'pgMiss'},{l:'Equipes',p:'pgTeams'},
-    {l:'Tripulação',p:'pgCrew'},{l:'Passageiros',p:'pgPass'},{l:'Diário de Bordo',p:'pgLog'}
-  ]:[
-    {l:'Dashboard',p:'pgDash'},
-    {l:'Diário de Bordo',p:'pgLog'}
-  ];
-  document.getElementById('navTabs').innerHTML=tabs.map((t,i)=>
-    `<button class="nt${i===0?' act':''}" onclick="showPg('${t.p}',this)">${t.l}</button>`).join('');
-
-  if(!cmd){
-    // Ocultar botões de missão no dashboard
-    let mb=document.getElementById('mBtns');if(mb)mb.style.display='none';
-    // Ocultar botão gerar relatório no dashboard para tripulação
-    let relBtn=document.querySelector('[onclick="gerarRelatorio()"]');
-    if(relBtn)relBtn.style.display='none';
-  }
-
-  syncMissForm();calcShifts();renderAll();renderTeamOrderList();startClock();initGPS();
-  updateMissionUI();
-  document.getElementById('sMN').textContent=D.miss.name||'—';
-  document.getElementById('tbM').textContent=D.miss.active?(D.miss.name||'Missão ativa'):'—';
-}
-
-function showPg(id,btn){
-  document.querySelectorAll('.page').forEach(p=>p.className='page');
-  document.getElementById(id).className='page show';
-  document.querySelectorAll('.nt').forEach(b=>b.className='nt');
-  btn.className='nt act';
-  if(id==='pgLog')fillLogForm();
-  if(id==='pgDash')renderSchedule();
-  if(id==='pgMiss'){renderTeamOrderList();renderSaved();}
-  calcShifts();
-}
-function showMissTab(id,btn){
-  ['mDados','mTurnos','mSalvas'].forEach(t=>{let e=document.getElementById(t);if(e)e.style.display='none';});
-  document.getElementById(id).style.display='block';
-  document.querySelectorAll('#missTabsBar .stab').forEach(b=>b.className='stab');
-  btn.className='stab act';
-  if(id==='mSalvas')renderSaved();
-  if(id==='mTurnos')renderTeamOrderList();
-}
-function syncMissForm(){
-  let m=D.miss;
-  document.getElementById('mName').value=m.name||'';
-  document.getElementById('mCmd').value=m.cmd||'';
-  document.getElementById('mVes').value=m.vessel||'';
-  document.getElementById('mArea').value=m.area||'';
-  document.getElementById('mObs').value=m.obs||'';
-  document.getElementById('dS').value=m.dayS||'06:00';
-  document.getElementById('dE').value=m.dayE||'22:00';
-  document.getElementById('nS').value=m.nightS||'22:00';
-  document.getElementById('nE').value=m.nightE||'06:00';
-}
-function updateMissionUI(){
-  if(D.profile!=='cmd')return;
-  let a=D.miss.active,pa=D.miss.paused;
-  document.getElementById('bStart').disabled=a;
-  document.getElementById('bPause').disabled=!a||pa;
-  document.getElementById('bResume').disabled=!a||!pa;
-  document.getElementById('bEnd').disabled=!a;
-  document.getElementById('sMS').textContent=a?(pa?'Pausada':'Em andamento'):(D.miss.startTs?'Finalizada':'Não iniciada');
-  if(a&&D.miss.startTs)document.getElementById('sSt').textContent='Início: '+new Date(D.miss.startTs).toLocaleString('pt-BR');
-}
-function updateCounters(){
-  document.getElementById('sTe').textContent=D.teams.length+' / '+D.crew.length;
-  document.getElementById('sPL').textContent=(D.passengers||[]).length+' / '+D.logs.length;
-}
-
-// ═══════════════════════════════════════════════
-// CLOCK
-// ═══════════════════════════════════════════════
-let _clk=null;
-function startClock(){
-  if(_clk)clearInterval(_clk);
-  _clk=setInterval(()=>{
-    let n=new Date();
-    document.getElementById('tbC').textContent=pad(n.getHours())+':'+pad(n.getMinutes())+':'+pad(n.getSeconds());
-    if(D.miss.active&&!D.miss.paused)
-      document.getElementById('sEl').textContent=fmtDur(Date.now()-D.miss.startTs-D.miss.pausedMs);
-    updateRing();
-  },1000);
-}
-
-// ═══════════════════════════════════════════════
-// ═══════════════════════════════════════════════
-// GPS — robusto para Android APK
-// ═══════════════════════════════════════════════
-let _gpsWatchId=null;
-
-function setGpsStatus(msg, color){
-  let el=document.getElementById('gpsStatus');
-  if(el){el.textContent=msg;el.style.color=color||'#8aaac0';}
-}
-
-// Converte graus decimais para GMS (Graus, Minutos, Segundos)
-function decimalToGMS(decimal, isLat){
-  let dir;
-  if(isLat) dir=decimal>=0?'N':'S';  // Norte se positivo, Sul se negativo
-  else      dir=decimal>=0?'E':'O';  // Leste se positivo, Oeste se negativo
-  let abs=Math.abs(decimal);
-  let graus=Math.floor(abs);
-  let minTotal=(abs-graus)*60;
-  let min=Math.floor(minTotal);
-  let seg=((minTotal-min)*60).toFixed(1);
-  return graus+'°'+pad(min)+"'"+seg+'"'+dir;
-}
-
-function onGpsSuccess(pos){
-  let latDec=pos.coords.latitude;
-  let lngDec=pos.coords.longitude;
-  let acc=pos.coords.accuracy?Math.round(pos.coords.accuracy)+'m':'?';
-  // Formato GMS: ex.  03°08'45.2"S  060°01'22.8"O
-  let latGMS=decimalToGMS(latDec, true);
-  let lngGMS=decimalToGMS(lngDec, false);
-  D.gps=latGMS+' / '+lngGMS;
-  // Atualiza campo visível se estiver aberto
-  let el=document.getElementById('lgGps');
-  if(el)el.value=D.gps;
-  setGpsStatus('✅ GPS ±'+acc+' — '+D.gps, '#1a8a5a');
-}
-
-function onGpsError(err){
-  let msgs={
-    1:'Permissão negada. Ative o GPS nas configurações.',
-    2:'GPS indisponível. Verifique se está ativado.',
-    3:'Tempo esgotado. Tente novamente ao ar livre.'
-  };
-  setGpsStatus('⚠ '+( msgs[err.code]||'Erro GPS: '+err.message), '#c03030');
-  D.gps=null;
-}
-
-function initGPS(){
-  if(!navigator.geolocation){
-    setGpsStatus('GPS não suportado neste dispositivo.','#c03030');
-    return;
-  }
-  setGpsStatus('Aguardando GPS...','#c9a040');
-
-  let opts={
-    enableHighAccuracy:true,
-    timeout:20000,
-    maximumAge:10000
-  };
-
-  // Primeira leitura rápida
-  navigator.geolocation.getCurrentPosition(onGpsSuccess, onGpsError, opts);
-
-  // Monitoramento contínuo
-  if(_gpsWatchId!==null)navigator.geolocation.clearWatch(_gpsWatchId);
-  _gpsWatchId=navigator.geolocation.watchPosition(onGpsSuccess, onGpsError, opts);
-}
-
-// Botão "Atualizar GPS" no formulário do diário
-function atualizarGPS(){
-  let btn=document.getElementById('btnGps');
-  if(btn){btn.textContent='⏳';btn.disabled=true;}
-  setGpsStatus('Buscando localização...','#c9a040');
-
-  if(!navigator.geolocation){
-    setGpsStatus('GPS não suportado.','#c03030');
-    if(btn){btn.textContent='📍 Atualizar';btn.disabled=false;}
-    return;
-  }
-
-  navigator.geolocation.getCurrentPosition(
-    pos=>{
-      onGpsSuccess(pos);
-      if(btn){btn.textContent='📍 Atualizar';btn.disabled=false;}
-    },
-    err=>{
-      onGpsError(err);
-      if(btn){btn.textContent='📍 Atualizar';btn.disabled=false;}
-      // No Android APK, pede permissão mostrando mensagem clara
-      if(err.code===1){
-        showMsg('lMsg','⚠ Permissão de GPS negada. Vá em Configurações > Apps > Rio Ops > Permissões e ative Localização.','err');
-      }
-    },
-    {enableHighAccuracy:true, timeout:15000, maximumAge:0}
-  );
-}
-
-// ═══════════════════════════════════════════════
-// MISSÃO
-// ═══════════════════════════════════════════════
-function saveMiss(){
-  D.miss.name=document.getElementById('mName').value.trim();
-  D.miss.cmd=document.getElementById('mCmd').value.trim();
-  D.miss.vessel=document.getElementById('mVes').value.trim();
-  D.miss.area=document.getElementById('mArea').value.trim();
-  D.miss.obs=document.getElementById('mObs').value.trim();
-  D.miss.dayS=document.getElementById('dS').value;
-  D.miss.dayE=document.getElementById('dE').value;
-  D.miss.nightS=document.getElementById('nS').value;
-  D.miss.nightE=document.getElementById('nE').value;
-  SS();calcShifts();renderSchedule();
-  showMsg('mMsg','Configuração salva com sucesso.','ok');
-  document.getElementById('tbM').textContent=D.miss.name||'—';
-  document.getElementById('sMN').textContent=D.miss.name||'—';
-}
-function calcShifts(){
-  let dd=shiftDurUI('day'),nd=shiftDurUI('night'),n=D.teams.length;
-  let di=document.getElementById('dInfo'),ni=document.getElementById('nInfo'),ss=document.getElementById('shiftSummary');
-  if(di)di.textContent='Duração: '+fmtHM(dd)+(n?' — '+fmtHM(dd/n)+' por equipe':'');
-  if(ni)ni.textContent='Duração: '+fmtHM(nd)+(n?' — '+fmtHM(nd/n)+' por equipe':'');
-  if(ss)ss.textContent=n?n+' equipes — Diurno '+fmtHM(dd/n)+'/equipe · Noturno '+fmtHM(nd/n)+'/equipe':'Cadastre equipes para calcular.';
-}
-function startMission(){
-  if(!D.teams.length){showMsg('dMsg','Cadastre ao menos uma equipe antes de iniciar.','err');return;}
-  D.miss.active=true;D.miss.paused=false;D.miss.startTs=Date.now();D.miss.pausedMs=0;SS();
-  document.getElementById('tbM').textContent=D.miss.name||'Missão ativa';
-  document.getElementById('sMN').textContent=D.miss.name||'—';
-  document.getElementById('sSt').textContent='Início: '+new Date().toLocaleString('pt-BR');
-  updateMissionUI();renderSchedule();
-}
-function pauseMission(){D.miss.paused=true;D.miss.pauseTs=Date.now();SS();updateMissionUI();}
-function resumeMission(){D.miss.pausedMs+=Date.now()-D.miss.pauseTs;D.miss.paused=false;SS();updateMissionUI();}
-function endMission(){
-  if(!confirm('Finalizar a missão?'))return;
-  D.miss.active=false;D.miss.paused=false;SS();
-  document.getElementById('sEl').textContent='00:00:00';
-  document.getElementById('tbM').textContent='Missão encerrada';
-  updateMissionUI();
-  document.getElementById('saveName').value=D.miss.name||'';
-  openOv('ovSave');
-}
-
-// ═══════════════════════════════════════════════
-// NOVA MISSÃO
-// ═══════════════════════════════════════════════
-function novaMissao(){
-  if(D.miss.active){showMsg('dMsg','Finalize a missão atual antes de criar uma nova.','err');return;}
-  openOv('ovNova');
-}
-function novaMissaoManter(){
-  closeOv('ovNova');
-  let{dayS,dayE,nightS,nightE}=D.miss;
-  D.miss={name:'',cmd:'',vessel:'',area:'',obs:'',dayS,dayE,nightS,nightE,active:false,paused:false,startTs:null,pauseTs:null,pausedMs:0};
-  D.logs=[];D.passengers=[];SS();
-  syncMissForm();renderAll();updateMissionUI();
-  document.getElementById('sMN').textContent='—';document.getElementById('tbM').textContent='—';
-  document.getElementById('sEl').textContent='00:00:00';document.getElementById('sSt').textContent='—';
-  showMsg('dMsg','Nova missão criada. Configure os dados na aba Missão.','ok');
-}
-function novaMissaoCompleta(){
-  closeOv('ovNova');
-  D.miss={name:'',cmd:'',vessel:'',area:'',obs:'',dayS:'06:00',dayE:'22:00',nightS:'22:00',nightE:'06:00',active:false,paused:false,startTs:null,pauseTs:null,pausedMs:0};
-  D.teams=[{id:'t1',name:'Equipe Alpha',color:'blue'},{id:'t2',name:'Equipe Bravo',color:'green'},{id:'t3',name:'Equipe Charlie',color:'amber'},{id:'t4',name:'Equipe Delta',color:'red'}];
-  D.crew=[];D.logs=[];D.passengers=[];SS();
-  syncMissForm();calcShifts();renderAll();renderTeamOrderList();updateMissionUI();
-  document.getElementById('sMN').textContent='—';document.getElementById('tbM').textContent='—';
-  document.getElementById('sEl').textContent='00:00:00';document.getElementById('sSt').textContent='—';
-  showMsg('dMsg','Missão zerada. Configure tudo na aba Missão.','ok');
-}
-
-// ═══════════════════════════════════════════════
-// SALVAR / CARREGAR MISSÕES
-// ═══════════════════════════════════════════════
-function confirmSave(){
-  let label=document.getElementById('saveName').value.trim()||D.miss.name||'Missão '+new Date().toLocaleDateString('pt-BR');
-  D.savedMissions.unshift({
-    id:uid(),label,savedAt:new Date().toISOString(),
-    miss:cloneD(D.miss),teams:cloneD(D.teams),crew:cloneD(D.crew),
-    passengers:cloneD(D.passengers||[]),logs:cloneD(D.logs)
-  });
-  SS();closeOv('ovSave');showMsg('dMsg','Missão salva com sucesso!','ok');renderSaved();
-}
-let curViewIdx=0;
-function renderSaved(){
-  let el=document.getElementById('savedList');if(!el)return;
-  if(!D.savedMissions.length){
-    el.innerHTML='<div class="empty">Nenhuma missão salva ainda.<br><small>Finalize e salve uma missão para vê-la aqui.</small></div>';return;
-  }
-  el.innerHTML=D.savedMissions.map((m,i)=>`
-    <div class="mcard">
-      <div class="mc-name">${m.label}</div>
-      <div class="mc-sub">${new Date(m.savedAt).toLocaleString('pt-BR')} · ${m.logs.length} registros · ${m.crew.length} tripulantes · ${(m.passengers||[]).length} passageiros</div>
-      <div class="mc-btns">
-        <button class="btn btn-blue btn-sm" onclick="viewSaved(${i})">👁 Ver</button>
-        <button class="btn btn-green btn-sm" onclick="loadSaved(${i})">⬇ Carregar</button>
-        <button class="btn btn-amber btn-sm" onclick="gerarRelatorioSalvo(${i})">📋 Relatório</button>
-        <button class="btn btn-ghost btn-sm" style="color:#c03030;border-color:#f0a0a0" onclick="delSaved(${i})">✕</button>
-      </div>
-    </div>`).join('');
-}
-function viewSaved(i){
-  curViewIdx=i;let m=D.savedMissions[i];
-  document.getElementById('ovViewTitle').innerHTML=m.label+'<button class="modal-close" onclick="closeOv(\'ovView\')">×</button>';
-  document.getElementById('ovViewBody').innerHTML=`<div style="font-size:12px;color:#4a6a8a;line-height:2">
-    <b>Comandante:</b> ${m.miss.cmd||'—'}<br><b>Embarcação:</b> ${m.miss.vessel||'—'}<br>
-    <b>Área:</b> ${m.miss.area||'—'}<br><b>Equipes:</b> ${m.teams.map(t=>t.name).join(', ')}<br>
-    <b>Tripulantes:</b> ${m.crew.length} · <b>Passageiros:</b> ${(m.passengers||[]).length}<br>
-    <b>Registros:</b> ${m.logs.length}</div>`;
-  openOv('ovView');
-}
-function loadSaved(i){
-  if(!confirm('Carregar esta missão? Os dados atuais serão substituídos.'))return;
-  let m=D.savedMissions[i];
-  D.miss=cloneD(m.miss);D.miss.active=false;D.miss.paused=false;D.miss.startTs=null;D.miss.pausedMs=0;
-  D.teams=cloneD(m.teams);D.crew=cloneD(m.crew);
-  D.passengers=cloneD(m.passengers||[]);D.logs=cloneD(m.logs);
-  SS();syncMissForm();calcShifts();renderAll();renderTeamOrderList();updateMissionUI();
-  closeOv('ovView');closeOv('ovSave');
-  document.getElementById('sMN').textContent=D.miss.name||'—';
-  document.getElementById('tbM').textContent=D.miss.name||'—';
-  document.getElementById('sEl').textContent='00:00:00';document.getElementById('sSt').textContent='—';
-  showMsg('dMsg','Missão carregada. Ajuste e inicie quando quiser.','ok');
-}
-function delSaved(i){
-  if(!confirm('Excluir esta missão salva?'))return;
-  D.savedMissions.splice(i,1);SS();renderSaved();
-}
-
-// ═══════════════════════════════════════════════
-// RING + SCHEDULE
-// ═══════════════════════════════════════════════
-function updateRing(){
-  if(!D.miss.active||!D.teams.length){
-    document.getElementById('rArc').style.strokeDashoffset='339';
-    document.getElementById('rTime').textContent='--:--';
-    document.getElementById('wcT').textContent='—';
-    document.getElementById('wcTp').textContent='Missão não iniciada';
-    document.getElementById('nxT').textContent='—';document.getElementById('nxTm').textContent='—';document.getElementById('nxS').textContent='—';
-    return;
-  }
-  let segs=getSegs(),idx=curSegIdx(),seg=segs[idx],nx=segs[(idx+1)%segs.length];
-  let now=nowMin(),end=(seg.s+seg.dur)%1440;
-  let rem=seg.s<end?(end-now):(now>=seg.s?1440-now+end:end-now);
-  if(rem<0)rem=0;
-  let rs=Math.round(rem*60),rm=Math.floor(rs/60);rs=rs%60;
-  document.getElementById('rTime').textContent=pad(rm)+':'+pad(rs);
-  document.getElementById('rArc').style.strokeDashoffset=339-(339*Math.max(0,Math.min(1,1-rem/seg.dur)));
-  let t=teamById(seg.tid),nt=teamById(nx.tid);
-  document.getElementById('wcT').textContent=t.name;
-  document.getElementById('wcTp').textContent=(seg.type==='day'?'Turno Diurno ☀️':'Turno Noturno 🌙')+' — até '+m2s(end);
-  document.getElementById('nxT').textContent=nt.name;
-  document.getElementById('nxTm').textContent='às '+m2s(end);
-  document.getElementById('nxS').textContent=nx.type==='day'?'Diurno ☀️':'Noturno 🌙';
-  updateCounters();
-}
-function renderSchedule(){
-  let segs=getSegs(),el=document.getElementById('schedRows');if(!el)return;
-  if(!segs.length){el.innerHTML='<div class="empty" style="padding:14px">Cadastre equipes para gerar a escala.</div>';return;}
-  let ai=D.miss.active?curSegIdx():-1;
-  el.innerHTML=segs.map((seg,i)=>{
-    let t=teamById(seg.tid),c=COLORS[t.color]||COLORS.gray,end=(seg.s+seg.dur)%1440,isA=i===ai;
-    return`<div class="srow">
-      <div style="width:28px;height:28px;border-radius:50%;background:${c.bg};color:${c.text};display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;flex-shrink:0">${t.name.split(' ').pop().slice(0,2)}</div>
-      <div style="flex:1"><div style="font-size:12px;font-weight:500;color:${isA?c.text:'#1a2535'}">${t.name}</div><div style="font-size:10px;color:#8aaac0">${seg.type==='day'?'Diurno ☀️':'Noturno 🌙'} · ${m2s(seg.s)} → ${m2s(end)}</div></div>
-      <div style="display:flex;align-items:center;gap:7px"><span style="font-size:10px;color:#8aaac0">${fmtHM(seg.dur)}</span>${isA?'<span class="badge b-active">Ativo</span>':''}</div>
-    </div>`;
-  }).join('');
-}
-
-// ═══════════════════════════════════════════════
-// DRAG & DROP EQUIPES
-// ═══════════════════════════════════════════════
-// Usar window para que inline handlers HTML possam acessar
-window._dSrc=null;
-
-function renderTeamOrderList(){
-  let el=document.getElementById('teamOrderList');if(!el)return;
-  if(!D.teams.length){el.innerHTML='<div style="padding:14px;color:#8aaac0;font-size:12px;text-align:center">Nenhuma equipe cadastrada.</div>';return;}
-  el.innerHTML=D.teams.map((t,i)=>{
-    let c=COLORS[t.color]||COLORS.gray;
-    return`<div class="order-item" draggable="true" data-i="${i}"
-      ondragstart="teamDragStart(event,${i})"
-      ondragover="teamDragOver(event)"
-      ondragleave="this.classList.remove('over')"
-      ondrop="teamDrop(event,${i})"
-      ontouchstart="teamTouchStart(${i})"
-      ontouchmove="event.preventDefault()"
-      ontouchend="teamTouchEnd(${i})">
-      <span class="drag-handle">⠿</span>
-      <div class="order-num">${i+1}</div>
-      <div class="av" style="background:${c.bg};color:${c.text};width:30px;height:30px;font-size:10px">${t.name.split(' ').map(w=>w[0]).join('').slice(0,2)}</div>
-      <div style="flex:1;font-size:13px;font-weight:500;color:#1a2535">${t.name}</div>
-    </div>`;
-  }).join('');
-}
-function teamDragStart(e,i){
-  window._dSrc=i;
-  setTimeout(()=>{let el=e.target;if(el)el.classList.add('dragging');},0);
-}
-function teamDragOver(e){
-  e.preventDefault();
-  document.querySelectorAll('.order-item').forEach(el=>el.classList.remove('over'));
-  e.currentTarget.classList.add('over');
-}
-function teamDrop(e,i){
-  e.preventDefault();
-  document.querySelectorAll('.order-item').forEach(el=>{el.classList.remove('over');el.classList.remove('dragging');});
-  let src=window._dSrc;window._dSrc=null;
-  if(src===null||src===i)return;
-  let tmp=D.teams[src];D.teams.splice(src,1);D.teams.splice(i,0,tmp);
-  renderTeamOrderList();calcShifts();renderSchedule();
-}
-function teamTouchStart(i){window._dSrc=i;}
-function teamTouchEnd(i){
-  let src=window._dSrc;window._dSrc=null;
-  if(src===null||src===i)return;
-  let tmp=D.teams[src];D.teams.splice(src,1);D.teams.splice(i,0,tmp);
-  renderTeamOrderList();calcShifts();renderSchedule();
-}
-function saveTeamOrder(){SS();showMsg('mMsg','Ordem das equipes salva.','ok');renderSchedule();}
-
-// ═══════════════════════════════════════════════
-// EQUIPES
-// ═══════════════════════════════════════════════
-function saveTeam(){
-  let name=document.getElementById('tN').value.trim();
-  if(!name){showMsg('tMsg','Informe o nome da equipe.','err');return;}
-  D.teams.push({id:uid(),name,color:document.getElementById('tC').value});
-  document.getElementById('tN').value='';hideF('addTForm');
-  renderAll();renderTeamOrderList();calcShifts();SS();showMsg('tMsg','Equipe criada.','ok');
-}
-function delTeam(id){
-  if(!confirm('Remover esta equipe?'))return;
-  D.teams=D.teams.filter(t=>t.id!==id);
-  renderAll();renderTeamOrderList();calcShifts();SS();
-}
-function editTeamColor(id,color){
-  let t=D.teams.find(t=>t.id===id);if(t){t.color=color;SS();renderTeams();renderTeamOrderList();}
-}
-function renderTeams(){
-  let el=document.getElementById('tList'),cmd=D.profile==='cmd';
-  if(!D.teams.length){el.innerHTML='<div class="empty">Nenhuma equipe cadastrada.</div>';return;}
-  el.innerHTML=D.teams.map(t=>{
-    let c=COLORS[t.color]||COLORS.gray,members=D.crew.filter(m=>m.tid===t.id);
-    return`<div class="li" style="flex-direction:column;align-items:stretch">
-      <div style="display:flex;align-items:center;gap:9px${members.length?';margin-bottom:8px':''}">
-        <div class="av" style="background:${c.bg};color:${c.text}">${t.name.split(' ').map(w=>w[0]).join('').slice(0,2)}</div>
-        <div style="flex:1"><div class="lin">${t.name}</div><div class="lis">${members.length} tripulante${members.length!==1?'s':''}</div></div>
-        ${cmd?`<div style="display:flex;gap:5px;align-items:center">
-          <select class="inline-sel" onchange="editTeamColor('${t.id}',this.value)">
-            ${['blue','green','amber','red','gray'].map(cl=>`<option value="${cl}"${t.color===cl?' selected':''}>${cl}</option>`).join('')}
-          </select>
-          <button class="btn btn-ghost btn-sm" onclick="delTeam('${t.id}')" style="color:#c03030;border-color:#f0a0a0">✕</button>
-        </div>`:''}
-      </div>
-      ${members.length?`<div style="display:flex;flex-wrap:wrap;gap:5px">${members.map(m=>`<span style="background:${c.bg};color:${c.text};border-radius:20px;padding:2px 9px;font-size:11px;font-weight:500">${m.ng||m.name.split(' ').pop()}</span>`).join('')}</div>`:''}
-    </div>`;
-  }).join('');
-}
-
-// ═══════════════════════════════════════════════
-// TRIPULAÇÃO
-// ═══════════════════════════════════════════════
-function fillTmSel(id){
-  let sel=document.getElementById(id);if(!sel)return;
-  sel.innerHTML=D.teams.length?D.teams.map(t=>`<option value="${t.id}">${t.name}</option>`).join(''):'<option value="">— Cadastre equipes —</option>';
-}
-function saveCrew(){
-  let name=document.getElementById('cN').value.trim();
-  if(!name){showMsg('cMsg','Informe o nome completo.','err');return;}
-  D.crew.push({
-    id:uid(),name,ng:document.getElementById('cNG').value.trim(),
-    rank:document.getElementById('cRk').value.trim(),role:document.getElementById('cRo').value,
-    tid:document.getElementById('cTm').value,camarote:document.getElementById('cCam').value,
-    om:document.getElementById('cOM').value.trim(),tel:document.getElementById('cTel').value.trim()
-  });
-  ['cN','cNG','cRk','cOM','cTel'].forEach(id=>document.getElementById(id).value='');
-  hideF('addCForm');renderAll();SS();showMsg('cMsg','Tripulante adicionado.','ok');
-}
-function delCrew(id){if(!confirm('Remover tripulante?'))return;D.crew=D.crew.filter(c=>c.id!==id);renderAll();SS();}
-function editCrewField(id,field,val){let c=D.crew.find(c=>c.id===id);if(c){c[field]=val;SS();}}
-function renderCrew(){
-  let el=document.getElementById('cList'),cmd=D.profile==='cmd';
-  if(!D.crew.length){el.innerHTML='<div class="empty">Nenhum tripulante cadastrado.</div>';return;}
-  let grouped={};
-  D.crew.forEach(m=>{let k=m.tid||'_';(grouped[k]=grouped[k]||[]).push(m);});
-  el.innerHTML=Object.entries(grouped).map(([tid,members])=>{
-    let t=teamById(tid),c=COLORS[t.color]||COLORS.gray;
-    return`<div style="margin-bottom:14px">
-      <div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.8px;color:${c.text};background:${c.bg};padding:4px 11px;border-radius:20px;display:inline-block;margin-bottom:7px">${t.name}</div>
-      ${members.map(m=>`<div class="li">
-        <div class="av" style="background:${c.bg};color:${c.text};flex-shrink:0">${(m.ng||m.name.replace(/^(cap\.|ten\.|sgt\.|cb\.|mar\.)\s*/i,'')).split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase()}</div>
-        <div style="flex:1;min-width:0">
-          <div class="lin">${m.name}${m.ng?` <span style="font-size:11px;font-weight:400;color:#8aaac0">(${m.ng})</span>`:''}</div>
-          <div class="lis">${[m.rank,m.role].filter(Boolean).join(' — ')}</div>
-          <div style="font-size:10px;color:#a0b8d0;margin-top:3px;display:flex;gap:8px;flex-wrap:wrap">
-            <span>🛏 ${m.camarote||'—'}</span>
-            ${m.om?`<span>🏛 ${m.om}</span>`:''}
-            ${m.tel?`<span>📡 ${m.tel}</span>`:''}
-          </div>
-          ${cmd?`<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">
-            <div>
-              <div class="fl" style="margin-bottom:2px">Equipe</div>
-              <select class="inline-sel" style="min-width:120px" onchange="editCrewField('${m.id}','tid',this.value);renderCrew()">
-                ${D.teams.map(tt=>`<option value="${tt.id}"${m.tid===tt.id?' selected':''}>${tt.name}</option>`).join('')}
-              </select>
-            </div>
-            <div>
-              <div class="fl" style="margin-bottom:2px">Pernoite</div>
-              <select class="inline-sel" style="min-width:140px" onchange="editCrewField('${m.id}','camarote',this.value)">
-                ${PERNOITE.map(o=>`<option value="${o}"${m.camarote===o?' selected':''}>${o}</option>`).join('')}
-              </select>
-            </div>
-          </div>`:''}
-        </div>
-        ${cmd?`<button class="btn btn-ghost btn-sm" onclick="delCrew('${m.id}')" style="color:#c03030;border-color:#f0a0a0;padding:5px 9px;flex-shrink:0">✕</button>`:''}
-      </div>`).join('')}
-    </div>`;
-  }).join('');
-}
-
-// ═══════════════════════════════════════════════
-// PASSAGEIROS
-// ═══════════════════════════════════════════════
-function savePassenger(){
-  let nome=document.getElementById('pNome').value.trim();
-  if(!nome){showMsg('pMsg','Informe o nome do passageiro.','err');return;}
-  D.passengers.push({
-    id:uid(),nome,ng:document.getElementById('pNG').value.trim(),
-    posto:document.getElementById('pPosto').value.trim(),dn:document.getElementById('pDN').value,
-    cpf:document.getElementById('pCPF').value.trim(),idt:document.getElementById('pIDT').value.trim(),
-    om:document.getElementById('pOM').value.trim(),pernoite:document.getElementById('pPernoite').value
-  });
-  ['pNome','pNG','pPosto','pCPF','pIDT','pOM'].forEach(id=>document.getElementById(id).value='');
-  document.getElementById('pDN').value='';
-  hideF('addPForm');renderPassengers();SS();
-  showMsg('pMsg','Passageiro adicionado.','ok');
-  updateCounters();
-}
-function delPassenger(id){
-  if(!confirm('Remover passageiro?'))return;
-  D.passengers=D.passengers.filter(p=>p.id!==id);renderPassengers();SS();updateCounters();
-}
-function renderPassengers(){
-  let el=document.getElementById('passList'),cmd=D.profile==='cmd';
-  if(!(D.passengers||[]).length){el.innerHTML='<div class="empty">Nenhum passageiro cadastrado.</div>';return;}
-  el.innerHTML=D.passengers.map(p=>`
-    <div class="li">
-      <div class="av" style="background:#ede8ff;color:#5a3a9a;flex-shrink:0">${(p.ng||p.nome).split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase()}</div>
-      <div style="flex:1;min-width:0">
-        <div class="lin">${p.nome}${p.ng?` <span style="font-size:11px;font-weight:400;color:#8aaac0">(${p.ng})</span>`:''}</div>
-        <div class="lis">${p.posto||'—'}${p.om?' · '+p.om:''}</div>
-        <div style="font-size:10px;color:#a0b8d0;margin-top:3px;display:flex;gap:8px;flex-wrap:wrap">
-          ${p.dn?`<span>📅 ${p.dn}</span>`:''}
-          ${p.cpf?`<span>🪪 CPF: ${p.cpf}</span>`:''}
-          ${p.idt?`<span>🆔 IDT: ${p.idt}</span>`:''}
-          <span>🛏 ${p.pernoite||'—'}</span>
-        </div>
-      </div>
-      ${cmd?`<button class="btn btn-ghost btn-sm" onclick="delPassenger('${p.id}')" style="color:#c03030;border-color:#f0a0a0;padding:5px 9px;flex-shrink:0">✕</button>`:''}
-    </div>`).join('');
-}
-
-// ═══════════════════════════════════════════════
-// DIÁRIO
-// ═══════════════════════════════════════════════
-function fillLogForm(){
-  let n=new Date();
-  document.getElementById('lgDt').value=n.toISOString().slice(0,10);
-  document.getElementById('lgHr').value=pad(n.getHours())+':'+pad(n.getMinutes());
-  // Preenche GPS se já disponível, senão tenta capturar
-  let gpsEl=document.getElementById('lgGps');
-  if(D.gps&&gpsEl){
-    gpsEl.value=D.gps;
-    setGpsStatus('✅ Posição disponível','#1a8a5a');
-  } else {
-    // Tenta capturar automaticamente ao abrir o diário
-    atualizarGPS();
-  }
-  fillTmSel('lgTm');
-  if(D.miss.active&&D.teams.length){let seg=getSegs()[curSegIdx()];if(seg)document.getElementById('lgTm').value=seg.tid;}
-}
-function addLog(){
-  let txt=document.getElementById('lgTxt').value.trim();
-  if(!txt){showMsg('lMsg','Descreva o evento.','err');return;}
-  let dt=document.getElementById('lgDt').value,hr=document.getElementById('lgHr').value;
-  if(!dt||!hr){showMsg('lMsg','Preencha data e hora.','err');return;}
-  D.logs.unshift({
-    id:uid(),tid:document.getElementById('lgTm').value,dt,hr,
-    type:document.getElementById('lgTp').value,txt,gps:document.getElementById('lgGps').value||null
-  });
-  document.getElementById('lgTxt').value='';SS();renderLog();
-  showMsg('lMsg','Registro adicionado ao diário.','ok');updateCounters();
-}
-function renderLog(){
-  let el=document.getElementById('logList');
-  if(!D.logs.length){el.innerHTML='<div class="empty">Nenhum registro ainda.</div>';return;}
-  el.innerHTML=D.logs.map(l=>{
-    let t=teamById(l.tid),c=COLORS[t.color]||COLORS.gray,bc=TYPE_CLR[l.type]||'#7a9ab8';
-    return`<div class="logi" style="border-left-color:${bc}">
-      <div class="lhdr">
-        <span class="badge" style="background:${bc}22;color:${bc};border:1px solid ${bc}44">${TYPE_LBL[l.type]||l.type}</span>
-        <span class="lts">${l.dt} ${l.hr}</span>
-        <span style="background:${c.bg};color:${c.text};padding:2px 7px;border-radius:20px;font-size:10px;font-weight:500">${t.name}</span>
-        ${l.gps?`<span class="lgps">📍 ${l.gps}</span>`:''}
-      </div>
-      <div class="ltxt">${l.txt}</div>
-    </div>`;
-  }).join('');
-}
-
-// ═══════════════════════════════════════════════
-// RENDER ALL
-// ═══════════════════════════════════════════════
-function renderAll(){
-  renderTeams();renderCrew();renderPassengers();renderLog();renderSchedule();updateCounters();
-}
-
-// ═══════════════════════════════════════════════
-// RELATÓRIO HTML — compatível Android
-// ═══════════════════════════════════════════════
-function buildReportHTML(miss,teams,crew,pass,logs){
-  let passArr=pass||[];
-  let elapsed=miss.startTs?fmtDur(Date.now()-miss.startTs-(miss.pausedMs||0)):'—';
-  let now=new Date();
-
-  // Calcular segmentos com os dados da missão salva
-  let segsR=[];
-  if(teams.length){
-    let n=teams.length;
-    let dd=shiftDurSaved('day',miss),nd=shiftDurSaved('night',miss);
-    let pd=dd/n,pn=nd/n,ds=t2m(miss.dayS||'06:00'),ns=t2m(miss.nightS||'22:00');
-    teams.forEach((t,i)=>segsR.push({tid:t.id,type:'day',s:(ds+i*pd)%1440,dur:pd}));
-    teams.forEach((t,i)=>segsR.push({tid:t.id,type:'night',s:(ns+i*pn)%1440,dur:pn}));
-  }
-  function tb(id){return teams.find(t=>t.id===id)||{name:'?',color:'gray'}}
-  let logsOrd=[...logs].sort((a,b)=>(a.dt+a.hr).localeCompare(b.dt+b.hr));
-
-  return`<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Relatório — ${miss.name||'Rio Ops'}</title>
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:Arial,Helvetica,sans-serif;background:#f4f6fa;color:#1a2535;font-size:13px}
-.pg{max-width:860px;margin:0 auto;padding:0 18px 60px}
-.cover{background:#1a3a60;border-radius:0 0 24px 24px;padding:38px 30px;color:#fff;margin-bottom:28px}
-.cbg{display:inline-block;background:rgba(201,160,64,.3);border:1px solid rgba(201,160,64,.6);border-radius:30px;padding:4px 14px;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#f0c840;margin-bottom:18px}
-.ct{font-size:28px;font-weight:700;color:#fff;margin-bottom:4px}
-.cs{font-size:12px;color:rgba(255,255,255,.6);margin-bottom:22px}
-.cm{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.cmb{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);border-radius:9px;padding:9px 11px}
-.cml{font-size:9px;text-transform:uppercase;letter-spacing:1px;color:rgba(255,255,255,.5);margin-bottom:3px}
-.cmv{font-size:12px;font-weight:500;color:#fff}
-.sec{margin-bottom:28px}
-.shd{display:flex;align-items:center;gap:8px;margin-bottom:14px;padding-bottom:8px;border-bottom:2px solid #e0e8f5}
-.sn{width:28px;height:28px;border-radius:50%;background:#1e5fa0;color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.st{font-size:15px;font-weight:600;color:#1a2535}
-table{width:100%;border-collapse:collapse;border-radius:9px;overflow:hidden}
-th{background:#1e3a5c;color:#fff;font-size:10px;text-transform:uppercase;letter-spacing:.7px;padding:8px 11px;text-align:left}
-td{padding:8px 11px;border-bottom:1px solid #e8eef5;font-size:12px}
-tr:last-child td{border:none}tr:nth-child(even) td{background:#f8fafd}
-.pd{display:inline-block;padding:2px 8px;border-radius:20px;font-size:10px;font-weight:600}
-.pd-d{background:#fff3d0;color:#8a6010}.pd-n{background:#e0eeff;color:#1e5fa0}
-.tg{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.tc{border-radius:10px;padding:13px;border:1px solid #dde8f5}
-.mrow{display:flex;align-items:flex-start;gap:7px;padding:6px 0;border-bottom:1px solid rgba(0,0,0,.05)}
-.mrow:last-child{border:none}
-.mav{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;flex-shrink:0;margin-top:1px}
-.mn{font-size:12px;font-weight:500}.ms{font-size:10px;color:#7a9ab8}.mc{font-size:9px;color:#a0b8d0;margin-top:1px}
-.li2{background:#fff;border-radius:8px;padding:11px 13px;margin-bottom:8px;border-left:3px solid #c8d8e8;display:flex;gap:10px}
-.lm{flex-shrink:0;width:105px}.ld{font-size:11px;font-weight:600}.lh{font-size:10px;color:#7a9ab8}
-.ltm{margin-top:4px;font-size:9px;font-weight:600;text-transform:uppercase;padding:2px 6px;border-radius:20px;display:inline-block}
-.lty{display:inline-block;padding:2px 6px;border-radius:20px;font-size:9px;font-weight:600;margin-top:3px}
-.lb{flex:1}.ltx{font-size:12px;color:#2a3a4d;line-height:1.5}.lg2{font-size:10px;color:#1a8a5a;margin-top:3px}
-.footer{text-align:center;padding:18px;color:#8aaac0;font-size:11px;border-top:1px solid #e0e8f5;margin-top:26px}
-.pbtn{position:fixed;bottom:18px;right:18px;background:#1e5fa0;color:#fff;border:none;border-radius:50px;padding:12px 22px;font-size:13px;font-weight:600;cursor:pointer;box-shadow:0 4px 14px rgba(30,95,160,.4)}
-@media print{.pbtn{display:none}*{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}}
-@media(max-width:500px){.cm{grid-template-columns:1fr 1fr}.tg{grid-template-columns:1fr}}
-</style></head><body>
-<div class="pg">
-<div class="cover">
-  <div class="cbg">📋 Relatório Oficial de Missão</div>
-  <div class="ct">${miss.name||'Missão Fluvial'}</div>
-  <div class="cs">Rio Ops — Sistema de Missões Fluviais</div>
-  <div class="cm">
-    <div class="cmb"><div class="cml">Comandante</div><div class="cmv">${miss.cmd||'—'}</div></div>
-    <div class="cmb"><div class="cml">Embarcação</div><div class="cmv">${miss.vessel||'—'}</div></div>
-    <div class="cmb"><div class="cml">Área de Operação</div><div class="cmv">${miss.area||'—'}</div></div>
-    <div class="cmb"><div class="cml">Início</div><div class="cmv">${miss.startTs?new Date(miss.startTs).toLocaleString('pt-BR'):'—'}</div></div>
-    <div class="cmb"><div class="cml">Tempo Total</div><div class="cmv">${elapsed}</div></div>
-    <div class="cmb"><div class="cml">Gerado em</div><div class="cmv">${now.toLocaleString('pt-BR')}</div></div>
-  </div>
-</div>
-${miss.obs?`<div class="sec"><div class="shd"><div class="sn">!</div><div class="st">Observações</div></div>
-<div style="background:#fff8e8;border:1px solid #e8d080;border-radius:8px;padding:12px 14px;font-size:12px;color:#4a3000;line-height:1.6">${miss.obs}</div></div>`:''}
-<div class="sec"><div class="shd"><div class="sn">1</div><div class="st">Escala de Quartos de Hora</div></div>
-${segsR.length?`<table><thead><tr><th>Equipe</th><th>Turno</th><th>Início</th><th>Fim</th><th>Duração</th></tr></thead><tbody>
-${segsR.map(seg=>{
-  let t=tb(seg.tid),c=COLORS[t.color]||COLORS.gray,end=(seg.s+seg.dur)%1440;
-  return`<tr><td><span style="background:${c.bg};color:${c.text};padding:2px 9px;border-radius:20px;font-size:11px;font-weight:600">${t.name}</span></td>
-  <td><span class="pd ${seg.type==='day'?'pd-d':'pd-n'}">${seg.type==='day'?'☀️ Diurno':'🌙 Noturno'}</span></td>
-  <td>${m2s(seg.s)}</td><td>${m2s(end)}</td><td>${fmtHM(seg.dur)}</td></tr>`;
-}).join('')}
-</tbody></table>`:'<p style="color:#8aaac0;padding:8px 0">Nenhuma equipe configurada.</p>'}
-</div>
-<div class="sec"><div class="shd"><div class="sn">2</div><div class="st">Tripulação — ${crew.length} membros</div></div>
-<div class="tg">${teams.map(t=>{
-  let c=COLORS[t.color]||COLORS.gray,members=crew.filter(m=>m.tid===t.id);
-  return`<div class="tc" style="background:${c.bg}30">
-    <div style="font-size:10px;font-weight:700;color:${c.text};margin-bottom:9px;text-transform:uppercase;letter-spacing:.8px">${t.name}</div>
-    ${members.map(m=>`<div class="mrow">
-      <div class="mav" style="background:${c.bg};color:${c.text}">${(m.ng||m.name).split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase()}</div>
-      <div><div class="mn">${m.name}${m.ng?' ('+m.ng+')':''}</div>
-      <div class="ms">${m.rank}${m.rank?' — ':''}${m.role}</div>
-      <div class="mc">🛏 ${m.camarote||'—'}${m.om?' · 🏛 '+m.om:''}${m.tel?' · 📡 '+m.tel:''}</div></div>
-    </div>`).join('')}
-    ${!members.length?'<p style="color:#8aaac0;font-size:11px">Sem membros</p>':''}
-  </div>`;
-}).join('')}</div></div>
-${passArr.length?`<div class="sec"><div class="shd"><div class="sn">3</div><div class="st">Passageiros — ${passArr.length}</div></div>
-<table><thead><tr><th>Nome / NG</th><th>Posto</th><th>OM</th><th>CPF / IDT</th><th>Dt. Nasc.</th><th>Pernoite</th></tr></thead><tbody>
-${passArr.map(p=>`<tr>
-  <td>${p.nome}${p.ng?' ('+p.ng+')':''}</td><td>${p.posto||'—'}</td><td>${p.om||'—'}</td>
-  <td>${p.cpf||'—'} / ${p.idt||'—'}</td><td>${p.dn||'—'}</td><td>${p.pernoite||'—'}</td>
-</tr>`).join('')}
-</tbody></table></div>`:''}
-<div class="sec"><div class="shd"><div class="sn">${passArr.length?4:3}</div><div class="st">Diário de Bordo — ${logs.length} registros</div></div>
-${logsOrd.length?logsOrd.map(l=>{
-  let t=tb(l.tid),c=COLORS[t.color]||COLORS.gray,bc=TYPE_CLR[l.type]||'#7a9ab8';
-  return`<div class="li2" style="border-left-color:${bc}">
-    <div class="lm"><div class="ld">${l.dt}</div><div class="lh">${l.hr}</div>
-    <div class="ltm" style="background:${c.bg};color:${c.text}">${t.name}</div>
-    <div class="lty" style="background:${bc}22;color:${bc};border:1px solid ${bc}44">${TYPE_LBL[l.type]||l.type}</div></div>
-    <div class="lb"><div class="ltx">${l.txt}</div>${l.gps?`<div class="lg2">📍 ${l.gps}</div>`:''}</div>
-  </div>`;
-}).join(''):'<p style="color:#8aaac0;text-align:center;padding:20px">Nenhum registro no diário.</p>'}
-</div>
-<div class="footer">Rio Ops — Sistema de Missões Fluviais · Gerado em ${now.toLocaleString('pt-BR')}</div>
-</div>
-<button class="pbtn" onclick="window.print()">🖨️ Imprimir / PDF</button>
-</body></html>`;
-}
-
-// ═══════════════════════════════════════════════
-// GERAÇÃO DE RELATÓRIO — ANDROID + DESKTOP
-// Estratégia em camadas para máxima compatibilidade
-// ═══════════════════════════════════════════════
-function openReport(html){
-  // Detectores de ambiente
-  let ua=navigator.userAgent||'';
-  let isAndroid=/Android/i.test(ua);
-  let isChromeAndroid=isAndroid&&/Chrome\//.test(ua)&&!/wv/.test(ua);
-  let isWebView=isAndroid&&(/wv/.test(ua)||/Version\/[0-9]/.test(ua)||!/Chrome\//.test(ua));
-  let isPWAInstalled=window.matchMedia&&window.matchMedia('(display-mode: standalone)').matches||
-    window.matchMedia&&window.matchMedia('(display-mode: fullscreen)').matches||
-    navigator.standalone===true;
-
-  // ── ESTRATÉGIA 1: Chrome Android (navegador real) ──
-  // window.open funciona normalmente
-  if(isChromeAndroid&&!isPWAInstalled){
-    try{
-      let w=window.open('','_blank');
-      if(w&&!w.closed){
-        w.document.open();w.document.write(html);w.document.close();
-        return;
-      }
-    }catch(e){}
-  }
-
-  // ── ESTRATÉGIA 2: PWA instalado ou WebView ──
-  // Usar Data URI em nova aba (funciona sem window.open bloqueado)
-  if(isAndroid){
-    // Tenta via data: URI — Android abre nativamente
-    try{
-      let encoded='data:text/html;charset=utf-8,'+encodeURIComponent(html);
-      let a=document.createElement('a');
-      a.href=encoded;
-      a.target='_blank';
-      a.rel='noopener';
-      a.style.display='none';
-      document.body.appendChild(a);
-      a.click();
-      setTimeout(()=>{if(a.parentNode)a.remove();},1000);
-      // Aguarda 2s e se nada abriu, tenta download
-      setTimeout(()=>{ _rptDownload(html); },2000);
-      return;
-    }catch(e){}
-
-    // Tenta download direto via Blob
-    _rptDownload(html);
-    return;
-  }
-
-  // ── ESTRATÉGIA 3: Desktop / outros ──
-  try{
-    let w=window.open('','_blank');
-    if(w&&!w.closed){
-      w.document.open();w.document.write(html);w.document.close();
-      return;
-    }
-  }catch(e){}
-
-  // Fallback final
-  _rptDownload(html);
-}
-
-// Download do relatório como arquivo HTML
-function _rptDownload(html){
-  let filename='Relatorio_RioOps_'+new Date().toISOString().slice(0,10)+'.html';
-  try{
-    // Método moderno: Blob + createObjectURL
-    let blob=new Blob([html],{type:'text/html;charset=utf-8'});
-    let url=URL.createObjectURL(blob);
-    let a=document.createElement('a');
-    a.href=url;a.download=filename;a.style.display='none';
-    document.body.appendChild(a);a.click();
-    setTimeout(()=>{
-      try{URL.revokeObjectURL(url);}catch(e){}
-      if(a.parentNode)a.remove();
-    },5000);
-    showMsg('dMsg','📥 Relatório baixado! Abra o arquivo para imprimir ou salvar PDF.','ok');
-  }catch(e){
-    // Último recurso: data URI
-    try{
-      let a=document.createElement('a');
-      a.href='data:text/html;charset=utf-8,'+encodeURIComponent(html);
-      a.download=filename;a.style.display='none';
-      document.body.appendChild(a);a.click();
-      setTimeout(()=>{if(a.parentNode)a.remove();},2000);
-      showMsg('dMsg','📥 Relatório baixado!','ok');
-    }catch(e2){
-      showMsg('dMsg','Erro ao gerar relatório. Tente novamente.','err');
-    }
-  }
-}
-
-function gerarRelatorio(){
-  openReport(buildReportHTML(D.miss,D.teams,D.crew,D.passengers||[],D.logs));
-}
-function gerarRelatorioSalvo(i){
-  let s=D.savedMissions[i];
-  openReport(buildReportHTML(s.miss,s.teams,s.crew,s.passengers||[],s.logs));
-}
-
-// ═══════════════════════════════════════════════
-// MODAIS
-// ═══════════════════════════════════════════════
-function openOv(id){document.getElementById(id).className='overlay show';}
-function closeOv(id){document.getElementById(id).className='overlay';}
-
-// ═══════════════════════════════════════════════
-// HELPERS
-// ═══════════════════════════════════════════════
-function toggleF(id,focusId){
-  let f=document.getElementById(id),vis=f.style.display==='block';
-  f.style.display=vis?'none':'block';
-  if(!vis){
-    if(id==='addCForm')fillTmSel('cTm');
-    setTimeout(()=>{let el=document.getElementById(focusId);if(el)el.focus();},100);
-  }
-}
-function hideF(id){document.getElementById(id).style.display='none';}
-function showMsg(areaId,msg,type){
-  let el=document.getElementById(areaId);if(!el)return;
-  let d=document.createElement('div');
-  d.className=type==='ok'?'mok':'merr';
-  d.textContent=(type==='ok'?'✓ ':'⚠ ')+msg;
-  el.appendChild(d);
-  setTimeout(()=>{if(d.parentNode)d.parentNode.removeChild(d);},5000);
-}
-
-// ═══════════════════════════════════════════════
-// ANDROID FULLSCREEN / IMMERSIVE MODE
-// ═══════════════════════════════════════════════
-(function(){
-  // Previne pull-to-refresh e bounce scroll
-  document.addEventListener('touchmove', function(e){
-    // Permite scroll horizontal nas abas de navegação
-    if(e.target.closest('.navtabs')){return;}
-    // Permite scroll vertical nas páginas, modal e login
-    if(e.target.closest('.pages,.modal,.lbox,.order-list')){return;}
-    e.preventDefault();
-  },{passive:false});
-
-  // Previne menu de contexto no app
-  document.addEventListener('contextmenu',function(e){
-    if(!e.target.closest('input,textarea'))e.preventDefault();
-  });
-
-  // Solicita fullscreen imersivo quando disponível (Android Chrome/WebView)
-  function requestFullscreen(){
-    let el=document.documentElement;
-    let fn=el.requestFullscreen||el.webkitRequestFullscreen||el.mozRequestFullScreen||el.msRequestFullscreen;
-    if(fn){fn.call(el).catch(()=>{});}
-  }
-
-  // Tenta fullscreen no primeiro toque (necessário gesto do usuário)
-  let fullscreenDone=false;
-  document.addEventListener('click',function(){
-    if(!fullscreenDone&&/Android/i.test(navigator.userAgent)){
-      fullscreenDone=true;
-      requestFullscreen();
-    }
-  },{once:true});
-
-  // Screen Wake Lock — mantém tela acesa durante missão
-  let wakeLock=null;
-  async function keepScreenOn(){
-    if('wakeLock' in navigator){
-      try{wakeLock=await navigator.wakeLock.request('screen');}catch(e){}
-    }
-  }
-  document.addEventListener('visibilitychange',async()=>{
-    if(wakeLock!==null&&document.visibilityState==='visible'){await keepScreenOn();}
-  });
-  keepScreenOn();
-})();
-
-// ═══════════════════════════════════════════════
-// SERVICE WORKER — OFFLINE
-// ═══════════════════════════════════════════════
-if('serviceWorker' in navigator && !location.hostname.includes('claudeusercontent')){
-  window.addEventListener('load',()=>{
-    navigator.serviceWorker.register('./sw.js')
-      .then(()=>console.log('SW registrado'))
-      .catch(e=>console.log('SW erro:',e));
-  });
-}
-
-// Captura erros globais e exibe na tela (útil em APK sem DevTools)
-window.addEventListener('error',function(e){
-  let msg=e.message||'Erro desconhecido';
-  let loc=(e.filename||'')+(e.lineno?':'+e.lineno:'');
-  let banner=document.createElement('div');
-  banner.style.cssText='position:fixed;top:0;left:0;right:0;background:#c03030;color:#fff;padding:10px 14px;font-size:12px;z-index:9999;font-family:monospace;word-break:break-all';
-  banner.textContent='ERRO: '+msg+(loc?' @ '+loc:'');
-  document.body.appendChild(banner);
-  setTimeout(()=>{if(banner.parentNode)banner.parentNode.removeChild(banner);},10000);
-});
-
-// Init
-document.getElementById('p0').focus();
+const CHECKLIST_PRE=['Verificar documentação da embarcação','Conferir lista de tripulantes e passageiros','Testar equipamentos de comunicação (VHF/HF)','Verificar coletes salva-vidas para todos a bordo','Conferir boias circulares e dispositivos de salvatagem','Verificar nível de combustível e autonomia','Checar água potável e mantimentos','Testar sistema de navegação (GPS, radar)','Verificar luzes de navegação','Conferir ferramentas e equipamentos de emergência','Verificar sistema de propulsão principal','Testar geradores e sistema elétrico','Conferir bombas de esgoto e porão','Verificar armamento e munição (se aplicável)','Briefing da missão com toda a tripulação','Definir escala de quartos de hora','Verificar previsão meteorológica','Conferir cartas náuticas e publicações','Estabelecer contato inicial com base','Registrar saída no diário de bordo'];
+function save(){try{const data={...S};delete data.currentGps;delete data.heading;localStorage.setItem('rioops_v8',JSON.stringify(data))}catch(e){console.error('Save error:',e)}}
+function load(){try{const data=localStorage.getItem('rioops_v8');if(data){const parsed=JSON.parse(data);Object.assign(S,parsed)}}catch(e){console.error('Load error:',e)}}
+function $(id){return document.getElementById(id)}
+function toast(msg,type){const t=$('toast');t.textContent=msg;t.className='toast show'+(type?' '+type:'');setTimeout(()=>t.className='toast',3000)}
+function pad(n){return String(n).padStart(2,'0')}
+function fmtDate(d){return `${pad(d.getDate())}/${pad(d.getMonth()+1)}/${d.getFullYear()}`}
+function fmtTime(d){return `${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`}
+function fmtDateTime(d){return fmtDate(d)+' '+fmtTime(d)}
+function toGMS(dec,isLat){if(dec===null||dec===undefined||isNaN(dec))return '--';const dir=isLat?(dec<0?'S':'N'):(dec<0?'O':'E');const abs=Math.abs(dec);const deg=Math.floor(abs);const min=Math.floor((abs-deg)*60);const sec=((abs-deg)*60-min)*60;return `${deg}°${pad(min)}'${sec.toFixed(1)}"${dir}`}
+function uuid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,7)}
+function doLogin(){const role=$('loginRole').value;const pass=$('loginPass').value;const err=$('loginErr');if(pass!==PASS[role]){err.textContent='⚠ SENHA INCORRETA';return}S.role=role;save();enterApp()}
+function enterApp(){$('loginScreen').style.display='none';$('app').classList.add('active');document.body.classList.add(S.role==='cmd'?'role-cmd':'role-crew');$('roleLabel').textContent=S.role==='cmd'?'COMANDANTE':'TRIPULAÇÃO';renderAll();startClock();startGps();startCompass()}
+function logout(){if(!confirm('Deseja sair do sistema?'))return;S.role=null;save();location.reload()}
+document.querySelectorAll('.tab-btn').forEach(b=>{b.addEventListener('click',()=>{document.querySelectorAll('.tab-btn').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));$('tab-'+b.dataset.tab).classList.add('active')})});
+document.querySelectorAll('.sub-tab').forEach(b=>{b.addEventListener('click',()=>{const parent=b.parentElement;parent.querySelectorAll('.sub-tab').forEach(x=>x.classList.remove('active'));b.classList.add('active');const container=parent.parentElement;Array.from(container.children).forEach(c=>{if(c.id&&c.id.startsWith('sub-'))c.style.display='none'});$('sub-'+b.dataset.sub).style.display='block'})});
+function startClock(){setInterval(()=>{const now=new Date();$('clockTop').textContent=fmtTime(now);$('clockMain').textContent=fmtTime(now);$('dateMain').textContent=fmtDate(now);updateMissionDuration();updateQuarter()},1000)}
+function updateMissionDuration(){if(!S.missionStart){$('missionDuration').textContent='--:--:--';return}let elapsed=0;if(S.missionPaused){elapsed=S.missionPaused-S.missionStart-S.pauseAccum}else{elapsed=Date.now()-S.missionStart-S.pauseAccum}if(elapsed<0)elapsed=0;const h=Math.floor(elapsed/3600000);const m=Math.floor((elapsed%3600000)/60000);const s=Math.floor((elapsed%60000)/1000);$('missionDuration').textContent=`${pad(h)}:${pad(m)}:${pad(s)}`}
+let gpsWatch=null;
+function startGps(){if(!navigator.geolocation){$('gpsStatus').textContent='INDISPONÍVEL';$('gpsStatus').className='gps-status err';return}$('gpsStatus').textContent='BUSCANDO';$('gpsStatus').className='gps-status search';gpsWatch=navigator.geolocation.watchPosition(pos=>{S.currentGps={lat:pos.coords.latitude,lng:pos.coords.longitude,acc:pos.coords.accuracy,alt:pos.coords.altitude,spd:pos.coords.speed,time:Date.now()};updateGpsDisplay()},err=>{$('gpsStatus').textContent='SEM SINAL';$('gpsStatus').className='gps-status err';$('gpsCoords').textContent='Erro: '+err.message},{enableHighAccuracy:true,timeout:20000,maximumAge:5000})}
+function updateGpsDisplay(){if(!S.currentGps)return;const g=S.currentGps;$('gpsStatus').textContent=`±${Math.round(g.acc)}m`;$('gpsStatus').className='gps-status ok';$('gpsCoords').innerHTML=`${toGMS(g.lat,true)}<br>${toGMS(g.lng,false)}`;$('gpsUpdate').textContent=`Atualizado: ${fmtTime(new Date(g.time))}`;$('accuracy').textContent=`${Math.round(g.acc)} m`;$('altitude').textContent=g.alt!==null?`${Math.round(g.alt)} m`:'-- m';if(g.spd!==null){const knots=g.spd*1.94384;$('speed').textContent=`${knots.toFixed(1)} nós`}$('logGps').textContent=`${toGMS(g.lat,true)} / ${toGMS(g.lng,false)}`}
+function startCompass(){if(window.DeviceOrientationEvent){if(typeof DeviceOrientationEvent.requestPermission==='function'){document.addEventListener('click',function rq(){DeviceOrientationEvent.requestPermission().then(r=>{if(r==='granted'){window.addEventListener('deviceorientation',handleOrient)}}).catch(()=>{});document.removeEventListener('click',rq)},{once:true})}else{window.addEventListener('deviceorientation',handleOrient)}}}
+function handleOrient(e){let h=e.webkitCompassHeading!==undefined?e.webkitCompassHeading:(360-(e.alpha||0));S.heading=Math.round(h);$('compassNeedle').style.transform=`translate(-50%,-100%) rotate(${S.heading}deg)`;$('heading').textContent=`${S.heading}°`}
+function updateNetStatus(){const on=navigator.onLine;$('netChip').className='status-chip '+(on?'online':'offline');$('netLabel').textContent=on?'ONLINE':'OFFLINE'}
+window.addEventListener('online',updateNetStatus);window.addEventListener('offline',updateNetStatus);updateNetStatus();
+function saveMissionInfo(){S.mission={name:$('mName').value.trim()||'Missão Sem Nome',vessel:$('mVessel').value.trim(),area:$('mArea').value.trim(),code:$('mCode').value.trim(),objective:$('mObjective').value.trim()};save();renderDashboard();toast('Dados da missão salvos','ok')}
+function saveShifts(){S.shifts={dayHours:parseInt($('dayHours').value)||16,nightHours:parseInt($('nightHours').value)||8,dayStart:$('dayStart').value||'06:00',nightStart:$('nightStart').value||'22:00'};save();renderSchedule();toast('Turnos atualizados','ok')}
+function openMissionStart(){if(S.missionStart){toast('Missão já em andamento','err');return}if(!S.mission||!S.mission.name){toast('Configure os dados da missão primeiro','err');switchTab('mission');return}if(S.teams.length===0){toast('Cadastre ao menos uma equipe','err');switchTab('teams');return}$('missionStartBody').innerHTML=`<p style="color:var(--text-secondary);font-size:12px;margin-bottom:12px">Confirma o início da missão <strong style="color:var(--accent)">${S.mission.name}</strong>?</p><p style="font-size:11px;color:var(--text-dim);margin-bottom:14px">Os quartos de hora começarão a contar imediatamente.</p><div class="modal-actions"><button class="btn" onclick="closeModal('modalMissionStart')">Cancelar</button><button class="btn btn-primary" onclick="startMission()">Confirmar Início</button></div>`;$('modalMissionStart').classList.add('active')}
+function startMission(){S.missionStart=Date.now();S.mission.actualStart=Date.now();S.pauseAccum=0;S.missionPaused=null;save();closeModal('modalMissionStart');renderDashboard();addSystemLog('Missão iniciada');toast('Missão iniciada!','ok');tryWakeLock()}
+function pauseMission(){if(!S.missionStart||S.missionPaused)return;S.missionPaused=Date.now();save();renderDashboard();addSystemLog('Missão pausada');toast('Missão pausada')}
+function resumeMission(){if(!S.missionPaused)return;S.pauseAccum+=Date.now()-S.missionPaused;S.missionPaused=null;save();renderDashboard();addSystemLog('Missão retomada');toast('Missão retomada','ok')}
+function finishMission(){if(!S.missionStart)return;$('saveAsName').value=S.mission.name+' - '+fmtDate(new Date());$('modalFinish').classList.add('active')}
+function abortFinish(){}
+function justFinish(){finalizeMission();closeModal('modalFinish')}
+function saveAndFinish(){const name=$('saveAsName').value.trim()||'Missão '+fmtDate(new Date());saveToHistory(name);finalizeMission();closeModal('modalFinish')}
+function finalizeMission(){addSystemLog('Missão finalizada');S.mission.actualEnd=Date.now();S.missionStart=null;S.missionPaused=null;S.pauseAccum=0;save();renderDashboard();toast('Missão finalizada','ok')}
+function saveToHistory(name){const snap={id:uuid(),name,date:new Date().toISOString(),mission:{...S.mission},teams:[...S.teams],crew:[...S.crew],passengers:[...S.passengers],logs:[...S.logs],waypoints:[...S.waypoints],comms:[...S.comms],weather:[...S.weather],resources:{...S.resources},shifts:{...S.shifts},teamOrder:[...S.teamOrder],missionStart:S.mission.actualStart,missionEnd:Date.now()};S.saved.unshift(snap);save();renderSaved();toast('Missão salva no histórico','ok')}
+function newMission(){if(S.missionStart){toast('Finalize a missão ativa primeiro','err');return}$('modalNewMission').classList.add('active')}
+function newMissionKeep(){S.mission=null;S.logs=[];S.waypoints=[];S.comms=[];S.weather=[];S.passengers=[];S.missionStart=null;save();closeModal('modalNewMission');renderAll();toast('Dados limpos (equipes mantidas)','ok')}
+function newMissionClean(){if(!confirm('Isso apagará TODOS os dados. Continuar?'))return;Object.assign(S,{mission:null,teams:[],crew:[],passengers:[],logs:[],waypoints:[],comms:[],weather:[],teamOrder:[],missionStart:null,resources:{fuel:100,water:100,food:7,engine:0,consumption:0}});save();closeModal('modalNewMission');renderAll();toast('Sistema resetado','ok')}
+function addSystemLog(msg){S.logs.unshift({id:uuid(),type:'obs',text:`[SISTEMA] ${msg}`,team:'—',time:Date.now(),gps:S.currentGps?`${toGMS(S.currentGps.lat,true)} / ${toGMS(S.currentGps.lng,false)}`:null});save()}
+function switchTab(name){const btn=document.querySelector(`[data-tab="${name}"]`);if(btn)btn.click()}
+function updateQuarter(){if(!S.missionStart||S.teams.length===0||S.missionPaused){$('quarterBox').style.display='none';return}const now=new Date();const h=now.getHours();const m=now.getMinutes();const s=now.getSeconds();const[dayH,dayM]=S.shifts.dayStart.split(':').map(Number);const[nightH,nightM]=S.shifts.nightStart.split(':').map(Number);const dayStartMin=dayH*60+dayM;const nightStartMin=nightH*60+nightM;const nowMin=h*60+m;const isNight=(nightStartMin>dayStartMin)?(nowMin>=nightStartMin||nowMin<dayStartMin):(nowMin>=nightStartMin&&nowMin<dayStartMin);const shiftHours=isNight?S.shifts.nightHours:S.shifts.dayHours;const shiftStartMin=isNight?nightStartMin:dayStartMin;const quarterDuration=(shiftHours*60)/S.teams.length;let elapsed=nowMin-shiftStartMin;if(elapsed<0)elapsed+=24*60;const currentQuarterIndex=Math.floor(elapsed/quarterDuration)%S.teams.length;const currentQuarterElapsed=elapsed%quarterDuration;const quarterRemaining=quarterDuration-currentQuarterElapsed;const order=S.teamOrder.length>0?S.teamOrder:S.teams.map(t=>t.id);const teamIdx=currentQuarterIndex%order.length;const teamId=order[teamIdx];const team=S.teams.find(t=>t.id===teamId);if(!team){$('quarterBox').style.display='none';return}$('quarterBox').style.display='block';$('quarterBox').className='quarter-active'+(isNight?' night':'');$('quarterIcon').textContent=isNight?'🌙':'☀️';$('quarterType').textContent=isNight?'QUARTO NOTURNO':'QUARTO DIURNO';$('quarterBadge').className='badge '+(isNight?'night':'day');$('quarterBadge').textContent=isNight?'NOTURNO':'DIURNO';$('quarterTeam').textContent='EQUIPE '+team.name.toUpperCase();$('quarterTeam').style.color=team.color;const rh=Math.floor(quarterRemaining/60);const rm=Math.floor(quarterRemaining%60);$('quarterCountdown').textContent=`${pad(rh)}:${pad(rm)}:${pad(60-s)}`;const progress=(currentQuarterElapsed/quarterDuration)*100;$('quarterProgress').style.width=progress+'%'}
+function renderSchedule(){if(S.teams.length===0){$('scheduleList').innerHTML='<div class="empty">Cadastre equipes para gerar a escala</div>';$('scheduleCount').textContent='0 turnos';return}const order=S.teamOrder.length>0?S.teamOrder:S.teams.map(t=>t.id);const[dayH,dayM]=S.shifts.dayStart.split(':').map(Number);const[nightH,nightM]=S.shifts.nightStart.split(':').map(Number);const dayMin=dayH*60+dayM;const nightMin=nightH*60+nightM;const dayQ=(S.shifts.dayHours*60)/S.teams.length;const nightQ=(S.shifts.nightHours*60)/S.teams.length;let html='<div style="font-size:11px;color:var(--accent);margin-bottom:8px;letter-spacing:1px;text-transform:uppercase;font-weight:600">☀️ Turno Diurno</div>';let cur=dayMin;order.forEach((tid,i)=>{const t=S.teams.find(x=>x.id===tid);if(!t)return;const end=cur+dayQ;html+=`<div class="schedule-row"><span class="schedule-time">${fmtMin(cur)} - ${fmtMin(end)}</span><span class="schedule-team"><span class="team-dot" style="color:${t.color};background:${t.color}"></span>${t.name}</span><span class="schedule-tag day">DIA</span></div>`;cur=end});html+='<div style="font-size:11px;color:var(--info);margin:12px 0 8px;letter-spacing:1px;text-transform:uppercase;font-weight:600">🌙 Turno Noturno</div>';cur=nightMin;order.forEach((tid,i)=>{const t=S.teams.find(x=>x.id===tid);if(!t)return;const end=cur+nightQ;html+=`<div class="schedule-row"><span class="schedule-time">${fmtMin(cur)} - ${fmtMin(end%1440)}</span><span class="schedule-team"><span class="team-dot" style="color:${t.color};background:${t.color}"></span>${t.name}</span><span class="schedule-tag night">NOITE</span></div>`;cur=end});$('scheduleList').innerHTML=html;$('scheduleCount').textContent=(S.teams.length*2)+' turnos'}
+function fmtMin(m){m=((m%1440)+1440)%1440;return `${pad(Math.floor(m/60))}:${pad(m%60)}`}
+function addTeam(){const name=$('teamName').value.trim();const color=$('teamColor').value;if(!name){toast('Informe o nome','err');return}S.teams.push({id:uuid(),name,color});S.teamOrder.push(S.teams[S.teams.length-1].id);$('teamName').value='';save();renderTeams();renderSchedule();renderTeamSelects();renderTeamOrder();toast('Equipe adicionada','ok')}
+function delTeam(id){if(!confirm('Excluir esta equipe?'))return;S.teams=S.teams.filter(t=>t.id!==id);S.teamOrder=S.teamOrder.filter(x=>x!==id);S.crew=S.crew.filter(c=>c.teamId!==id);save();renderTeams();renderCrew();renderSchedule();renderTeamSelects();renderTeamOrder()}
+function renderTeams(){if(S.teams.length===0){$('teamList').innerHTML='<div class="empty">Nenhuma equipe cadastrada</div>';$('teamCount').textContent='0';return}$('teamList').innerHTML=S.teams.map(t=>`<div class="list-item"><div class="list-icon" style="background:${t.color};color:#000;font-weight:700">${t.name[0].toUpperCase()}</div><div class="list-body"><div class="list-title">Equipe ${t.name}</div><div class="list-sub">${S.crew.filter(c=>c.teamId===t.id).length} membros</div></div><button class="icon-btn danger" onclick="delTeam('${t.id}')">🗑</button></div>`).join('');$('teamCount').textContent=S.teams.length}
+function renderTeamOrder(){const order=S.teamOrder.length>0?S.teamOrder:S.teams.map(t=>t.id);if(order.length===0){$('teamOrderList').innerHTML='<div class="empty">Cadastre equipes</div>';return}$('teamOrderList').innerHTML=order.map((tid,i)=>{const t=S.teams.find(x=>x.id===tid);if(!t)return '';return `<div class="list-item drag-item" draggable="true" data-id="${tid}" ondragstart="window._dSrc='${tid}';this.classList.add('dragging')" ondragover="event.preventDefault();this.classList.add('drag-over')" ondrop="event.preventDefault();this.classList.remove('drag-over');const f=window._dSrc,to='${tid}';if(f===to)return;const o=S.teamOrder.length>0?[...S.teamOrder]:S.teams.map(t=>t.id);const fi=o.indexOf(f),ti=o.indexOf(to);o.splice(fi,1);o.splice(ti,0,f);S.teamOrder=o;save();renderTeamOrder();renderSchedule()" ondragend="this.classList.remove('dragging');document.querySelectorAll('.drag-over').forEach(x=>x.classList.remove('drag-over'))"><span class="drag-handle">☰</span><div class="list-icon" style="background:${t.color};color:#000;font-weight:700">${i+1}</div><div class="list-body"><div class="list-title">Equipe ${t.name}</div><div class="list-sub">Posição ${i+1}</div></div></div>`}).join('')}
+function renderTeamSelects(){const opts=S.teams.map(t=>`<option value="${t.id}">Equipe ${t.name}</option>`).join('');const empty='<option value="">-- selecione equipe --</option>';$('cTeam').innerHTML=empty+opts;$('logTeam').innerHTML=empty+opts}
+function addCrew(){const name=$('cName').value.trim();if(!name){toast('Informe o nome','err');return}S.crew.push({id:uuid(),name,war:$('cWar').value.trim(),rank:$('cRank').value,role:$('cRole').value,teamId:$('cTeam').value,cabin:$('cCabin').value});$('cName').value='';$('cWar').value='';$('cRank').value='';$('cRole').value='';$('cTeam').value='';$('cCabin').value='';save();renderCrew();renderDashboard();toast('Tripulante adicionado','ok')}
+function delCrew(id){if(!confirm('Excluir tripulante?'))return;S.crew=S.crew.filter(c=>c.id!==id);save();renderCrew();renderDashboard()}
+function renderCrew(){if(S.crew.length===0){$('crewList').innerHTML='<div class="empty">Nenhum tripulante cadastrado</div>';$('crewCount').textContent='0';return}$('crewList').innerHTML=S.crew.map(c=>{const team=S.teams.find(t=>t.id===c.teamId);return `<div class="list-item"><div class="list-icon" style="background:${team?team.color:'#555'};color:#000;font-weight:700">${(c.war||c.name)[0].toUpperCase()}</div><div class="list-body"><div class="list-title">${c.rank?c.rank+' ':''}${c.war||c.name}</div><div class="list-sub">${c.role||'Sem função'} · ${team?'Equipe '+team.name:'Sem equipe'}</div>${c.cabin?`<div class="list-meta">🛏 ${c.cabin}</div>`:''}</div><button class="icon-btn danger" onclick="delCrew('${c.id}')">🗑</button></div>`}).join('');$('crewCount').textContent=S.crew.length}
+function addPassenger(){const name=$('pName').value.trim();if(!name){toast('Informe o nome','err');return}S.passengers.push({id:uuid(),name,war:$('pWar').value.trim(),rank:$('pRank').value.trim(),om:$('pOM').value.trim(),birth:$('pBirth').value,cpf:$('pCPF').value.trim(),idt:$('pIDT').value.trim(),cabin:$('pCabin').value});$('pName').value='';$('pWar').value='';$('pRank').value='';$('pOM').value='';$('pBirth').value='';$('pCPF').value='';$('pIDT').value='';$('pCabin').value='';save();renderPax();renderDashboard();toast('Passageiro adicionado','ok')}
+function delPax(id){if(!confirm('Excluir passageiro?'))return;S.passengers=S.passengers.filter(p=>p.id!==id);save();renderPax();renderDashboard()}
+function renderPax(){if(S.passengers.length===0){$('paxList').innerHTML='<div class="empty">Nenhum passageiro cadastrado</div>';$('paxCount').textContent='0';return}$('paxList').innerHTML=S.passengers.map(p=>`<div class="list-item"><div class="list-icon">👤</div><div class="list-body"><div class="list-title">${p.rank?p.rank+' ':''}${p.war||p.name}</div><div class="list-sub">${p.om||''} ${p.cabin?'· '+p.cabin:''}</div><div class="list-meta">${p.cpf?'CPF: '+p.cpf:''} ${p.idt?'· IDT: '+p.idt:''}</div></div><button class="icon-btn danger" onclick="delPax('${p.id}')">🗑</button></div>`).join('');$('paxCount').textContent=S.passengers.length}
+function addLog(){const text=$('logText').value.trim();if(!text){toast('Informe a descrição','err');return}const gps=S.currentGps?`${toGMS(S.currentGps.lat,true)} / ${toGMS(S.currentGps.lng,false)}`:null;const team=S.teams.find(t=>t.id===$('logTeam').value);S.logs.unshift({id:uuid(),type:$('logType').value,text,team:team?team.name:'—',time:Date.now(),gps});$('logText').value='';save();renderLogs();renderDashboard();toast('Registrado no diário','ok')}
+function delLog(id){if(!confirm('Excluir registro?'))return;S.logs=S.logs.filter(l=>l.id!==id);save();renderLogs();renderDashboard()}
+function renderLogs(){if(S.logs.length===0){$('logList').innerHTML='<div class="empty">Nenhum registro</div>';$('logCount').textContent='0';return}$('logList').innerHTML=S.logs.map(l=>{const types={nav:'🧭 NAVEGAÇÃO',com:'📡 COMUNICAÇÃO',occ:'⚠️ OCORRÊNCIA',met:'🌦️ METEOROLOGIA',obs:'👁️ OBSERVAÇÃO'};const canDel=S.role==='cmd';return `<div class="log-entry ${l.type}"><div class="log-header"><span class="log-type ${l.type}">${types[l.type]}</span><span class="log-time">${fmtDateTime(new Date(l.time))}</span></div><div class="log-text">${l.text}</div><div class="log-meta"><span>👥 ${l.team}</span>${l.gps?`<span>📍 ${l.gps}</span>`:''}${canDel?`<button class="icon-btn danger" onclick="delLog('${l.id}')" style="margin-left:auto;width:24px;height:24px;font-size:10px">🗑</button>`:''}</div></div>`}).join('');$('logCount').textContent=S.logs.length}
+function addWaypoint(){const name=$('wpName').value.trim();if(!name){toast('Informe o nome','err');return}if(!S.currentGps){toast('Aguardando GPS','err');return}S.waypoints.push({id:uuid(),name,type:$('wpType').value,note:$('wpNote').value.trim(),lat:S.currentGps.lat,lng:S.currentGps.lng,time:Date.now(),num:S.waypoints.length+1});$('wpName').value='';$('wpNote').value='';save();renderWaypoints();toast('Waypoint marcado','ok')}
+function delWp(id){if(!confirm('Excluir waypoint?'))return;S.waypoints=S.waypoints.filter(w=>w.id!==id);save();renderWaypoints()}
+function renderWaypoints(){if(S.waypoints.length===0){$('wpList').innerHTML='<div class="empty">Nenhum waypoint marcado</div>';$('wpCount').textContent='0 pontos';return}$('wpList').innerHTML=S.waypoints.map(w=>{const types={check:'✓',start:'▶',end:'■',fuel:'⛽',danger:'⚠',anchor:'⚓'};return `<div class="waypoint"><div class="wp-marker">${w.num}</div><div class="wp-body"><div class="wp-name">${types[w.type]||''} ${w.name}</div><div class="wp-coords">${toGMS(w.lat,true)} / ${toGMS(w.lng,false)}</div>${w.note?`<div class="wp-time">${w.note}</div>`:''}<div class="wp-time">${fmtDateTime(new Date(w.time))}</div></div><button class="icon-btn danger" onclick="delWp('${w.id}')">🗑</button></div>`}).join('');$('wpCount').textContent=S.waypoints.length+' pontos'}
+function saveLogistics(){S.resources={fuel:parseInt($('resFuel').value)||0,water:parseInt($('resWater').value)||0,food:parseInt($('resFood').value)||0,engine:parseFloat($('resEngine').value)||0,consumption:parseFloat($('resConsumption').value)||0};save();renderResources();toast('Recursos atualizados','ok')}
+function renderResources(){const r=S.resources;const autonomy=r.consumption>0?(r.fuel/100*1000)/r.consumption:0;$('resourcesList').innerHTML=`<div class="resource"><div class="resource-header"><span class="resource-name">⛽ Combustível</span><span class="resource-value">${r.fuel}%</span></div><div class="resource-bar"><div class="resource-fill ${r.fuel<25?'crit':r.fuel<50?'warn':''}" style="width:${r.fuel}%"></div></div></div><div class="resource"><div class="resource-header"><span class="resource-name">💧 Água Potável</span><span class="resource-value">${r.water}%</span></div><div class="resource-bar"><div class="resource-fill ${r.water<25?'crit':r.water<50?'warn':''}" style="width:${r.water}%"></div></div></div><div class="resource"><div class="resource-header"><span class="resource-name">🍞 Mantimentos</span><span class="resource-value">${r.food} dias</span></div><div class="resource-bar"><div class="resource-fill ${r.food<2?'crit':r.food<4?'warn':''}" style="width:${Math.min(r.food*14,100)}%"></div></div></div><div class="row"><span class="row-label">Horímetro Motor</span><span class="row-value">${r.engine} h</span></div><div class="row"><span class="row-label">Consumo Médio</span><span class="row-value">${r.consumption} L/h</span></div>${autonomy>0?`<div class="row"><span class="row-label">Autonomia Estimada</span><span class="row-value">${autonomy.toFixed(1)} h</span></div>`:''}`;$('resFuel').value=r.fuel;$('resWater').value=r.water;$('resFood').value=r.food;$('resEngine').value=r.engine;$('resConsumption').value=r.consumption}
+function addComms(){const msg=$('comMsg').value.trim();if(!msg){toast('Informe a mensagem','err');return}S.comms.unshift({id:uuid(),freq:$('comFreq').value.trim(),contact:$('comContact').value.trim(),type:$('comType').value,msg,time:Date.now()});$('comMsg').value='';$('comFreq').value='';$('comContact').value='';save();renderComms();toast('Comunicação registrada','ok')}
+function delCom(id){if(!confirm('Excluir comunicação?'))return;S.comms=S.comms.filter(c=>c.id!==id);save();renderComms()}
+function renderComms(){if(S.comms.length===0){$('comList').innerHTML='<div class="empty">Nenhuma comunicação registrada</div>';$('comCount').textContent='0';return}$('comList').innerHTML=S.comms.map(c=>{const types={routine:'ROTINA',report:'REPORTE',request:'SOLICITAÇÃO',emergency:'🚨 EMERGÊNCIA'};return `<div class="log-entry com"><div class="log-header"><span class="log-type com">${types[c.type]||'ROTINA'}</span><span class="log-time">${fmtDateTime(new Date(c.time))}</span></div><div class="log-text"><strong>${c.contact||'?'}</strong> · ${c.freq||'?'}<br>${c.msg}</div>${S.role==='cmd'?`<button class="icon-btn danger" onclick="delCom('${c.id}')" style="float:right">🗑</button>`:''}</div>`}).join('');$('comCount').textContent=S.comms.length}
+function saveWeather(){S.weather.unshift({id:uuid(),sky:$('wxSky').value,temp:$('wxTemp').value,vis:$('wxVis').value,wind:$('wxWind').value,windDir:$('wxWindDir').value,sea:$('wxSea').value,note:$('wxNote').value.trim(),time:Date.now()});$('wxNote').value='';save();renderWeather();toast('Condições registradas','ok')}
+function delWx(id){if(!confirm('Excluir registro?'))return;S.weather=S.weather.filter(w=>w.id!==id);save();renderWeather()}
+function renderWeather(){if(S.weather.length===0){$('wxList').innerHTML='<div class="empty">Nenhum registro meteorológico</div>';return}$('wxList').innerHTML=S.weather.slice(0,10).map(w=>`<div class="log-entry met"><div class="log-header"><span class="log-type met">🌦️ METEOROLOGIA</span><span class="log-time">${fmtDateTime(new Date(w.time))}</span></div><div class="log-text" style="font-size:11px"><strong>${w.sky}</strong> · ${w.temp}°C<br>Vento: ${w.windDir} ${w.wind}<br>Visibilidade: ${w.vis}<br>Rio: ${w.sea}${w.note?'<br><em>'+w.note+'</em>':''}</div>${S.role==='cmd'?`<button class="icon-btn danger" onclick="delWx('${w.id}')" style="float:right">🗑</button>`:''}</div>`).join('')}
+function renderChecklist(){if(!S.checklists.pre)S.checklists.pre={};const done=CHECKLIST_PRE.filter((_,i)=>S.checklists.pre[i]).length;$('checkPreCount').textContent=`${done}/${CHECKLIST_PRE.length}`;$('checkPreList').innerHTML=CHECKLIST_PRE.map((item,i)=>{const checked=S.checklists.pre[i];return `<div class="check-item ${checked?'done':''}" onclick="toggleCheck(${i})"><div class="check-box">${checked?'✓':''}</div><div class="check-text">${item}</div></div>`}).join('')}
+function toggleCheck(i){if(S.role!=='cmd')return;S.checklists.pre[i]=!S.checklists.pre[i];save();renderChecklist()}
+function resetChecklist(type){if(!confirm('Resetar checklist?'))return;S.checklists[type]={};save();renderChecklist()}
+function renderSaved(){if(S.saved.length===0){$('savedList').innerHTML='<div class="empty">Nenhuma missão salva ainda.<br>Finalize e salve uma missão para vê-la aqui.</div>';$('savedCount').textContent='0';return}$('savedList').innerHTML=S.saved.map(s=>`<div class="list-item"><div class="list-icon">📁</div><div class="list-body"><div class="list-title">${s.name}</div><div class="list-sub">${s.mission?.vessel||'—'} · ${s.crew?.length||0} tripulantes</div><div class="list-meta">${fmtDateTime(new Date(s.date))}</div></div><div class="list-actions"><button class="icon-btn" onclick="viewSaved('${s.id}')">👁</button><button class="icon-btn" onclick="loadSaved('${s.id}')">📥</button><button class="icon-btn danger" onclick="delSaved('${s.id}')">🗑</button></div></div>`).join('');$('savedCount').textContent=S.saved.length}
+function viewSaved(id){const s=S.saved.find(x=>x.id===id);if(!s)return;const dur=s.missionEnd&&s.missionStart?(s.missionEnd-s.missionStart)/3600000:0;$('savedDetail').innerHTML=`<div style="font-size:12px;line-height:1.8"><div class="row"><span class="row-label">Nome</span><span class="row-value">${s.name}</span></div><div class="row"><span class="row-label">Embarcação</span><span class="row-value">${s.mission?.vessel||'—'}</span></div><div class="row"><span class="row-label">Área</span><span class="row-value">${s.mission?.area||'—'}</span></div><div class="row"><span class="row-label">Duração</span><span class="row-value">${dur.toFixed(1)} h</span></div><div class="row"><span class="row-label">Tripulantes</span><span class="row-value">${s.crew?.length||0}</span></div><div class="row"><span class="row-label">Passageiros</span><span class="row-value">${s.passengers?.length||0}</span></div><div class="row"><span class="row-label">Registros</span><span class="row-value">${s.logs?.length||0}</span></div><div class="row"><span class="row-label">Waypoints</span><span class="row-value">${s.waypoints?.length||0}</span></div></div><div class="modal-actions"><button class="btn" onclick="closeModal('modalSaved')">Fechar</button><button class="btn btn-primary" onclick="loadSaved('${s.id}');closeModal('modalSaved')">Carregar</button></div>`;$('modalSaved').classList.add('active')}
+function loadSaved(id){const s=S.saved.find(x=>x.id===id);if(!s)return;if(S.missionStart){toast('Finalize a missão ativa','err');return}if(!confirm('Carregar esta missão substituirá os dados atuais. Continuar?'))return;Object.assign(S,{mission:s.mission||null,teams:s.teams||[],crew:s.crew||[],passengers:s.passengers||[],logs:s.logs||[],waypoints:s.waypoints||[],comms:s.comms||[],weather:s.weather||[],resources:s.resources||{fuel:100,water:100,food:7,engine:0,consumption:0},shifts:s.shifts||{dayHours:16,nightHours:8,dayStart:'06:00',nightStart:'22:00'},teamOrder:s.teamOrder||[]});save();renderAll();toast('Missão carregada','ok')}
+function delSaved(id){if(!confirm('Excluir missão salva?'))return;S.saved=S.saved.filter(s=>s.id!==id);save();renderSaved()}
+function renderDashboard(){$('heroTitle').textContent=S.mission?.name||'SEM MISSÃO ATIVA';$('heroVessel').textContent=S.mission?.vessel||'Configure uma missão para iniciar';$('missionStatus').textContent=S.missionStart?(S.missionPaused?'PAUSADA':'EM EXECUÇÃO'):'PARADA';$('btnPause').style.display=S.missionStart&&!S.missionPaused?'flex':'none';$('btnResume').style.display=S.missionPaused?'flex':'none';$('btnFinish').style.display=S.missionStart?'flex':'none';$('statTeams').textContent=S.teams.length;$('statCrew').textContent=S.crew.length;$('statPax').textContent=S.passengers.length;$('statLogs').textContent=S.logs.length}
+function generateReport(){if(!S.mission&&S.logs.length===0&&S.saved.length===0){toast('Sem dados para relatório','err');return}const html=buildReportHtml();const isAndroid=/android/i.test(navigator.userAgent);const isWebView=navigator.userAgent.includes('wv')||(navigator.userAgent.includes('Mobile')&&!navigator.userAgent.includes('Chrome'));if(isWebView||isAndroid){try{const blob=new Blob([html],{type:'text/html;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=`RioOps2_${(S.mission?.name||'Relatorio').replace(/\s/g,'_')}_${Date.now()}.html`;a.style.display='none';document.body.appendChild(a);a.click();setTimeout(()=>{document.body.removeChild(a);URL.revokeObjectURL(url)},100);toast('Relatório baixado','ok')}catch(e){try{const dataUrl='data:text/html;charset=utf-8,'+encodeURIComponent(html);window.location.href=dataUrl}catch(e2){toast('Erro ao gerar: '+e.message,'err')}}}else{const w=window.open('','_blank');if(w){w.document.write(html);w.document.close()}else{const blob=new Blob([html],{type:'text/html'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=`RioOps2_${Date.now()}.html`;a.click();URL.revokeObjectURL(url)}}}
+function buildReportHtml(){const m=S.mission||{};const dur=S.missionStart&&S.mission.actualStart?(Date.now()-S.mission.actualStart-S.pauseAccum)/3600000:0;const now=new Date();return `<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><title>Relatório Rio Ops 2 - ${m.name||'Missão'}</title><style>@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Inter',sans-serif;background:#f5f2e8;color:#1a1a1a;line-height:1.5;padding:20px}.container{max-width:900px;margin:0 auto;background:#fff;box-shadow:0 4px 20px rgba(0,0,0,0.15);border-radius:8px;overflow:hidden}.header{background:linear-gradient(135deg,#0a1410 0%,#1a3329 100%);color:#c9a961;padding:40px 30px;text-align:center;border-bottom:4px solid #c9a961}.header-emblem{font-size:48px;margin-bottom:10px}.header h1{font-family:'Oswald',sans-serif;font-size:32px;letter-spacing:6px;margin-bottom:4px}.header-sub{font-size:11px;letter-spacing:3px;opacity:0.8;text-transform:uppercase}.header-mission{font-size:22px;margin-top:14px;letter-spacing:3px;font-family:'Oswald',sans-serif;color:#fff}.header-date{font-size:11px;margin-top:6px;opacity:0.7;font-family:'JetBrains Mono',monospace}.section{padding:25px 30px;border-bottom:1px solid #e8e4d8}.section:last-child{border:none}.section-title{font-family:'Oswald',sans-serif;font-size:18px;color:#1a3329;letter-spacing:3px;text-transform:uppercase;margin-bottom:14px;padding-bottom:6px;border-bottom:2px solid #c9a961;display:inline-block}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:14px}.field{padding:8px 12px;background:#f5f2e8;border-left:3px solid #c9a961;border-radius:4px}.field-label{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:#888;margin-bottom:2px}.field-value{font-size:13px;font-weight:500}table{width:100%;border-collapse:collapse;font-size:11px;margin-top:10px}th{background:#1a3329;color:#c9a961;padding:10px;text-align:left;font-family:'Oswald',sans-serif;letter-spacing:2px;text-transform:uppercase;font-size:10px}td{padding:8px 10px;border-bottom:1px solid #e8e4d8}tr:nth-child(even){background:#faf8f0}.log-entry{padding:10px 14px;background:#faf8f0;border-left:4px solid #c9a961;border-radius:4px;margin-bottom:8px;font-size:11px}.log-entry.nav{border-left-color:#4a7a8f}.log-entry.occ{border-left-color:#b04848}.log-entry.met{border-left-color:#4a8f5c}.log-time{font-family:'JetBrains Mono',monospace;font-size:10px;color:#888}.log-type{font-weight:700;letter-spacing:1px;text-transform:uppercase;font-size:9px}.footer{background:#0a1410;color:#6b6355;padding:20px 30px;text-align:center;font-size:10px;letter-spacing:2px}.print-btn{position:fixed;top:20px;right:20px;padding:12px 20px;background:#1a3329;color:#c9a961;border:2px solid #c9a961;border-radius:6px;font-family:'Oswald',sans-serif;letter-spacing:2px;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,0.3)}@media print{body{padding:0}.print-btn{display:none}.container{box-shadow:none}}</style></head><body><button class="print-btn" onclick="window.print()">🖨️ IMPRIMIR / PDF</button><div class="container"><div class="header"><div class="header-emblem">⚓</div><h1>RIO OPS 2</h1><div class="header-sub">Relatório Operacional de Missão Fluvial</div><div class="header-mission">${m.name||'RELATÓRIO GERAL'}</div><div class="header-date">Gerado em ${fmtDateTime(now)}</div></div><div class="section"><div class="section-title">Dados da Missão</div><div class="grid"><div class="field"><div class="field-label">Operação</div><div class="field-value">${m.name||'—'}</div></div><div class="field"><div class="field-label">Embarcação</div><div class="field-value">${m.vessel||'—'}</div></div><div class="field"><div class="field-label">Área de Operação</div><div class="field-value">${m.area||'—'}</div></div><div class="field"><div class="field-label">Código</div><div class="field-value">${m.code||'—'}</div></div></div>${m.objective?`<div class="field"><div class="field-label">Objetivo</div><div class="field-value">${m.objective}</div></div>`:''}</div>${S.teams.length?`<div class="section"><div class="section-title">Equipes e Escala</div><table><thead><tr><th>Ordem</th><th>Equipe</th><th>Membros</th><th>Turno</th></tr></thead><tbody>${(S.teamOrder.length>0?S.teamOrder:S.teams.map(t=>t.id)).map((tid,i)=>{const t=S.teams.find(x=>x.id===tid);if(!t)return '';const n=S.crew.filter(c=>c.teamId===tid).length;return `<tr><td><strong>${i+1}º</strong></td><td style="color:${t.color};font-weight:700">${t.name}</td><td>${n} tripulantes</td><td>${(S.shifts.dayHours*60/S.teams.length).toFixed(0)}min (dia) / ${(S.shifts.nightHours*60/S.teams.length).toFixed(0)}min (noite)</td></tr>`}).join('')}</tbody></table></div>`:''}${S.crew.length?`<div class="section"><div class="section-title">Tripulação (${S.crew.length})</div><table><thead><tr><th>Posto</th><th>Nome de Guerra</th><th>Função</th><th>Equipe</th><th>Pernoite</th></tr></thead><tbody>${S.crew.map(c=>{const t=S.teams.find(x=>x.id===c.teamId);return `<tr><td>${c.rank||'—'}</td><td><strong>${c.war||c.name}</strong></td><td>${c.role||'—'}</td><td style="color:${t?t.color:'#000'}">${t?t.name:'—'}</td><td>${c.cabin||'—'}</td></tr>`}).join('')}</tbody></table></div>`:''}${S.passengers.length?`<div class="section"><div class="section-title">Passageiros (${S.passengers.length})</div><table><thead><tr><th>Posto</th><th>Nome</th><th>OM</th><th>CPF</th><th>Pernoite</th></tr></thead><tbody>${S.passengers.map(p=>`<tr><td>${p.rank||'—'}</td><td><strong>${p.war||p.name}</strong></td><td>${p.om||'—'}</td><td>${p.cpf||'—'}</td><td>${p.cabin||'—'}</td></tr>`).join('')}</tbody></table></div>`:''}${S.waypoints.length?`<div class="section"><div class="section-title">Track de Navegação (${S.waypoints.length} pontos)</div><table><thead><tr><th>#</th><th>Nome</th><th>Coordenadas (GMS)</th><th>Horário</th></tr></thead><tbody>${S.waypoints.map(w=>`<tr><td><strong>${w.num}</strong></td><td>${w.name}</td><td style="font-family:'JetBrains Mono',monospace;font-size:10px">${toGMS(w.lat,true)} / ${toGMS(w.lng,false)}</td><td>${fmtDateTime(new Date(w.time))}</td></tr>`).join('')}</tbody></table></div>`:''}${S.logs.length?`<div class="section"><div class="section-title">Diário de Bordo (${S.logs.length} registros)</div>${S.logs.slice().reverse().map(l=>{const types={nav:'NAVEGAÇÃO',com:'COMUNICAÇÃO',occ:'OCORRÊNCIA',met:'METEOROLOGIA',obs:'OBSERVAÇÃO'};return `<div class="log-entry ${l.type}"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span class="log-type">${types[l.type]}</span><span class="log-time">${fmtDateTime(new Date(l.time))}</span></div><div style="margin:4px 0">${l.text}</div><div style="font-size:9px;color:#888;font-family:'JetBrains Mono',monospace">👥 ${l.team} ${l.gps?'· 📍 '+l.gps:''}</div></div>`}).join('')}</div>`:''}${S.comms.length?`<div class="section"><div class="section-title">Comunicações (${S.comms.length})</div>${S.comms.slice().reverse().map(c=>`<div class="log-entry"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span class="log-type">📡 ${c.contact||'?'} · ${c.freq||'?'}</span><span class="log-time">${fmtDateTime(new Date(c.time))}</span></div><div style="margin:4px 0">${c.msg}</div></div>`).join('')}</div>`:''}<div class="footer">⚓ RIO OPS 2 · SISTEMA TÁTICO DE PATRULHA FLUVIAL · RELATÓRIO OFICIAL ⚓<br>Documento gerado automaticamente · ${fmtDateTime(now)}</div></div></body></html>`}
+function closeModal(id){$(id).classList.remove('active')}
+document.querySelectorAll('.modal').forEach(m=>{m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('active')})});
+async function tryWakeLock(){try{if('wakeLock' in navigator){await navigator.wakeLock.request('screen')}}catch(e){}}
+function renderAll(){renderDashboard();renderSchedule();renderTeams();renderTeamSelects();renderTeamOrder();renderCrew();renderPax();renderLogs();renderWaypoints();renderResources();renderComms();renderWeather();renderChecklist();renderSaved();if(S.mission){$('mName').value=S.mission.name||'';$('mVessel').value=S.mission.vessel||'';$('mArea').value=S.mission.area||'';$('mCode').value=S.mission.code||'';$('mObjective').value=S.mission.objective||''}$('dayHours').value=S.shifts.dayHours;$('nightHours').value=S.shifts.nightHours;$('dayStart').value=S.shifts.dayStart;$('nightStart').value=S.shifts.nightStart}
+window.onerror=function(msg,url,line){console.error('Global error:',msg,url,line);const e=document.createElement('div');e.style.cssText='position:fixed;top:60px;left:8px;right:8px;background:#b04848;color:#fff;padding:10px;border-radius:8px;font-size:11px;z-index:9999';e.textContent='⚠ '+msg;document.body.appendChild(e);setTimeout(()=>e.remove(),6000)};
+load();renderAll();if(S.role){enterApp()}
+if('serviceWorker' in navigator&&!location.hostname.includes('claudeusercontent')&&location.protocol==='https:'){window.addEventListener('load',()=>{navigator.serviceWorker.register('./sw.js').catch(()=>{})})}
 </script>
 </body>
 </html>
+</content>
+</write_to_file>
