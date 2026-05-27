@@ -1,41 +1,32 @@
 <write_to_file>
-<path>rioops2/sw.js</path>
-<content>const CACHE_NAME = 'rioops-v8.0';
-const ASSETS = [
-'./',
-'./index.html',
-'./manifest.json',
-'https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap'
-];
-
-self.addEventListener('install', e => {
-e.waitUntil(
-caches.open(CACHE_NAME).then(cache => cache.addAll(ASSETS).catch(()=>{}))
-);
-self.skipWaiting();
-});
-self.addEventListener('activate', e => {
-e.waitUntil(
-caches.keys().then(keys =>
-Promise.all(keys.filter(k => k !== CACHE_NAME).map(k => caches.delete(k)))
-)
-);
-self.clients.claim();
-});
-self.addEventListener('fetch', e => {
-if(e.request.method !== 'GET') return;
-e.respondWith(
-caches.match(e.request).then(cached => {
-const fetchPromise = fetch(e.request).then(response => {
-if(response && response.status === 200){
-const clone = response.clone();
-caches.open(CACHE_NAME).then(cache => cache.put(e.request, clone));
+<path>rioops2/manifest.json</path>
+<content>{
+"name": "RIO OPS 2 · Sistema Tático de Patrulha Fluvial",
+"short_name": "RIO OPS 2",
+"description": "Sistema operacional completo para missões de patrulha fluvial na Amazônia",
+"start_url": "./index.html",
+"scope": "./",
+"display": "fullscreen",
+"orientation": "portrait",
+"theme_color": "#0a1410",
+"background_color": "#0a1410",
+"icons": [
+{
+"src": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cmVjdCB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgZmlsbD0iIzBhMTQxMCIvPjxjaXJjbGUgY3g9IjI1NiIgY3k9IjI1NiIgcj0iMjAwIiBmaWxsPSJub25lIiBzdHJva2U9IiNjOWE5NjEiIHN0cm9rZS13aWR0aD0iOCIvPjx0ZXh0IHg9IjI1NiIgeT0iMzIwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIyMDAiIGZpbGw9IiNjOWE5NjEiPuKaoTwvdGV4dD48L3N2Zz4=",
+"sizes": "512x512",
+"type": "image/svg+xml",
+"purpose": "any maskable"
+},
+{
+"src": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxOTIgMTkyIj48cmVjdCB3aWR0aD0iMTkyIiBoZWlnaHQ9IjE5MiIgZmlsbD0iIzBhMTQxMCIvPjxjaXJjbGUgY3g9Ijk2IiBjeT0iOTYiIHI9Ijc1IiBmaWxsPSJub25lIiBzdHJva2U9IiNjOWE5NjEiIHN0cm9rZS13aWR0aD0iMyIvPjx0ZXh0IHg9Ijk2IiB5PSIxMjAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9Ijc1IiBmaWxsPSIjYzlhOTYxIj7imqA8L3RleHQ+PC9zdmc+",
+"sizes": "192x192",
+"type": "image/svg+xml",
+"purpose": "any maskable"
 }
-return response;
-}).catch(() => cached);
-return cached || fetchPromise;
-})
-);
-});
+],
+"categories": ["productivity", "navigation", "utilities"],
+"lang": "pt-BR",
+"dir": "ltr"
+}
 </content>
 </write_to_file>
