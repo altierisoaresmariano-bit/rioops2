@@ -363,7 +363,56 @@ document.querySelectorAll('.sub-tab').forEach(b=>{b.addEventListener('click',()=
 function startClock(){setInterval(()=>{const n=new Date();$('clockTop').textContent=fmtTime(n);$('clockMain').textContent=fmtTime(n);$('dateMain').textContent=fmtDate(n);updateDur();updateQ()},1000)}
 function updateDur(){if(!S.missionStart){$('missionDuration').textContent='--:--:--';return}let e=S.missionPaused?S.missionPaused-S.missionStart-S.pauseAccum:Date.now()-S.missionStart-S.pauseAccum;if(e<0)e=0;$('missionDuration').textContent=`${pad(Math.floor(e/3600000))}:${pad(Math.floor(e%3600000/60000))}:${pad(Math.floor(e%60000/1000))}`}
 let gpsW=null;
-function startGps(){if(!navigator.geolocation){$('gpsStatus').textContent='INDISPONÍVEL';$('gpsStatus').className='gps-status err';return}$('gpsStatus').textContent='BUSCANDO';$('gpsStatus').className='gps-status search';gpsW=navigator.geolocation.watchPosition(p=>{S.currentGps={lat:p.coords.latitude,lng:p.coords.longitude,acc:p.coords.accuracy,alt:p.coords.altitude,spd:p.coords.speed,time:Date.now()};updGps()},e=>{$('gpsStatus').textContent='SEM SINAL';$('gpsStatus').className='gps-status err';$('gpsCoords').textContent='Erro: '+e.message},{enableHighAccuracy:true,timeout:20000,maximumAge:5000})}
+function startGps(){
+  if(!navigator.geolocation){
+    $('gpsStatus').textContent='INDISPONÍVEL';
+    $('gpsStatus').className='gps-status err';
+    $('gpsCoords').innerHTML='<div style="font-size:11px;color:var(--danger-bright)">GPS não suportado neste dispositivo</div>';
+    return;
+  }
+  $('gpsStatus').textContent='BUSCANDO';
+  $('gpsStatus').className='gps-status search';
+  $('gpsCoords').innerHTML='<div style="font-size:11px;color:var(--text-secondary)">Aguardando sinal GPS...<br>Isso pode levar até 2 min em áreas remotas.</div><button class="btn btn-sm mt-10" onclick="retryGps()" style="font-size:10px">🔄 Tentar Novamente</button>';
+  
+  // Tenta primeiro com alta precisão (GPS hardware)
+  if(gpsW) navigator.geolocation.clearWatch(gpsW);
+  
+  gpsW = navigator.geolocation.watchPosition(
+    function(pos){
+      S.currentGps={lat:pos.coords.latitude,lng:pos.coords.longitude,acc:pos.coords.accuracy,alt:pos.coords.altitude,spd:pos.coords.speed,time:Date.now()};
+      updGps();
+    },
+    function(err){
+      console.warn('GPS alta precisão falhou:',err.message);
+      // Fallback: tenta sem alta precisão (rede/wifi)
+      navigator.geolocation.getCurrentPosition(
+        function(pos){
+          S.currentGps={lat:pos.coords.latitude,lng:pos.coords.longitude,acc:pos.coords.accuracy,alt:pos.coords.altitude,spd:pos.coords.speed,time:Date.now()};
+          updGps();
+          toast('GPS via rede (menos preciso)','ok');
+        },
+        function(err2){
+          $('gpsStatus').textContent='SEM SINAL';
+          $('gpsStatus').className='gps-status err';
+          let msg='Erro: '+err2.message;
+          if(err2.code===1) msg='⚠ Permissão negada!<br>Vá em Configurações → Apps → Rio Ops → Permissões → Ativar Localização';
+          else if(err2.code===2) msg='Posição indisponível.<br>Verifique se o GPS do celular está ativado.';
+          else if(err2.code===3) msg='Tempo esgotado.<br>Céu aberto acelera o sinal GPS.';
+          $('gpsCoords').innerHTML='<div style="font-size:11px;color:var(--danger-bright);line-height:1.6">'+msg+'</div><button class="btn btn-sm mt-10" onclick="retryGps()" style="font-size:10px">🔄 Tentar Novamente</button>';
+        },
+        {enableHighAccuracy:false,timeout:15000,maximumAge:30000}
+      );
+    },
+    {enableHighAccuracy:true,timeout:20000,maximumAge:5000}
+  );
+}
+
+function retryGps(){
+  $('gpsStatus').textContent='BUSCANDO';
+  $('gpsStatus').className='gps-status search';
+  $('gpsCoords').innerHTML='<div style="font-size:11px;color:var(--text-secondary)">Buscando sinal...</div>';
+  startGps();
+}
 function updGps(){if(!S.currentGps)return;const g=S.currentGps;$('gpsStatus').textContent=`±${Math.round(g.acc)}m`;$('gpsStatus').className='gps-status ok';$('gpsCoords').innerHTML=`${toGMS(g.lat,true)}<br>${toGMS(g.lng,false)}`;$('gpsUpdate').textContent=`Atualizado: ${fmtTime(new Date(g.time))}`;$('accuracy').textContent=`${Math.round(g.acc)} m`;$('altitude').textContent=g.alt!=null?`${Math.round(g.alt)} m`:'-- m';if(g.spd!=null)$('speed').textContent=`${(g.spd*1.94384).toFixed(1)} nós`;$('logGps').textContent=`${toGMS(g.lat,true)} / ${toGMS(g.lng,false)}`}
 function startCompass(){if(window.DeviceOrientationEvent){if(typeof DeviceOrientationEvent.requestPermission==='function'){document.addEventListener('click',function rq(){DeviceOrientationEvent.requestPermission().then(r=>{if(r==='granted')window.addEventListener('deviceorientation',hOrient)}).catch(()=>{});document.removeEventListener('click',rq)},{once:true})}else window.addEventListener('deviceorientation',hOrient)}}
 function hOrient(e){let h=e.webkitCompassHeading!=null?e.webkitCompassHeading:(360-(e.alpha||0));S.heading=Math.round(h);$('compassNeedle').style.transform=`translate(-50%,-100%) rotate(${S.heading}deg)`;$('heading').textContent=`${S.heading}°`}
