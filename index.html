@@ -436,7 +436,56 @@ function newMissionClean(){if(!confirm('Apagar TUDO?'))return;Object.assign(S,{m
 function addSysLog(m){S.logs.unshift({id:uuid(),type:'obs',text:`[SISTEMA] ${m}`,team:'—',time:Date.now(),gps:S.currentGps?`${toGMS(S.currentGps.lat,true)} / ${toGMS(S.currentGps.lng,false)}`:null});save()}
 function switchTab(n){const b=document.querySelector(`[data-tab="${n}"]`);if(b)b.click()}
 // CARGO
-function handleCargoPhoto(input){if(!input.files||!input.files[0])return;const file=input.files[0];const reader=new FileReader();reader.onload=function(e){const name=prompt('Nomeie esta foto:','Foto_'+(tempCargoPhotos.length+1));if(!name){input.value='';return}tempCargoPhotos.push({id:uuid(),name:name,data:e.target.result});renderCargoPhotos();input.value=''};reader.readAsDataURL(file)}
+function handleCargoPhoto(input){
+  if(!input.files||!input.files[0])return;
+  const file=input.files[0];
+  
+  // Comprimir imagem antes de salvar
+  const img=new Image();
+  const reader=new FileReader();
+  
+  reader.onload=function(e){
+    img.onload=function(){
+      // Criar canvas para redimensionar
+      const canvas=document.createElement('canvas');
+      const ctx=canvas.getContext('2d');
+      
+      // Limitar tamanho máximo a 1200px (mantém qualidade boa para relatório)
+      const maxSize=1200;
+      let w=img.width,h=img.height;
+      if(w>maxSize||h>maxSize){
+        if(w>h){h=Math.round(h*maxSize/w);w=maxSize}
+        else{w=Math.round(w*maxSize/h);h=maxSize}
+      }
+      
+      canvas.width=w;
+      canvas.height=h;
+      ctx.drawImage(img,0,0,w,h);
+      
+      // Converter para JPEG comprimido (qualidade 0.7 = ~70% qualidade, ~80% redução)
+      const compressedData=canvas.toDataURL('image/jpeg',0.7);
+      
+      // Pedir nome da foto
+      const name=prompt('Nomeie esta foto:','Foto_'+(tempCargoPhotos.length+1));
+      if(!name){input.value='';return}
+      
+      tempCargoPhotos.push({id:uuid(),name:name,data:compressedData});
+      renderCargoPhotos();
+      input.value='';
+      
+      // Feedback visual do tamanho
+      const originalKB=Math.round(file.size/1024);
+      const compressedKB=Math.round(compressedData.length*0.75/1024);
+      toast(`Foto salva: ${originalKB}KB → ${compressedKB}KB`,'ok');
+    };
+    img.onerror=function(){
+      toast('Erro ao processar imagem','err');
+      input.value='';
+    };
+    img.src=e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
 function delCargoPhoto(idx){tempCargoPhotos.splice(idx,1);renderCargoPhotos()}
 function renderCargoPhotos(){const grid=$('cargoPhotoGrid');let html='<label class="photo-add"><span style="font-size:24px">📷</span><span>Tirar Foto</span><input type="file" accept="image/*" capture="environment" onchange="handleCargoPhoto(this)"></label>';tempCargoPhotos.forEach((p,i)=>{html+=`<div class="photo-thumb"><img src="${p.data}" alt="${p.name}"><div class="photo-name">${p.name}</div>${S.role==='cmd'?`<div class="photo-del" onclick="delCargoPhoto(${i})">✕</div>`:''}</div>`});grid.innerHTML=html}
 function addCargo(){const guia=$('cgGuia').value.trim();if(!guia){toast('Informe o número da guia','err');return}const spec=$('cgSpec').value.trim();if(!spec){toast('Informe a especificação','err');return}S.cargo.push({id:uuid(),guia,spec,qtd:$('cgQtd').value.trim(),origem:$('cgOrigem').value.trim(),destino:$('cgDestino').value.trim(),emb:$('cgEmb').value.trim(),rec:$('cgRec').value.trim(),obs:$('cgObs').value.trim(),photos:[...tempCargoPhotos],time:Date.now()});$('cgGuia').value='';$('cgSpec').value='';$('cgQtd').value='';$('cgOrigem').value='';$('cgDestino').value='';$('cgEmb').value='';$('cgRec').value='';$('cgObs').value='';tempCargoPhotos=[];renderCargoPhotos();save();renderCargo();renderDash();toast('Carga adicionada','ok')}
