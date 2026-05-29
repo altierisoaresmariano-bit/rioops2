@@ -1,511 +1,358 @@
-<!DOCTYPE html>
+<write_to_file>
+<path>rioops/index_final_corp.html</path>
+<content><!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
-<meta name="theme-color" content="#0a1410">
+<meta name="theme-color" content="#0f172a">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="mobile-web-app-capable" content="yes">
-<title>RIO OPS · Sistema Tático de Patrulha Fluvial</title>
-<link rel="manifest" href="manifest.json">
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<title>RIO OPS · Corporate River Operations</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root{--bg-primary:#0a1410;--bg-secondary:#0f1d18;--bg-tertiary:#142822;--bg-card:#1a3329;--bg-elevated:#1f3d31;--border:#2d4a3c;--border-light:#3d5f4d;--accent:#c9a961;--accent-bright:#e6c77a;--accent-dim:#8a7340;--success:#4a8f5c;--success-bright:#5fa870;--danger:#b04848;--danger-bright:#d15858;--warning:#c99640;--info:#4a7a8f;--text-primary:#e8e4d8;--text-secondary:#a8a090;--text-dim:#6b6355;--font-display:'Oswald',sans-serif;--font-mono:'JetBrains Mono',monospace;--font-body:'Inter',sans-serif;--radius:8px;--radius-lg:12px}
+:root{--bg-body:#f1f5f9;--bg-card:#ffffff;--bg-header:#0f172a;--text-primary:#1e293b;--text-secondary:#64748b;--text-light:#94a3b8;--accent:#0ea5e9;--accent-dark:#0284c7;--border:#e2e8f0;--success:#10b981;--warning:#f59e0b;--danger:#ef4444;--shadow:0 1px 3px rgba(0,0,0,0.1);--radius:6px}
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{height:100%;width:100%;overflow:hidden;overscroll-behavior:none;touch-action:manipulation}
-body{font-family:var(--font-body);background:var(--bg-primary);color:var(--text-primary);user-select:none;-webkit-user-select:none;position:fixed;top:0;left:0;right:0;bottom:0}
-input,textarea,select{user-select:text;-webkit-user-select:text;font-family:inherit}
+html,body{height:100%;width:100%;overflow:hidden;font-family:'Inter',sans-serif;background:var(--bg-body);color:var(--text-primary)}
+input,select,textarea{font-family:inherit;border:1px solid var(--border);border-radius:var(--radius);padding:10px 12px;width:100%;background:#fff;color:var(--text-primary);font-size:14px;transition:border 0.2s}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 2px rgba(14,165,233,0.1)}
 button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
-::-webkit-scrollbar{width:6px;height:6px}::-webkit-scrollbar-track{background:var(--bg-secondary)}::-webkit-scrollbar-thumb{background:var(--border-light);border-radius:3px}
-.login-screen{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0a1410,#142822);z-index:9999;padding:20px}
-.login-box{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:40px 30px;max-width:400px;width:100%;text-align:center}
-.login-emblem{width:100px;height:100px;margin:0 auto 20px;background:radial-gradient(circle,var(--accent),var(--accent-dim));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:48px;border:3px solid var(--accent-dim)}
-.login-title{font-family:var(--font-display);font-size:32px;letter-spacing:4px;color:var(--accent);margin-bottom:4px}
-.login-subtitle{font-size:11px;letter-spacing:3px;color:var(--text-secondary);margin-bottom:30px;text-transform:uppercase}
-.login-field{margin-bottom:15px;text-align:left}
-.login-field label{display:block;font-size:11px;letter-spacing:2px;color:var(--text-secondary);margin-bottom:6px;text-transform:uppercase}
-.login-field input,.login-field select{width:100%;padding:12px 15px;background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius);color:var(--text-primary);font-size:14px;font-family:var(--font-mono)}
-.login-btn{width:100%;padding:14px;background:var(--accent);color:var(--bg-primary);font-family:var(--font-display);font-size:14px;letter-spacing:3px;border-radius:var(--radius);font-weight:700;margin-top:10px;text-transform:uppercase}
-.login-error{color:var(--danger-bright);font-size:12px;margin-top:10px;min-height:16px}
-.login-hint{font-size:10px;color:var(--text-dim);margin-top:20px;letter-spacing:1px}
+::-webkit-scrollbar{width:6px;height:6px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:#cbd5e1;border-radius:3px}
+
+.login-screen{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:var(--bg-header);z-index:9999;padding:20px}
+.login-box{background:#fff;border-radius:8px;padding:40px;max-width:400px;width:100%;box-shadow:0 20px 25px -5px rgba(0,0,0,0.1)}
+.login-header{text-align:center;margin-bottom:30px}
+.login-logo{font-size:24px;font-weight:700;color:var(--bg-header);letter-spacing:-0.5px;margin-bottom:8px}
+.login-sub{font-size:12px;color:var(--text-secondary);text-transform:uppercase;letter-spacing:1px}
+.form-group{margin-bottom:16px}
+.form-group label{display:block;font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:6px;text-transform:uppercase}
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:10px 20px;border-radius:var(--radius);font-size:14px;font-weight:600;transition:all 0.2s}
+.btn-primary{background:var(--bg-header);color:#fff;width:100%}.btn-primary:hover{background:#1e293b}
+.btn-sm{padding:6px 12px;font-size:12px}
+.btn-danger{background:#fee2e2;color:#dc2626}
+.btn-success{background:#dcfce7;color:#16a34a}
+.login-error{color:#dc2626;font-size:12px;margin-top:10px;text-align:center;min-height:18px}
 .app{display:none;height:100vh;width:100vw;flex-direction:column}
 .app.active{display:flex}
-.app-header{background:var(--bg-secondary);border-bottom:1px solid var(--border);padding:8px 12px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;min-height:52px}
-.app-brand{display:flex;align-items:center;gap:10px}
-.brand-icon{width:32px;height:32px;background:var(--accent);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px}
-.brand-text{font-family:var(--font-display);letter-spacing:3px;font-size:16px;color:var(--accent)}
-.brand-sub{font-size:9px;letter-spacing:2px;color:var(--text-dim);text-transform:uppercase}
-.app-status{display:flex;align-items:center;gap:12px;font-family:var(--font-mono);font-size:11px}
-.status-chip{display:flex;align-items:center;gap:4px;color:var(--text-secondary)}
-.status-dot{width:6px;height:6px;border-radius:50%;background:currentColor;animation:pulse 2s infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
-.header-time{font-size:14px;color:var(--accent);font-weight:600}
-.nav-tabs{display:flex;background:var(--bg-secondary);border-bottom:1px solid var(--border);overflow-x:auto;overflow-y:hidden;flex-shrink:0;-webkit-overflow-scrolling:touch;scrollbar-width:none;touch-action:pan-x}
-.nav-tabs::-webkit-scrollbar{display:none}.nav-tabs::after{content:'';flex-shrink:0;width:10px}
-.tab-btn{padding:10px 14px;background:transparent;color:var(--text-secondary);font-size:11px;letter-spacing:1.5px;white-space:nowrap;flex-shrink:0;border-bottom:2px solid transparent;text-transform:uppercase;font-family:var(--font-display);font-weight:500}
-.tab-btn.active{color:var(--accent);border-bottom-color:var(--accent);background:rgba(201,169,97,0.05)}
-.main{flex:1;overflow-y:auto;overflow-x:hidden;padding:12px;-webkit-overflow-scrolling:touch}
-.tab-content{display:none}.tab-content.active{display:block;animation:fadeIn 0.3s}
-@keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
-.card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:14px;margin-bottom:10px}
-.card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--border)}
-.card-title{font-family:var(--font-display);font-size:12px;letter-spacing:2px;color:var(--accent);text-transform:uppercase;font-weight:600}
-.card-badge{font-size:9px;padding:3px 8px;background:var(--accent-dim);color:var(--bg-primary);border-radius:10px;letter-spacing:1px;text-transform:uppercase;font-weight:700}
-.hero-panel{background:linear-gradient(135deg,var(--bg-card),var(--bg-tertiary));border:1px solid var(--border-light);border-radius:var(--radius-lg);padding:18px;margin-bottom:12px;position:relative;overflow:hidden}
-.hero-mission{font-size:10px;letter-spacing:3px;color:var(--text-dim);text-transform:uppercase;margin-bottom:2px}
-.hero-title{font-family:var(--font-display);font-size:22px;color:var(--text-primary);letter-spacing:2px;margin-bottom:2px}
-.hero-vessel{font-size:11px;color:var(--accent);letter-spacing:1px}
-.time-display{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
-.time-box{background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius);padding:12px;text-align:center}
-.time-label{font-size:9px;letter-spacing:2px;color:var(--text-dim);text-transform:uppercase;margin-bottom:4px}
-.time-value{font-family:var(--font-mono);font-size:22px;color:var(--accent);font-weight:700;letter-spacing:1px}
-.time-value.big{font-size:28px}
-.time-sub{font-size:10px;color:var(--text-secondary);margin-top:2px}
-.quarter-active{background:linear-gradient(135deg,rgba(74,143,92,0.15),rgba(74,143,92,0.05));border:1px solid var(--success);border-radius:var(--radius);padding:14px;margin-bottom:12px}
-.quarter-active.night{background:linear-gradient(135deg,rgba(26,40,64,0.4),rgba(26,40,64,0.2));border-color:var(--info)}
-.qa-label{font-size:10px;letter-spacing:2px;color:var(--text-secondary);text-transform:uppercase;margin-bottom:4px;display:flex;align-items:center;gap:6px}
-.qa-team{font-family:var(--font-display);font-size:20px;color:var(--accent);letter-spacing:2px;margin-bottom:4px}
-.qa-countdown{font-family:var(--font-mono);font-size:28px;color:var(--text-primary);font-weight:700}
-.qa-progress{height:4px;background:var(--bg-secondary);border-radius:2px;margin-top:8px;overflow:hidden}
-.qa-progress-bar{height:100%;background:var(--success-bright);transition:width 1s linear}
-.compass-box{background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius);padding:12px;margin-bottom:12px;display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:center}
-.compass-visual{width:90px;height:90px;position:relative;border:2px solid var(--accent-dim);border-radius:50%;background:radial-gradient(circle,var(--bg-card),var(--bg-secondary))}
-.compass-needle{position:absolute;top:50%;left:50%;width:3px;height:36px;background:linear-gradient(to top,var(--danger-bright) 50%,var(--text-primary) 50%);transform-origin:bottom center;transform:translate(-50%,-100%);transition:transform 0.3s;border-radius:2px}
-.compass-center{position:absolute;top:50%;left:50%;width:8px;height:8px;background:var(--accent);border-radius:50%;transform:translate(-50%,-50%)}
-.compass-mark{position:absolute;font-size:9px;font-family:var(--font-mono);color:var(--text-dim);font-weight:700}
-.compass-mark.n{top:4px;left:50%;transform:translateX(-50%);color:var(--danger-bright)}
-.compass-mark.s{bottom:4px;left:50%;transform:translateX(-50%)}
-.compass-mark.e{right:4px;top:50%;transform:translateY(-50%)}
-.compass-mark.w{left:4px;top:50%;transform:translateY(-50%)}
-.compass-data{display:flex;flex-direction:column;gap:8px}
-.compass-row{display:flex;justify-content:space-between;font-size:11px}
-.compass-row span:first-child{color:var(--text-dim);letter-spacing:1px;text-transform:uppercase;font-size:9px}
-.compass-row span:last-child{font-family:var(--font-mono);color:var(--text-primary);font-weight:600}
-.gps-box{background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius);padding:12px;margin-bottom:12px}
-.gps-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
-.gps-title{font-size:10px;letter-spacing:2px;color:var(--text-dim);text-transform:uppercase}
-.gps-status{font-size:10px;padding:2px 8px;border-radius:10px;font-weight:700;letter-spacing:1px}
-.gps-status.ok{background:rgba(74,143,92,0.2);color:var(--success-bright)}
-.gps-status.search{background:rgba(201,150,64,0.2);color:var(--warning)}
-.gps-status.err{background:rgba(176,72,72,0.2);color:var(--danger-bright)}
-.gps-coords{font-family:var(--font-mono);font-size:13px;color:var(--text-primary);letter-spacing:0.5px;line-height:1.6}
-.gps-meta{display:flex;gap:14px;margin-top:8px;font-size:10px;color:var(--text-secondary);font-family:var(--font-mono)}
-.status-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:12px}
-.stat-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:10px}
-.stat-label{font-size:9px;letter-spacing:1.5px;color:var(--text-dim);text-transform:uppercase;margin-bottom:4px}
-.stat-value{font-family:var(--font-mono);font-size:16px;color:var(--accent);font-weight:700}
-.control-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:12px}
-.ctrl-btn{padding:14px 10px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);display:flex;flex-direction:column;align-items:center;gap:6px}
-.ctrl-btn.primary{background:var(--accent);color:var(--bg-primary);border-color:var(--accent)}
-.ctrl-btn.danger{border-color:var(--danger);color:var(--danger-bright)}
-.ctrl-btn.success{border-color:var(--success);color:var(--success-bright)}
-.ctrl-btn-icon{font-size:20px}
-.ctrl-btn-label{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600}
-.schedule-row{display:flex;align-items:center;gap:10px;padding:8px;background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:6px;font-size:12px}
-.schedule-time{font-family:var(--font-mono);font-size:11px;color:var(--text-secondary);min-width:80px}
-.schedule-team{flex:1;display:flex;align-items:center;gap:6px}
-.team-dot{width:10px;height:10px;border-radius:50%;border:2px solid currentColor}
-.schedule-tag{font-size:9px;padding:2px 6px;border-radius:8px;letter-spacing:1px;text-transform:uppercase;font-weight:700}
-.schedule-tag.day{background:rgba(201,169,97,0.2);color:var(--accent)}
-.schedule-tag.night{background:rgba(74,122,143,0.2);color:var(--info)}
-.form-group{margin-bottom:12px}
-.form-group label{display:block;font-size:10px;letter-spacing:2px;color:var(--text-secondary);margin-bottom:5px;text-transform:uppercase}
-.form-group input,.form-group select,.form-group textarea{width:100%;padding:10px 12px;background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius);color:var(--text-primary);font-size:13px}
-.form-group textarea{resize:vertical;min-height:70px;font-family:var(--font-body)}
-.form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.form-row.three{grid-template-columns:1fr 1fr 1fr}
-.btn{padding:11px 16px;background:var(--bg-elevated);border:1px solid var(--border);border-radius:var(--radius);color:var(--text-primary);font-size:12px;letter-spacing:1px;text-transform:uppercase;font-weight:600;display:inline-flex;align-items:center;gap:6px}
-.btn-primary{background:var(--accent);color:var(--bg-primary);border-color:var(--accent)}
-.btn-danger{background:var(--danger);color:#fff;border-color:var(--danger)}
-.btn-success{background:var(--success);color:#fff;border-color:var(--success)}
-.btn-block{width:100%;justify-content:center}
-.btn-sm{padding:7px 12px;font-size:10px}
-.list-item{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:12px;margin-bottom:8px;display:flex;align-items:center;gap:10px}
-.list-icon{width:36px;height:36px;border-radius:50%;background:var(--bg-elevated);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
-.list-body{flex:1;min-width:0}
-.list-title{font-size:13px;font-weight:600;color:var(--text-primary);margin-bottom:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.list-sub{font-size:11px;color:var(--text-secondary);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.list-meta{font-size:10px;color:var(--text-dim);font-family:var(--font-mono);margin-top:2px}
-.list-actions{display:flex;gap:4px;flex-shrink:0}
-.icon-btn{width:30px;height:30px;border-radius:50%;background:var(--bg-secondary);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--text-secondary)}
-.icon-btn.danger{color:var(--danger-bright);border-color:var(--danger)}
-.log-entry{background:var(--bg-card);border-left:3px solid var(--accent);border-radius:var(--radius);padding:10px 12px;margin-bottom:8px}
-.log-entry.nav{border-left-color:var(--info)}.log-entry.com{border-left-color:var(--accent)}
-.log-entry.occ{border-left-color:var(--danger-bright)}.log-entry.met{border-left-color:var(--success-bright)}
-.log-entry.obs{border-left-color:var(--text-secondary)}
-.log-header{display:flex;justify-content:space-between;margin-bottom:6px;font-size:10px}
-.log-type{letter-spacing:1.5px;text-transform:uppercase;font-weight:700}
-.log-type.nav{color:var(--info)}.log-type.com{color:var(--accent)}.log-type.occ{color:var(--danger-bright)}
-.log-type.met{color:var(--success-bright)}.log-type.obs{color:var(--text-secondary)}
-.log-time{font-family:var(--font-mono);color:var(--text-dim)}
-.log-text{font-size:12px;color:var(--text-primary);line-height:1.5;margin-bottom:4px}
-.log-meta{font-size:10px;color:var(--text-dim);font-family:var(--font-mono);display:flex;gap:10px;flex-wrap:wrap}
-.waypoint{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:10px;margin-bottom:6px;display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center}
-.wp-marker{width:32px;height:32px;border-radius:50%;background:var(--accent);color:var(--bg-primary);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:700;font-size:14px}
-.wp-body{min-width:0}
-.wp-name{font-size:12px;font-weight:600;color:var(--text-primary);margin-bottom:2px}
-.wp-coords{font-size:10px;color:var(--text-secondary);font-family:var(--font-mono)}
-.wp-time{font-size:9px;color:var(--text-dim);font-family:var(--font-mono);margin-top:2px}
-.resource{margin-bottom:10px}
-.resource-header{display:flex;justify-content:space-between;margin-bottom:4px;font-size:11px}
-.resource-name{color:var(--text-secondary);text-transform:uppercase;letter-spacing:1px;font-size:10px}
-.resource-value{font-family:var(--font-mono);color:var(--accent);font-weight:700}
-.resource-bar{height:8px;background:var(--bg-secondary);border-radius:4px;overflow:hidden;border:1px solid var(--border)}
-.resource-fill{height:100%;background:var(--success-bright);transition:width 0.3s}
-.resource-fill.warn{background:var(--warning)}.resource-fill.crit{background:var(--danger-bright)}
-.check-item{display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:4px;font-size:12px}
-.check-item.done{opacity:0.6}.check-item.done .check-text{text-decoration:line-through}
-.check-box{width:20px;height:20px;border:2px solid var(--border-light);border-radius:4px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:12px;color:transparent}
-.check-item.done .check-box{background:var(--success);border-color:var(--success);color:#fff}
-.check-text{flex:1;color:var(--text-primary)}
-.modal{position:fixed;inset:0;background:rgba(0,0,0,0.85);display:none;align-items:center;justify-content:center;z-index:1000;padding:15px;backdrop-filter:blur(6px);overflow-y:auto}
+.header{background:var(--bg-header);color:#fff;padding:0 20px;height:60px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;box-shadow:0 4px 6px -1px rgba(0,0,0,0.1)}
+.brand{display:flex;align-items:center;gap:12px}
+.brand-icon{width:32px;height:32px;background:var(--accent);border-radius:4px;display:flex;align-items:center;justify-content:center}
+.brand-text{font-size:18px;font-weight:700;letter-spacing:-0.5px}
+.user-info{display:flex;align-items:center;gap:16px;font-size:12px;color:#cbd5e1}
+.logout-btn{color:#fff;opacity:0.7;transition:opacity 0.2s}.logout-btn:hover{opacity:1}
+.nav-bar{background:#fff;border-bottom:1px solid var(--border);display:flex;overflow-x:auto;flex-shrink:0;-webkit-overflow-scrolling:touch}
+.nav-item{padding:14px 20px;font-size:13px;font-weight:500;color:var(--text-secondary);white-space:nowrap;border-bottom:2px solid transparent;transition:all 0.2s}
+.nav-item.active{color:var(--accent-dark);border-bottom-color:var(--accent-dark);font-weight:600}
+.nav-item.cmd-only{display:none}
+body.role-cmd .nav-item.cmd-only{display:block}
+.main-content{flex:1;overflow-y:auto;padding:20px;background:var(--bg-body)}
+.section-title{font-size:16px;font-weight:700;color:var(--text-primary);margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.card{background:var(--bg-card);border:1px solid var(--border);border-radius:8px;padding:20px;margin-bottom:16px;box-shadow:var(--shadow)}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.grid-4{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+.stat-widget{background:#fff;border:1px solid var(--border);border-radius:8px;padding:16px;display:flex;flex-direction:column;gap:4px}
+.stat-label{font-size:11px;text-transform:uppercase;color:var(--text-secondary);font-weight:600;letter-spacing:0.5px}
+.stat-value{font-size:24px;font-weight:700;color:var(--text-primary);font-family:'JetBrains Mono',monospace}
+.stat-sub{font-size:12px;color:var(--text-light)}
+.shift-display{background:linear-gradient(to right,#0f172a,#1e293b);color:#fff;border-radius:8px;padding:20px;margin-bottom:16px;display:flex;justify-content:space-between;align-items:center}
+.shift-info h3{font-size:14px;text-transform:uppercase;opacity:0.8;margin-bottom:4px}
+.shift-info .team-name{font-size:28px;font-weight:700;color:var(--accent)}
+.shift-timer{font-family:'JetBrains Mono',monospace;font-size:32px;font-weight:700;text-align:right}
+.shift-timer span{display:block;font-size:10px;text-transform:uppercase;opacity:0.7;font-weight:400}
+.data-table{width:100%;border-collapse:collapse;font-size:13px}
+.data-table th{text-align:left;padding:12px 16px;background:#f8fafc;color:var(--text-secondary);font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:0.5px;border-bottom:1px solid var(--border)}
+.data-table td{padding:12px 16px;border-bottom:1px solid var(--border);color:var(--text-primary)}
+.data-table tr:last-child td{border-bottom:none}
+.data-table tr:hover{background:#f8fafc}
+.badge{display:inline-block;padding:2px 8px;border-radius:12px;font-size:10px;font-weight:600;text-transform:uppercase}
+.badge-day{background:#dbeafe;color:#1e40af}
+.badge-night{background:#1e293b;color:#fff}
+.badge-team{width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:6px}
+.modal{position:fixed;inset:0;background:rgba(15,23,42,0.8);display:none;align-items:center;justify-content:center;z-index:1000;padding:20px;backdrop-filter:blur(4px)}
 .modal.active{display:flex}
-.modal-box{background:var(--bg-card);border:1px solid var(--border-light);border-radius:var(--radius-lg);max-width:480px;width:100%;max-height:90vh;overflow-y:auto;padding:20px}
-.modal-title{font-family:var(--font-display);font-size:16px;letter-spacing:2px;color:var(--accent);margin-bottom:14px;text-transform:uppercase;padding-bottom:10px;border-bottom:1px solid var(--border)}
-.modal-actions{display:flex;gap:8px;margin-top:16px}.modal-actions .btn{flex:1}
-.badge{display:inline-block;padding:2px 8px;border-radius:10px;font-size:9px;letter-spacing:1px;text-transform:uppercase;font-weight:700}
-.badge.day{background:rgba(201,169,97,0.2);color:var(--accent)}
-.badge.night{background:rgba(74,122,143,0.2);color:var(--info)}
-.empty{text-align:center;padding:30px 20px;color:var(--text-dim);font-size:12px}
-.toast{position:fixed;bottom:70px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--bg-elevated);border:1px solid var(--accent);color:var(--text-primary);padding:10px 20px;border-radius:var(--radius);font-size:12px;z-index:2000;opacity:0;transition:all 0.3s;letter-spacing:1px;max-width:90%;text-align:center}
-.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
-.toast.err{border-color:var(--danger-bright);color:var(--danger-bright)}
-.toast.ok{border-color:var(--success-bright);color:var(--success-bright)}
-.drag-handle{color:var(--text-dim);cursor:grab;padding:4px;font-size:14px}
-.drag-item.dragging{opacity:0.5;background:var(--bg-elevated)}
-.drag-over{border-top:2px solid var(--accent)!important}
-.sub-tabs{display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap}
-.sub-tab{padding:6px 12px;background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius);font-size:10px;letter-spacing:1.5px;color:var(--text-secondary);text-transform:uppercase;font-weight:600}
-.sub-tab.active{background:var(--accent);color:var(--bg-primary);border-color:var(--accent)}
-.row{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
-.row-label{font-size:11px;color:var(--text-secondary);text-transform:uppercase;letter-spacing:1px}
-.row-value{font-family:var(--font-mono);font-size:12px;color:var(--text-primary);font-weight:600}
-.mt-10{margin-top:10px}.mb-10{margin-bottom:10px}
-.cmd-only{display:none}
-body.role-cmd .cmd-only{display:block}
-.photo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}
-.photo-thumb{position:relative;aspect-ratio:1;border-radius:var(--radius);overflow:hidden;border:1px solid var(--border);background:var(--bg-secondary)}
-.photo-thumb img{width:100%;height:100%;object-fit:cover}
-.photo-thumb .photo-name{position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,0.8);color:var(--text-primary);font-size:8px;padding:3px 5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.photo-thumb .photo-del{position:absolute;top:2px;right:2px;width:20px;height:20px;background:var(--danger);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;cursor:pointer}
-.photo-add{aspect-ratio:1;border:2px dashed var(--border-light);border-radius:var(--radius);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;color:var(--text-dim);font-size:10px;cursor:pointer}
-.photo-add input{display:none}
-.cargo-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:14px;margin-bottom:10px;border-left:3px solid var(--warning)}
-.cargo-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px}
-.cargo-guia{font-family:var(--font-mono);font-size:14px;color:var(--accent);font-weight:700}
-.cargo-spec{font-size:12px;color:var(--text-primary);margin-bottom:6px;line-height:1.4}
-.cargo-details{display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:10px;color:var(--text-secondary);margin-bottom:8px}
-.cargo-details span{display:flex;gap:4px}
-.cargo-photos{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:8px}
-.cargo-photo-mini{aspect-ratio:1;border-radius:4px;overflow:hidden;border:1px solid var(--border)}
-.cargo-photo-mini img{width:100%;height:100%;object-fit:cover}
-@media(min-width:720px){.time-display{grid-template-columns:1fr 1fr 1fr}.status-grid{grid-template-columns:repeat(4,1fr)}.control-grid{grid-template-columns:repeat(4,1fr)}.main{padding:16px 20px}}
+.modal-content{background:#fff;border-radius:8px;max-width:500px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:0 20px 25px -5px rgba(0,0,0,0.1)}
+.modal-header{padding:20px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+.modal-title{font-size:18px;font-weight:700}
+.modal-body{padding:20px}
+.modal-footer{padding:20px;border-top:1px solid var(--border);display:flex;justify-content:flex-end;gap:10px}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(100px);background:#1e293b;color:#fff;padding:12px 24px;border-radius:6px;font-size:14px;font-weight:500;z-index:2000;transition:transform 0.3s;box-shadow:0 10px 15px -3px rgba(0,0,0,0.1)}
+.toast.show{transform:translateX(-50%) translateY(0)}
+.toast.error{background:#dc2626}
+.toast.success{background:#059669}
+@media(min-width:768px){.grid-2{grid-template-columns:1fr 1fr}.grid-3{grid-template-columns:1fr 1fr 1fr}}
 </style>
 </head>
 <body>
+
 <div class="login-screen" id="loginScreen">
 <div class="login-box">
-<div class="login-emblem">⚓</div>
-<div class="login-title">RIO OPS</div>
-<div class="login-subtitle">Sistema Tático de Patrulha Fluvial</div>
-<div class="login-field"><label>Perfil de Acesso</label><select id="loginRole"><option value="cmd">Comandante</option><option value="crew">Tripulação</option></select></div>
-<div class="login-field"><label>Senha Operacional</label><input type="password" id="loginPass" placeholder="••••••" autocomplete="off"></div>
-<button class="login-btn" onclick="doLogin()">Acessar Sistema</button>
+<div class="login-header"><div class="login-logo">RIO OPS</div><div class="login-sub">Corporate River Operations</div></div>
+<div class="form-group"><label>Perfil de Acesso</label><select id="loginRole"><option value="cmd">Comandante</option><option value="crew">Tripulação</option></select></div>
+<div class="form-group"><label>Senha Operacional</label><input type="password" id="loginPass" placeholder="••••••"></div>
+<button class="btn btn-primary" onclick="doLogin()">Acessar Sistema</button>
 <div class="login-error" id="loginErr"></div>
-<div class="login-hint">COMANDANTE: 54321 · TRIPULAÇÃO: 12345</div>
+<div style="text-align:center;font-size:11px;color:#94a3b8;margin-top:20px">CMD: 54321 | TRIP: 12345</div>
 </div>
 </div>
+
 <div class="app" id="app">
-<header class="app-header">
-<div class="app-brand"><div class="brand-icon">⚓</div><div><div class="brand-text">RIO OPS</div><div class="brand-sub" id="roleLabel">COMANDANTE</div></div></div>
-<div class="app-status"><span class="status-chip" id="netChip"><span class="status-dot"></span><span id="netLabel">ONLINE</span></span><span class="header-time" id="clockTop">00:00:00</span><button class="icon-btn" onclick="logout()" title="Sair">⏻</button></div>
+<header class="header">
+<div class="brand"><div class="brand-icon"><svg class="icon" viewBox="0 0 24 24" style="width:20px;height:20px;fill:#fff"><path d="M12 2L2 7l10 5 10-5-10-5zm0 9l2.5-1.25L12 8.5l-2.5 1.25L12 11zm0 2.5l-5-2.5-5 2.5L12 22l10-8.5-5-2.5-5 2.5z"/></svg></div><div class="brand-text">RIO OPS</div></div>
+<div class="user-info"><span id="roleLabel">COMANDANTE</span><button class="logout-btn" onclick="logout()">Sair</button></div>
 </header>
-<nav class="nav-tabs" id="navTabs">
-<button class="tab-btn active" data-tab="dashboard">Painel</button>
-<button class="tab-btn cmd-only" data-tab="mission">Missão</button>
-<button class="tab-btn cmd-only" data-tab="teams">Equipes</button>
-<button class="tab-btn cmd-only" data-tab="crew">Tripulação</button>
-<button class="tab-btn cmd-only" data-tab="passengers">Passageiros</button>
-<button class="tab-btn" data-tab="cargo">Carga</button>
-<button class="tab-btn" data-tab="diary">Diário</button>
-<button class="tab-btn cmd-only" data-tab="navigation">Navegação</button>
-<button class="tab-btn cmd-only" data-tab="logistics">Logística</button>
-<button class="tab-btn cmd-only" data-tab="comms">Comunicações</button>
-<button class="tab-btn cmd-only" data-tab="weather">Meteo</button>
-<button class="tab-btn cmd-only" data-tab="procedures">Procedimentos</button>
+
+<nav class="nav-bar" id="navBar">
+<div class="nav-item active" data-tab="dashboard">Painel</div>
+<div class="nav-item cmd-only" data-tab="mission">Missão</div>
+<div class="nav-item cmd-only" data-tab="teams">Equipes</div>
+<div class="nav-item cmd-only" data-tab="crew">Tripulação</div>
+<div class="nav-item cmd-only" data-tab="passengers">Passageiros</div>
+<div class="nav-item" data-tab="cargo">Carga</div>
+<div class="nav-item" data-tab="diary">Diário</div>
+<div class="nav-item cmd-only" data-tab="navigation">Navegação</div>
+<div class="nav-item cmd-only" data-tab="logistics">Logística</div>
 </nav>
-<main class="main">
+
+<main class="main-content">
 <section class="tab-content active" id="tab-dashboard">
-<div class="hero-panel"><div class="hero-mission">Missão Atual</div><div class="hero-title" id="heroTitle">SEM MISSÃO ATIVA</div><div class="hero-vessel" id="heroVessel">Configure uma missão para iniciar</div></div>
-<div class="time-display"><div class="time-box"><div class="time-label">Hora Local</div><div class="time-value big" id="clockMain">00:00:00</div><div class="time-sub" id="dateMain">--</div></div><div class="time-box"><div class="time-label">Duração Missão</div><div class="time-value big" id="missionDuration">--:--:--</div><div class="time-sub" id="missionStatus">PARADA</div></div></div>
-<div class="quarter-active" id="quarterBox" style="display:none"><div class="qa-label"><span id="quarterIcon">☀️</span><span id="quarterType">QUARTO DIURNO</span><span class="badge day" id="quarterBadge">ATIVO</span></div><div class="qa-team" id="quarterTeam">—</div><div class="qa-countdown" id="quarterCountdown">--:--:--</div><div class="qa-progress"><div class="qa-progress-bar" id="quarterProgress" style="width:0%"></div></div></div>
-<div class="compass-box"><div class="compass-visual"><div class="compass-mark n">N</div><div class="compass-mark s">S</div><div class="compass-mark e">E</div><div class="compass-mark w">W</div><div class="compass-needle" id="compassNeedle"></div><div class="compass-center"></div></div><div class="compass-data"><div class="compass-row"><span>Proa</span><span id="heading">---°</span></div><div class="compass-row"><span>Velocidade</span><span id="speed">0.0 nós</span></div><div class="compass-row"><span>Precisão GPS</span><span id="accuracy">-- m</span></div><div class="compass-row"><span>Altitude</span><span id="altitude">-- m</span></div></div></div>
-<div class="gps-box"><div class="gps-header"><div class="gps-title">📍 Posição Atual (GMS)</div><div class="gps-status search" id="gpsStatus">BUSCANDO</div></div><div class="gps-coords" id="gpsCoords">Aguardando sinal GPS...</div><div class="gps-meta"><span id="gpsUpdate">--</span></div></div>
-<div class="status-grid"><div class="stat-card"><div class="stat-label">Equipes</div><div class="stat-value" id="statTeams">0</div></div><div class="stat-card"><div class="stat-label">Tripulantes</div><div class="stat-value" id="statCrew">0</div></div><div class="stat-card"><div class="stat-label">Passageiros</div><div class="stat-value" id="statPax">0</div></div><div class="stat-card"><div class="stat-label">Cargas</div><div class="stat-value" id="statCargo">0</div></div></div>
-<div class="control-grid">
-<button class="ctrl-btn primary cmd-only" onclick="openMissionStart()"><span class="ctrl-btn-icon">▶</span><span class="ctrl-btn-label">Iniciar</span></button>
-<button class="ctrl-btn cmd-only" onclick="pauseMission()" id="btnPause" style="display:none"><span class="ctrl-btn-icon">⏸</span><span class="ctrl-btn-label">Pausar</span></button>
-<button class="ctrl-btn success cmd-only" onclick="resumeMission()" id="btnResume" style="display:none"><span class="ctrl-btn-icon">▶</span><span class="ctrl-btn-label">Retomar</span></button>
-<button class="ctrl-btn danger cmd-only" onclick="finishMission()" id="btnFinish" style="display:none"><span class="ctrl-btn-icon">■</span><span class="ctrl-btn-label">Finalizar</span></button>
-<button class="ctrl-btn" onclick="generateReport()"><span class="ctrl-btn-icon">📄</span><span class="ctrl-btn-label">Relatório</span></button>
-<button class="ctrl-btn cmd-only" onclick="newMission()"><span class="ctrl-btn-icon">✦</span><span class="ctrl-btn-label">Nova Missão</span></button>
+<div class="shift-display" id="shiftDisplay" style="display:none">
+<div class="shift-info"><h3>Turno Atual</h3><div class="team-name" id="currentTeam">—</div></div>
+<div class="shift-timer"><div id="countdown">--:--:--</div><span>Restante</span></div>
 </div>
-<div class="card cmd-only"><div class="card-header"><div class="card-title">Escala de Quartos</div><span class="card-badge" id="scheduleCount">0 turnos</span></div><div id="scheduleList"></div></div>
+<div class="grid-4">
+<div class="stat-widget"><div class="stat-label">Duração Missão</div><div class="stat-value" id="missionDuration">00:00:00</div><div class="stat-sub" id="missionStatus">Parada</div></div>
+<div class="stat-widget"><div class="stat-label">Tripulantes</div><div class="stat-value" id="statCrew">0</div></div>
+<div class="stat-widget"><div class="stat-label">Passageiros</div><div class="stat-value" id="statPax">0</div></div>
+<div class="stat-widget"><div class="stat-label">Cargas</div><div class="stat-value" id="statCargo">0</div></div>
+</div>
+<div class="card" style="margin-top:16px">
+<div class="section-title">Controles Operacionais</div>
+<div class="grid-4">
+<button class="btn btn-primary cmd-only" onclick="openMissionStart()">Iniciar Missão</button>
+<button class="btn btn-danger cmd-only" id="btnPause" style="display:none" onclick="pauseMission()">Pausar</button>
+<button class="btn btn-success cmd-only" id="btnResume" style="display:none" onclick="resumeMission()">Retomar</button>
+<button class="btn btn-danger cmd-only" id="btnFinish" style="display:none" onclick="finishMission()">Finalizar</button>
+<button class="btn" onclick="generateReport()">Gerar Relatório</button>
+<button class="btn cmd-only" onclick="newMission()">Nova Missão</button>
+</div>
+</div>
 </section>
 <section class="tab-content" id="tab-mission">
-<div class="sub-tabs"><button class="sub-tab active" data-sub="info">Dados</button><button class="sub-tab" data-sub="shifts">Turnos</button><button class="sub-tab" data-sub="saved">Salvas</button></div>
-<div id="sub-info"><div class="card"><div class="card-header"><div class="card-title">Dados da Missão</div></div><div class="form-group"><label>Nome da Operação</label><input type="text" id="mName" placeholder="Ex: Operação Sucuri"></div><div class="form-group"><label>Embarcação</label><input type="text" id="mVessel" placeholder="Ex: AVP Rio Negro"></div><div class="form-row"><div class="form-group"><label>Área de Operação</label><input type="text" id="mArea" placeholder="Ex: Rio Amazonas"></div><div class="form-group"><label>Código</label><input type="text" id="mCode" placeholder="Ex: OP-001/2025"></div></div><div class="form-group"><label>Objetivo</label><textarea id="mObjective" placeholder="Descreva o objetivo da missão..."></textarea></div><button class="btn btn-primary btn-block" onclick="saveMissionInfo()">Salvar Dados</button></div></div>
-<div id="sub-shifts" style="display:none"><div class="card"><div class="card-header"><div class="card-title">Configuração dos Turnos</div></div><div class="form-row"><div class="form-group"><label>☀️ Turno Diurno (horas)</label><input type="number" id="dayHours" value="16" min="1" max="24"></div><div class="form-group"><label>🌙 Turno Noturno (horas)</label><input type="number" id="nightHours" value="8" min="1" max="24"></div></div><div class="form-row"><div class="form-group"><label>Início Diurno</label><input type="time" id="dayStart" value="06:00"></div><div class="form-group"><label>Início Noturno</label><input type="time" id="nightStart" value="22:00"></div></div><button class="btn btn-primary btn-block" onclick="saveShifts()">Salvar Turnos</button></div><div class="card"><div class="card-header"><div class="card-title">Ordem das Equipes</div><span class="card-badge">Arraste</span></div><p style="font-size:11px;color:var(--text-secondary);margin-bottom:10px">Arraste para reordenar.</p><div id="teamOrderList"></div></div></div>
-<div id="sub-saved" style="display:none"><div class="card"><div class="card-header"><div class="card-title">Missões Salvas</div><span class="card-badge" id="savedCount">0</span></div><div id="savedList"></div></div></div>
+  <div class="card">
+    <div class="section-title">Dados da Operação</div>
+    <div class="grid-2">
+      <div class="form-group"><label>Nome da Operação</label><input type="text" id="mName"></div>
+      <div class="form-group"><label>Embarcação</label><input type="text" id="mVessel"></div>
+      <div class="form-group"><label>Área de Operação</label><input type="text" id="mArea"></div>
+      <div class="form-group"><label>Código</label><input type="text" id="mCode"></div>
+    </div>
+    <div class="form-group"><label>Objetivo</label><textarea id="mObjective" rows="3"></textarea></div>
+    <button class="btn btn-primary" onclick="saveMissionInfo()">Salvar Dados</button>
+  </div>
+  <div class="card">
+    <div class="section-title">Configuração de Turnos</div>
+    <div class="grid-2">
+      <div class="form-group"><label>Início Diurno</label><input type="time" id="dayStart" value="06:00"></div>
+      <div class="form-group"><label>Início Noturno</label><input type="time" id="nightStart" value="22:00"></div>
+      <div class="form-group"><label>Duração Diurna (h)</label><input type="number" id="dayHours" value="16"></div>
+      <div class="form-group"><label>Duração Noturna (h)</label><input type="number" id="nightHours" value="8"></div>
+    </div>
+    <button class="btn btn-primary" onclick="saveShifts()">Salvar Configuração</button>
+  </div>
 </section>
-<section class="tab-content" id="tab-teams"><div class="card"><div class="card-header"><div class="card-title">Nova Equipe</div></div><div class="form-row"><div class="form-group"><label>Nome da Equipe</label><input type="text" id="teamName" placeholder="Ex: Alpha"></div><div class="form-group"><label>Cor</label><input type="color" id="teamColor" value="#c9a961"></div></div><button class="btn btn-primary btn-block" onclick="addTeam()">Adicionar Equipe</button></div><div class="card"><div class="card-header"><div class="card-title">Equipes Cadastradas</div><span class="card-badge" id="teamCount">0</span></div><div id="teamList"></div></div></section>
-<section class="tab-content" id="tab-crew"><div class="card"><div class="card-header"><div class="card-title">Novo Tripulante</div></div><div class="form-row"><div class="form-group"><label>Nome Completo</label><input type="text" id="cName" placeholder="Nome"></div><div class="form-group"><label>Nome de Guerra</label><input type="text" id="cWar" placeholder="Guerra"></div></div><div class="form-row"><div class="form-group"><label>Posto/Graduação</label><select id="cRank"><option value="">Selecione...</option><option>Capitão-Tenente</option><option>Primeiro-Tenente</option><option>Segundo-Tenente</option><option>Suboficial</option><option>Primeiro-Sargento</option><option>Segundo-Sargento</option><option>Terceiro-Sargento</option><option>Cabo</option><option>Marinheiro</option><option>Soldado Engajado</option><option>Soldado EV</option></select></div><div class="form-group"><label>Função</label><select id="cRole"><option value="">Selecione...</option><option>Comandante</option><option>Imediato</option><option>Encarregado de Navegação</option><option>Timoneiro</option><option>Operador de Rádio</option><option>Mestre</option><option>Maquinista</option><option>Eletricista</option><option>Cozinheiro</option><option>Sentinela</option><option>Atirador</option><option>Saúde</option><option>Auxiliar de Convés</option><option>Operador de Convés</option><option>Aprendiz</option></select></div></div><div class="form-row"><div class="form-group"><label>Equipe</label><select id="cTeam"></select></div><div class="form-group"><label>Local de Pernoite</label><select id="cCabin"><option value="">Selecione...</option><option>Camarote 1</option><option>Camarote 2</option><option>Camarote 3</option><option>Camarote 4</option><option>Cozinha</option><option>VTR</option><option>Corredor</option><option>Praça de Máquinas</option><option>Balsa</option><option>Outros</option></select></div></div><button class="btn btn-primary btn-block" onclick="addCrew()">Adicionar Tripulante</button></div><div class="card"><div class="card-header"><div class="card-title">Tripulação</div><span class="card-badge" id="crewCount">0</span></div><div id="crewList"></div></div></section>
-<section class="tab-content" id="tab-passengers"><div class="card"><div class="card-header"><div class="card-title">Novo Passageiro</div></div><div class="form-row"><div class="form-group"><label>Nome Completo</label><input type="text" id="pName" placeholder="Nome"></div><div class="form-group"><label>Nome de Guerra</label><input type="text" id="pWar" placeholder="Guerra"></div></div><div class="form-row"><div class="form-group"><label>Posto/Graduação</label><input type="text" id="pRank" placeholder="Ex: 3º Sargento"></div><div class="form-group"><label>OM</label><input type="text" id="pOM" placeholder="Ex: 9º DN"></div></div><div class="form-row three"><div class="form-group"><label>Data Nasc.</label><input type="date" id="pBirth"></div><div class="form-group"><label>CPF</label><input type="text" id="pCPF" placeholder="000.000.000-00"></div><div class="form-group"><label>IDT</label><input type="text" id="pIDT" placeholder="Identidade"></div></div><div class="form-group"><label>Local de Pernoite</label><select id="pCabin"><option value="">Selecione...</option><option>Camarote 1</option><option>Camarote 2</option><option>Camarote 3</option><option>Camarote 4</option><option>Cozinha</option><option>VTR</option><option>Corredor</option><option>Praça de Máquinas</option><option>Balsa</option><option>Outros</option></select></div><button class="btn btn-primary btn-block" onclick="addPassenger()">Adicionar Passageiro</button></div><div class="card"><div class="card-header"><div class="card-title">Passageiros</div><span class="card-badge" id="paxCount">0</span></div><div id="paxList"></div></div></section>
+
+<section class="tab-content" id="tab-teams">
+  <div class="card">
+    <div class="section-title">Nova Equipe</div>
+    <div class="grid-2">
+      <div class="form-group"><label>Nome</label><input type="text" id="teamName"></div>
+      <div class="form-group"><label>Cor Identificadora</label><input type="color" id="teamColor" value="#0ea5e9"></div>
+    </div>
+    <button class="btn btn-primary" onclick="addTeam()">Adicionar Equipe</button>
+  </div>
+  <div class="card">
+    <div class="section-title">Equipes Cadastradas</div>
+    <table class="data-table"><thead><tr><th>Cor</th><th>Nome</th><th>Membros</th><th>Ações</th></tr></thead><tbody id="teamList"></tbody></table>
+  </div>
+</section>
+
+<section class="tab-content" id="tab-crew">
+  <div class="card">
+    <div class="section-title">Novo Tripulante</div>
+    <div class="grid-2">
+      <div class="form-group"><label>Nome Completo</label><input type="text" id="cName"></div>
+      <div class="form-group"><label>Nome de Guerra</label><input type="text" id="cWar"></div>
+      <div class="form-group"><label>Posto/Graduação</label><select id="cRank"><option value="">Selecione...</option><option>Capitão-Tenente</option><option>Primeiro-Tenente</option><option>Segundo-Tenente</option><option>Suboficial</option><option>Primeiro-Sargento</option><option>Segundo-Sargento</option><option>Terceiro-Sargento</option><option>Cabo</option><option>Marinheiro</option><option>Soldado Engajado</option><option>Soldado EV</option></select></div>
+      <div class="form-group"><label>Função</label><select id="cRole"><option value="">Selecione...</option><option>Comandante</option><option>Imediato</option><option>Encarregado de Navegação</option><option>Timoneiro</option><option>Operador de Rádio</option><option>Mestre</option><option>Maquinista</option><option>Eletricista</option><option>Cozinheiro</option><option>Sentinela</option><option>Atirador</option><option>Saúde</option><option>Auxiliar de Convés</option><option>Operador de Convés</option><option>Aprendiz</option></select></div>
+      <div class="form-group"><label>Equipe</label><select id="cTeam"></select></div>
+      <div class="form-group"><label>Local de Pernoite</label><select id="cCabin"><option value="">Selecione...</option><option>Camarote 1</option><option>Camarote 2</option><option>Camarote 3</option><option>Camarote 4</option><option>Cozinha</option><option>VTR</option><option>Corredor</option><option>Praça de Máquinas</option><option>Balsa</option><option>Outros</option></select></div>
+    </div>
+    <button class="btn btn-primary" onclick="addCrew()">Adicionar Tripulante</button>
+  </div>
+  <div class="card">
+    <div class="section-title">Lista de Tripulação</div>
+    <table class="data-table"><thead><tr><th>Posto</th><th>Guerra</th><th>Função</th><th>Equipe</th><th>Pernoite</th><th>Ações</th></tr></thead><tbody id="crewList"></tbody></table>
+  </div>
+</section>
+
+<section class="tab-content" id="tab-passengers">
+  <div class="card">
+    <div class="section-title">Novo Passageiro</div>
+    <div class="grid-2">
+      <div class="form-group"><label>Nome Completo</label><input type="text" id="pName"></div>
+      <div class="form-group"><label>Nome de Guerra</label><input type="text" id="pWar"></div>
+      <div class="form-group"><label>Posto/Graduação</label><input type="text" id="pRank"></div>
+      <div class="form-group"><label>OM</label><input type="text" id="pOM"></div>
+      <div class="form-group"><label>Data Nasc.</label><input type="date" id="pBirth"></div>
+      <div class="form-group"><label>CPF</label><input type="text" id="pCPF"></div>
+      <div class="form-group"><label>IDT</label><input type="text" id="pIDT"></div>
+      <div class="form-group"><label>Local de Pernoite</label><select id="pCabin"><option value="">Selecione...</option><option>Camarote 1</option><option>Camarote 2</option><option>Camarote 3</option><option>Camarote 4</option><option>Cozinha</option><option>VTR</option><option>Corredor</option><option>Praça de Máquinas</option><option>Balsa</option><option>Outros</option></select></div>
+    </div>
+    <button class="btn btn-primary" onclick="addPassenger()">Adicionar Passageiro</button>
+  </div>
+  <div class="card">
+    <div class="section-title">Lista de Passageiros</div>
+    <table class="data-table"><thead><tr><th>Posto</th><th>Nome</th><th>OM</th><th>CPF</th><th>Pernoite</th><th>Ações</th></tr></thead><tbody id="paxList"></tbody></table>
+  </div>
+</section>
+
 <section class="tab-content" id="tab-cargo">
-<div class="card cmd-only"><div class="card-header"><div class="card-title">Nova Carga</div></div><div class="form-row"><div class="form-group"><label>Número da Guia</label><input type="text" id="cgGuia" placeholder="Ex: GUIA-001/2025"></div><div class="form-group"><label>Quantidade</label><input type="text" id="cgQtd" placeholder="Ex: 50 caixas"></div></div><div class="form-group"><label>Especificação do Material</label><textarea id="cgSpec" placeholder="Descreva o material transportado..."></textarea></div><div class="form-row"><div class="form-group"><label>Origem</label><input type="text" id="cgOrigem" placeholder="Ex: Manaus-AM"></div><div class="form-group"><label>Destino</label><input type="text" id="cgDestino" placeholder="Ex: Tabatinga-AM"></div></div><div class="form-row"><div class="form-group"><label>Resp. Embarque</label><input type="text" id="cgEmb" placeholder="Nome do responsável"></div><div class="form-group"><label>Resp. Recebimento</label><input type="text" id="cgRec" placeholder="Nome do responsável"></div></div><div class="form-group"><label>Observação</label><textarea id="cgObs" placeholder="Observações adicionais..."></textarea></div><div class="form-group"><label>📷 Fotos da Carga</label><div class="photo-grid" id="cargoPhotoGrid"><label class="photo-add"><span style="font-size:24px">📷</span><span>Tirar Foto</span><input type="file" accept="image/*" capture="environment" onchange="handleCargoPhoto(this)"></label></div></div><button class="btn btn-primary btn-block" onclick="addCargo()">Adicionar Carga</button></div>
-<div class="card"><div class="card-header"><div class="card-title">Cargas Registradas</div><span class="card-badge" id="cargoCount">0</span></div><div id="cargoList"></div></div>
+  <div class="card cmd-only">
+    <div class="section-title">Registro de Carga</div>
+    <div class="grid-2">
+      <div class="form-group"><label>Número da Guia</label><input type="text" id="cgGuia"></div>
+      <div class="form-group"><label>Quantidade</label><input type="text" id="cgQtd"></div>
+      <div class="form-group"><label>Origem</label><input type="text" id="cgOrigem"></div>
+      <div class="form-group"><label>Destino</label><input type="text" id="cgDestino"></div>
+      <div class="form-group"><label>Resp. Embarque</label><input type="text" id="cgEmb"></div>
+      <div class="form-group"><label>Resp. Recebimento</label><input type="text" id="cgRec"></div>
+    </div>
+    <div class="form-group"><label>Especificação do Material</label><textarea id="cgSpec" rows="2"></textarea></div>
+    <div class="form-group"><label>Observação</label><textarea id="cgObs" rows="2"></textarea></div>
+    <div class="form-group"><label>Fotos da Carga</label><div style="display:flex;gap:10px;align-items:center"><input type="file" accept="image/*" capture="environment" onchange="handleCargoPhoto(this)" style="flex:1"></div><div id="cargoPhotoPreview" style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap"></div></div>
+    <button class="btn btn-primary" onclick="addCargo()">Registrar Carga</button>
+  </div>
+  <div class="card"><div class="section-title">Manifesto de Cargas</div><div id="cargoList"></div></div>
 </section>
-<section class="tab-content" id="tab-diary"><div class="card"><div class="card-header"><div class="card-title">Novo Registro</div></div><div class="form-row"><div class="form-group"><label>Tipo</label><select id="logType"><option value="nav">🧭 Navegação</option><option value="com">📡 Comunicação</option><option value="occ">⚠️ Ocorrência</option><option value="met">🌦️ Meteorologia</option><option value="obs">👁️ Observação</option></select></div><div class="form-group"><label>Equipe</label><select id="logTeam"></select></div></div><div class="form-group"><label>Descrição</label><textarea id="logText" placeholder="Descreva o evento..."></textarea></div><div class="row" style="margin-bottom:8px"><span class="row-label">📍 GPS</span><span class="row-value text-mono" id="logGps">Aguardando...</span></div><button class="btn btn-primary btn-block" onclick="addLog()">Registrar no Diário</button></div><div class="card"><div class="card-header"><div class="card-title">Diário de Bordo</div><span class="card-badge" id="logCount">0</span></div><div id="logList"></div></div></section>
-<section class="tab-content" id="tab-navigation"><div class="card"><div class="card-header"><div class="card-title">Marcar Waypoint</div></div><div class="form-row"><div class="form-group"><label>Nome do Ponto</label><input type="text" id="wpName" placeholder="Ex: Foz do Tapajós"></div><div class="form-group"><label>Tipo</label><select id="wpType"><option value="check">Ponto de Checagem</option><option value="start">Início</option><option value="end">Destino</option><option value="fuel">Reabastecimento</option><option value="danger">Área de Risco</option><option value="anchor">Fundeadouro</option></select></div></div><div class="form-group"><label>Observação</label><input type="text" id="wpNote" placeholder="Observação (opcional)"></div><button class="btn btn-primary btn-block" onclick="addWaypoint()">Marcar Posição</button></div><div class="card"><div class="card-header"><div class="card-title">Track de Navegação</div><span class="card-badge" id="wpCount">0 pontos</span></div><div id="wpList"></div></div></section>
-<section class="tab-content" id="tab-logistics"><div class="card"><div class="card-header"><div class="card-title">Atualizar Recursos</div></div><div class="form-row three"><div class="form-group"><label>Combustível (%)</label><input type="number" id="resFuel" min="0" max="100" value="100"></div><div class="form-group"><label>Água Potável (%)</label><input type="number" id="resWater" min="0" max="100" value="100"></div><div class="form-group"><label>Mantimentos (dias)</label><input type="number" id="resFood" min="0" value="7"></div></div><div class="form-row"><div class="form-group"><label>Horímetro Motor (h)</label><input type="number" id="resEngine" step="0.1" value="0"></div><div class="form-group"><label>Consumo Médio (L/h)</label><input type="number" id="resConsumption" step="0.1" value="0"></div></div><button class="btn btn-primary btn-block" onclick="saveLogistics()">Atualizar</button></div><div class="card"><div class="card-header"><div class="card-title">Status Logístico</div></div><div id="resourcesList"></div></div></section>
-<section class="tab-content" id="tab-comms"><div class="card"><div class="card-header"><div class="card-title">Registrar Comunicação</div></div><div class="form-row"><div class="form-group"><label>Canal/Frequência</label><input type="text" id="comFreq" placeholder="Ex: VHF CH16"></div><div class="form-group"><label>Contato</label><input type="text" id="comContact" placeholder="Ex: Base Manaus"></div></div><div class="form-group"><label>Tipo</label><select id="comType"><option value="routine">Rotina</option><option value="report">Reporte</option><option value="request">Solicitação</option><option value="emergency">Emergência</option></select></div><div class="form-group"><label>Mensagem</label><textarea id="comMsg" placeholder="Conteúdo da comunicação..."></textarea></div><button class="btn btn-primary btn-block" onclick="addComms()">Registrar</button></div><div class="card"><div class="card-header"><div class="card-title">Log de Comunicações</div><span class="card-badge" id="comCount">0</span></div><div id="comList"></div></div></section>
-<section class="tab-content" id="tab-weather"><div class="card"><div class="card-header"><div class="card-title">Condições Meteorológicas</div></div><div class="form-row three"><div class="form-group"><label>Céu</label><select id="wxSky"><option>Limpo</option><option>Parcialmente nublado</option><option>Nublado</option><option>Encoberto</option><option>Chuva leve</option><option>Chuva forte</option><option>Tempestade</option></select></div><div class="form-group"><label>Temp. (°C)</label><input type="number" id="wxTemp" value="28"></div><div class="form-group"><label>Visibilidade</label><select id="wxVis"><option>Excelente (>10km)</option><option>Boa (5-10km)</option><option>Regular (2-5km)</option><option>Ruim (1-2km)</option><option>Péssima (<1km)</option></select></div></div><div class="form-row three"><div class="form-group"><label>Direção Vento</label><select id="wxWindDir"><option>N</option><option>NE</option><option>E</option><option>SE</option><option>S</option><option>SO</option><option>O</option><option>NO</option><option>Calmo</option></select></div><div class="form-group"><label>Intensidade</label><select id="wxWind"><option>Calmaria</option><option>Friso</option><option>Moderado</option><option>Forte</option><option>Muito forte</option></select></div><div class="form-group"><label>Estado do Rio</label><select id="wxSea"><option>Calmo</option><option>Leve ondulação</option><option>Ondulado</option><option>Agitado</option></select></div></div><div class="form-group"><label>Observações</label><textarea id="wxNote" placeholder="Observações meteorológicas..."></textarea></div><button class="btn btn-primary btn-block" onclick="saveWeather()">Registrar</button></div><div class="card"><div class="card-header"><div class="card-title">Histórico Meteorológico</div></div><div id="wxList"></div></div></section>
-<section class="tab-content" id="tab-procedures">
-<div class="sub-tabs"><button class="sub-tab active" data-sub="pre">Pré-Navegação</button><button class="sub-tab" data-sub="emer">Emergência</button><button class="sub-tab" data-sub="radio">Rádio</button></div>
-<div id="sub-pre"><div class="card"><div class="card-header"><div class="card-title">Checklist Pré-Navegação</div><span class="card-badge" id="checkPreCount">0/0</span></div><div id="checkPreList"></div><button class="btn btn-primary btn-block mt-10" onclick="resetChecklist('pre')">Resetar</button></div></div>
-<div id="sub-emer" style="display:none"><div class="card"><div class="card-header"><div class="card-title">🚨 Procedimentos de Emergência</div></div><div style="font-size:12px;line-height:1.7;color:var(--text-primary)"><p style="margin-bottom:10px"><strong style="color:var(--danger-bright)">MAYDAY:</strong></p><p style="font-family:var(--font-mono);background:var(--bg-secondary);padding:10px;border-radius:var(--radius);margin-bottom:12px;font-size:11px;line-height:1.8">MAYDAY MAYDAY MAYDAY<br>AQUI [EMBARCAÇÃO] [INDICATIVO]<br>POSIÇÃO [COORDENADAS]<br>NATUREZA DA EMERGÊNCIA<br>ASSISTÊNCIA NECESSÁRIA<br>PESSOAS A BORDO: [NÚMERO]<br>OVER</p><p style="margin-bottom:10px"><strong style="color:var(--warning)">PAN-PAN:</strong></p><p style="font-family:var(--font-mono);background:var(--bg-secondary);padding:10px;border-radius:var(--radius);margin-bottom:12px;font-size:11px;line-height:1.8">PAN-PAN PAN-PAN PAN-PAN<br>AQUI [EMBARCAÇÃO]<br>POSIÇÃO [COORDENADAS]<br>NATUREZA DA URGÊNCIA<br>ASSISTÊNCIA DESEJADA<br>OVER</p><p style="margin-bottom:10px"><strong style="color:var(--danger-bright)">HOMEM AO MAR:</strong></p><ol style="padding-left:20px;color:var(--text-secondary);font-size:11px"><li>Gritar "HOMEM AO MAR" + bordo (BE/BB)</li><li>Lançar boia salva-vidas imediatamente</li><li>Manter contato visual permanente</li><li>Marcar posição GPS no momento</li><li>Executar curva Williamson</li><li>Preparar equipe de resgate</li></ol></div></div></div>
-<div id="sub-radio" style="display:none"><div class="card"><div class="card-header"><div class="card-title">📻 Chamada de Rádio Padrão</div></div><div style="font-family:var(--font-mono);background:var(--bg-secondary);padding:14px;border-radius:var(--radius);font-size:11px;line-height:2;color:var(--text-primary)">[INDICATIVO CHAMADO], [INDICATIVO CHAMADO]<br>AQUI [SEU INDICATIVO], [SEU INDICATIVO]<br>MENSAGEM: [CONTEÚDO]<br>CÂMBIO</div><div style="margin-top:14px;font-size:11px;line-height:1.8;color:var(--text-secondary)"><p><strong style="color:var(--accent)">Alfabeto Fonético:</strong></p><p style="font-family:var(--font-mono);font-size:10px;margin-top:4px">Alpha · Bravo · Charlie · Delta · Echo · Foxtrot · Golf · Hotel · India · Juliet · Kilo · Lima · Mike · November · Oscar · Papa · Quebec · Romeo · Sierra · Tango · Uniform · Victor · Whiskey · X-ray · Yankee · Zulu</p></div></div></div>
+
+<section class="tab-content" id="tab-diary">
+  <div class="card">
+    <div class="section-title">Novo Registro de Ocorrência</div>
+    <div class="grid-2">
+      <div class="form-group"><label>Tipo</label><select id="logType"><option value="nav">Navegação</option><option value="com">Comunicação</option><option value="occ">Ocorrência</option><option value="met">Meteorologia</option><option value="obs">Observação</option></select></div>
+      <div class="form-group"><label>Equipe Responsável</label><select id="logTeam"></select></div>
+    </div>
+    <div class="form-group"><label>Descrição Detalhada</label><textarea id="logText" rows="3"></textarea></div>
+    <div style="font-size:12px;color:var(--text-secondary);margin-bottom:10px">GPS Automático: <span id="logGps" style="font-family:'JetBrains Mono',monospace">Aguardando...</span></div>
+    <button class="btn btn-primary" onclick="addLog()">Registrar no Diário</button>
+  </div>
+  <div class="card"><div class="section-title">Histórico de Ocorrências</div><div id="logList"></div></div>
+</section>
+
+<section class="tab-content" id="tab-navigation">
+  <div class="card">
+    <div class="section-title">Marcar Waypoint</div>
+    <div class="grid-2">
+      <div class="form-group"><label>Nome do Ponto</label><input type="text" id="wpName"></div>
+      <div class="form-group"><label>Tipo</label><select id="wpType"><option value="check">Check Point</option><option value="start">Início</option><option value="end">Destino</option><option value="fuel">Reabastecimento</option><option value="danger">Risco</option><option value="anchor">Fundeadouro</option></select></div>
+    </div>
+    <div class="form-group"><label>Observação</label><input type="text" id="wpNote"></div>
+    <button class="btn btn-primary" onclick="addWaypoint()">Salvar Posição</button>
+  </div>
+  <div class="card">
+    <div class="section-title">Track de Navegação</div>
+    <table class="data-table"><thead><tr><th>#</th><th>Nome</th><th>Coordenadas (GMS)</th><th>Hora</th><th>Ações</th></tr></thead><tbody id="wpList"></tbody></table>
+  </div>
+</section>
+
+<section class="tab-content" id="tab-logistics">
+  <div class="card">
+    <div class="section-title">Controle de Recursos</div>
+    <div class="grid-3">
+      <div class="form-group"><label>Combustível (%)</label><input type="number" id="resFuel" min="0" max="100" value="100"></div>
+      <div class="form-group"><label>Água Potável (%)</label><input type="number" id="resWater" min="0" max="100" value="100"></div>
+      <div class="form-group"><label>Mantimentos (dias)</label><input type="number" id="resFood" value="7"></div>
+      <div class="form-group"><label>Horímetro Motor (h)</label><input type="number" id="resEngine" step="0.1" value="0"></div>
+      <div class="form-group"><label>Consumo Médio (L/h)</label><input type="number" id="resConsumption" step="0.1" value="0"></div>
+    </div>
+    <button class="btn btn-primary" onclick="saveLogistics()">Atualizar Status</button>
+  </div>
+  <div class="card"><div class="section-title">Status Logístico</div><div id="resourcesList"></div></div>
 </section>
 </main>
 </div>
-<div class="modal" id="modalMissionStart"><div class="modal-box"><div class="modal-title">Iniciar Missão</div><div id="missionStartBody"></div></div></div>
-<div class="modal" id="modalFinish"><div class="modal-box"><div class="modal-title">Finalizar Missão</div><p style="color:var(--text-secondary);font-size:12px;margin-bottom:14px">Deseja salvar esta missão antes de finalizar?</p><div class="form-group"><label>Nome para Salvar</label><input type="text" id="saveAsName" placeholder="Ex: Patrulha Maio 2025"></div><div class="modal-actions"><button class="btn" onclick="closeModal('modalFinish');abortFinish()">Cancelar</button><button class="btn btn-success" onclick="saveAndFinish()">Salvar e Finalizar</button><button class="btn btn-danger" onclick="justFinish()">Apenas Finalizar</button></div></div></div>
-<div class="modal" id="modalNewMission"><div class="modal-box"><div class="modal-title">Nova Missão</div><p style="color:var(--text-secondary);font-size:12px;margin-bottom:14px">Escolha uma opção:</p><button class="btn btn-block mb-10" onclick="newMissionKeep()">🔄 Manter equipes e tripulação</button><button class="btn btn-danger btn-block" onclick="newMissionClean()">🆕 Missão completamente nova</button><button class="btn btn-block mt-10" onclick="closeModal('modalNewMission')">Cancelar</button></div></div>
-<div class="modal" id="modalSaved"><div class="modal-box"><div class="modal-title">Missão Salva</div><div id="savedDetail"></div></div></div>
+
+<div class="modal" id="modalMissionStart"><div class="modal-content"><div class="modal-header"><div class="modal-title">Iniciar Missão</div></div><div class="modal-body"><p style="color:var(--text-secondary)">Confirmar início da operação? Os quartos de hora começarão a contar imediatamente.</p></div><div class="modal-footer"><button class="btn" onclick="closeModal('modalMissionStart')">Cancelar</button><button class="btn btn-primary" onclick="startMission()">Confirmar Início</button></div></div></div>
+<div class="modal" id="modalFinish"><div class="modal-content"><div class="modal-header"><div class="modal-title">Finalizar Missão</div></div><div class="modal-body"><p style="color:var(--text-secondary);margin-bottom:16px">Deseja salvar esta missão no histórico antes de finalizar?</p><div class="form-group"><label>Nome para Arquivo</label><input type="text" id="saveAsName"></div></div><div class="modal-footer"><button class="btn" onclick="closeModal('modalFinish');abortFinish()">Cancelar</button><button class="btn btn-danger" onclick="justFinish()">Apenas Finalizar</button><button class="btn btn-primary" onclick="saveAndFinish()">Salvar e Finalizar</button></div></div></div>
+<div class="modal" id="modalNewMission"><div class="modal-content"><div class="modal-header"><div class="modal-title">Nova Missão</div></div><div class="modal-body"><button class="btn btn-primary" style="width:100%;margin-bottom:10px" onclick="newMissionKeep()">Manter Equipes e Tripulação</button><button class="btn btn-danger" style="width:100%" onclick="newMissionClean()">Limpar Tudo (Reset Total)</button></div><div class="modal-footer"><button class="btn" onclick="closeModal('modalNewMission')">Cancelar</button></div></div></div>
 <div class="toast" id="toast"></div>
+
 <script>
 const S={role:null,mission:null,teams:[],crew:[],passengers:[],logs:[],waypoints:[],comms:[],weather:[],cargo:[],resources:{fuel:100,water:100,food:7,engine:0,consumption:0},shifts:{dayHours:16,nightHours:8,dayStart:'06:00',nightStart:'22:00'},teamOrder:[],missionStart:null,missionPaused:null,pauseAccum:0,saved:[],checklists:{pre:{}},currentGps:null,heading:0};
-const PASS={cmd:'54321',crew:'12345'};
-let tempCargoPhotos=[];
-function save(){try{const d={...S};delete d.currentGps;delete d.heading;localStorage.setItem('rioops_v13',JSON.stringify(d))}catch(e){console.error('Save:',e)}}
-function load(){try{const d=localStorage.getItem('rioops_v13');if(d){const p=JSON.parse(d);Object.assign(S,p);if(!S.cargo)S.cargo=[]}}catch(e){console.error('Load:',e)}}
+const PASS={cmd:'54321',crew:'12345'};let tempCargoPhotos=[];
 function $(id){return document.getElementById(id)}
-function toast(m,t){const e=$('toast');e.textContent=m;e.className='toast show'+(t?' '+t:'');setTimeout(()=>e.className='toast',3000)}
+function toast(m,t){const e=$('toast');e.textContent=m;e.className='toast show '+(t||'');setTimeout(()=>e.className='toast',3000)}
 function pad(n){return String(n).padStart(2,'0')}
 function fmtDate(d){return`${pad(d.getDate())}/${pad(d.getMonth()+1)}/${d.getFullYear()}`}
 function fmtTime(d){return`${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`}
 function fmtDT(d){return fmtDate(d)+' '+fmtTime(d)}
 function toGMS(dec,isLat){if(dec==null||isNaN(dec))return'--';const dir=isLat?(dec<0?'S':'N'):(dec<0?'O':'E');const a=Math.abs(dec);const d=Math.floor(a);const m=Math.floor((a-d)*60);const s=((a-d)*60-m)*60;return`${d}°${pad(m)}'${s.toFixed(1)}"${dir}`}
 function uuid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,7)}
-function doLogin(){const r=$('loginRole').value,p=$('loginPass').value;if(p!==PASS[r]){$('loginErr').textContent='⚠ SENHA INCORRETA';return}S.role=r;save();enterApp()}
-function enterApp(){$('loginScreen').style.display='none';$('app').classList.add('active');document.body.classList.add(S.role==='cmd'?'role-cmd':'role-crew');$('roleLabel').textContent=S.role==='cmd'?'COMANDANTE':'TRIPULAÇÃO';renderAll();startClock();startGps();startCompass()}
-function logout(){if(!confirm('Sair?'))return;S.role=null;save();location.reload()}
-document.querySelectorAll('.tab-btn').forEach(b=>{b.addEventListener('click',()=>{document.querySelectorAll('.tab-btn').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));$('tab-'+b.dataset.tab).classList.add('active')})});
-document.querySelectorAll('.sub-tab').forEach(b=>{b.addEventListener('click',()=>{const p=b.parentElement;p.querySelectorAll('.sub-tab').forEach(x=>x.classList.remove('active'));b.classList.add('active');const c=p.parentElement;Array.from(c.children).forEach(ch=>{if(ch.id&&ch.id.startsWith('sub-'))ch.style.display='none'});$('sub-'+b.dataset.sub).style.display='block'})});
-function startClock(){setInterval(()=>{const n=new Date();$('clockTop').textContent=fmtTime(n);$('clockMain').textContent=fmtTime(n);$('dateMain').textContent=fmtDate(n);updateDur();updateQ()},1000)}
+function save(){try{localStorage.setItem('rioops_v15',JSON.stringify(S))}catch(e){}}
+function load(){try{const d=localStorage.getItem('rioops_v15');if(d)Object.assign(S,JSON.parse(d))}catch(e){}}
+function doLogin(){const r=$('loginRole').value,p=$('loginPass').value;if(p!==PASS[r]){$('loginErr').textContent='Senha incorreta';return}S.role=r;save();enterApp()}
+function enterApp(){$('loginScreen').style.display='none';$('app').classList.add('active');document.body.classList.add(S.role==='cmd'?'role-cmd':'');$('roleLabel').textContent=S.role==='cmd'?'COMANDANTE':'TRIPULAÇÃO';renderAll();startClock();startGps()}
+function logout(){if(!confirm('Sair do sistema?'))return;S.role=null;save();location.reload()}
+document.querySelectorAll('.nav-item').forEach(b=>{b.addEventListener('click',()=>{document.querySelectorAll('.nav-item').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));$('tab-'+b.dataset.tab).classList.add('active')})});
+function closeModal(id){$(id).classList.remove('active')}
+function startClock(){setInterval(()=>{updateDur();updateQ()},1000)}
 function updateDur(){if(!S.missionStart){$('missionDuration').textContent='--:--:--';return}let e=S.missionPaused?S.missionPaused-S.missionStart-S.pauseAccum:Date.now()-S.missionStart-S.pauseAccum;if(e<0)e=0;$('missionDuration').textContent=`${pad(Math.floor(e/3600000))}:${pad(Math.floor(e%3600000/60000))}:${pad(Math.floor(e%60000/1000))}`}
-let gpsW=null;
-function startGps(){if(!navigator.geolocation){$('gpsStatus').textContent='INDISPONÍVEL';$('gpsStatus').className='gps-status err';$('gpsCoords').innerHTML='<div style="font-size:11px;color:var(--danger-bright)">GPS não suportado</div>';return}$('gpsStatus').textContent='BUSCANDO';$('gpsStatus').className='gps-status search';$('gpsCoords').innerHTML='<div style="font-size:11px;color:var(--text-secondary)">Aguardando sinal GPS...<br>Pode levar até 2 min.</div><button class="btn btn-sm mt-10" onclick="retryGps()" style="font-size:10px">🔄 Tentar Novamente</button>';if(gpsW)navigator.geolocation.clearWatch(gpsW);gpsW=navigator.geolocation.watchPosition(function(pos){S.currentGps={lat:pos.coords.latitude,lng:pos.coords.longitude,acc:pos.coords.accuracy,alt:pos.coords.altitude,spd:pos.coords.speed,time:Date.now()};updGps()},function(err){navigator.geolocation.getCurrentPosition(function(pos){S.currentGps={lat:pos.coords.latitude,lng:pos.coords.longitude,acc:pos.coords.accuracy,alt:pos.coords.altitude,spd:pos.coords.speed,time:Date.now()};updGps();toast('GPS via rede','ok')},function(err2){$('gpsStatus').textContent='SEM SINAL';$('gpsStatus').className='gps-status err';let msg='Erro: '+err2.message;if(err2.code===1)msg='⚠ Permissão negada!<br>Ative em Configurações → Apps → Rio Ops → Permissões';else if(err2.code===2)msg='Posição indisponível.<br>Ative o GPS do dispositivo.';else if(err2.code===3)msg='Tempo esgotado.<br>Céu aberto acelera o sinal.';$('gpsCoords').innerHTML='<div style="font-size:11px;color:var(--danger-bright);line-height:1.6">'+msg+'</div><button class="btn btn-sm mt-10" onclick="retryGps()" style="font-size:10px">🔄 Tentar Novamente</button>'},{enableHighAccuracy:false,timeout:15000,maximumAge:30000})},{enableHighAccuracy:true,timeout:20000,maximumAge:5000})}
-function retryGps(){$('gpsStatus').textContent='BUSCANDO';$('gpsStatus').className='gps-status search';$('gpsCoords').innerHTML='<div style="font-size:11px;color:var(--text-secondary)">Buscando sinal...</div>';startGps()}
-function updGps(){if(!S.currentGps)return;const g=S.currentGps;$('gpsStatus').textContent=`±${Math.round(g.acc)}m`;$('gpsStatus').className='gps-status ok';$('gpsCoords').innerHTML=`${toGMS(g.lat,true)}<br>${toGMS(g.lng,false)}`;$('gpsUpdate').textContent=`Atualizado: ${fmtTime(new Date(g.time))}`;$('accuracy').textContent=`${Math.round(g.acc)} m`;$('altitude').textContent=g.alt!=null?`${Math.round(g.alt)} m`:'-- m';if(g.spd!=null)$('speed').textContent=`${(g.spd*1.94384).toFixed(1)} nós`;$('logGps').textContent=`${toGMS(g.lat,true)} / ${toGMS(g.lng,false)}`}
-function startCompass(){if(window.DeviceOrientationEvent){if(typeof DeviceOrientationEvent.requestPermission==='function'){document.addEventListener('click',function rq(){DeviceOrientationEvent.requestPermission().then(r=>{if(r==='granted')window.addEventListener('deviceorientation',hOrient)}).catch(()=>{});document.removeEventListener('click',rq)},{once:true})}else window.addEventListener('deviceorientation',hOrient)}}
-function hOrient(e){let h=e.webkitCompassHeading!=null?e.webkitCompassHeading:(360-(e.alpha||0));S.heading=Math.round(h);$('compassNeedle').style.transform=`translate(-50%,-100%) rotate(${S.heading}deg)`;$('heading').textContent=`${S.heading}°`}
-function updateNet(){const o=navigator.onLine;$('netChip').className='status-chip '+(o?'online':'offline');$('netLabel').textContent=o?'ONLINE':'OFFLINE'}
-window.addEventListener('online',updateNet);window.addEventListener('offline',updateNet);updateNet();
-function saveMissionInfo(){S.mission={name:$('mName').value.trim()||'Sem Nome',vessel:$('mVessel').value.trim(),area:$('mArea').value.trim(),code:$('mCode').value.trim(),objective:$('mObjective').value.trim()};save();renderDash();toast('Dados salvos','ok')}
-function saveShifts(){S.shifts={dayHours:parseInt($('dayHours').value)||16,nightHours:parseInt($('nightHours').value)||8,dayStart:$('dayStart').value||'06:00',nightStart:$('nightStart').value||'22:00'};save();renderSch();toast('Turnos salvos','ok')}
-function openMissionStart(){if(S.missionStart){toast('Missão em andamento','err');return}if(!S.mission||!S.mission.name){toast('Configure a missão','err');return}if(!S.teams.length){toast('Cadastre equipes','err');return}$('missionStartBody').innerHTML=`<p style="color:var(--text-secondary);font-size:12px;margin-bottom:12px">Confirmar início: <strong style="color:var(--accent)">${S.mission.name}</strong>?</p><div class="modal-actions"><button class="btn" onclick="closeModal('modalMissionStart')">Cancelar</button><button class="btn btn-primary" onclick="startMission()">Confirmar</button></div>`;$('modalMissionStart').classList.add('active')}
-function startMission(){S.missionStart=Date.now();S.mission.actualStart=Date.now();S.pauseAccum=0;S.missionPaused=null;save();closeModal('modalMissionStart');renderDash();addSysLog('Missão iniciada');toast('Missão iniciada!','ok');tryWL()}
-function pauseMission(){if(!S.missionStart||S.missionPaused)return;S.missionPaused=Date.now();save();renderDash();addSysLog('Missão pausada');toast('Pausada')}
-function resumeMission(){if(!S.missionPaused)return;S.pauseAccum+=Date.now()-S.missionPaused;S.missionPaused=null;save();renderDash();addSysLog('Missão retomada');toast('Retomada','ok')}
+function startGps(){if(!navigator.geolocation)return;navigator.geolocation.watchPosition(p=>{S.currentGps={lat:p.coords.latitude,lng:p.coords.longitude,acc:p.coords.accuracy,time:Date.now()};$('logGps').textContent=`${toGMS(S.currentGps.lat,true)} / ${toGMS(S.currentGps.lng,false)}`},e=>{}, {enableHighAccuracy:true})}
+function openMissionStart(){if(S.missionStart){toast('Missão já ativa','error');return}$('modalMissionStart').classList.add('active')}
+function startMission(){S.missionStart=Date.now();S.mission.actualStart=Date.now();S.pauseAccum=0;S.missionPaused=null;save();closeModal('modalMissionStart');renderDash();toast('Missão iniciada','success')}
+function pauseMission(){if(!S.missionStart||S.missionPaused)return;S.missionPaused=Date.now();save();renderDash();toast('Missão pausada')}
+function resumeMission(){if(!S.missionPaused)return;S.pauseAccum+=Date.now()-S.missionPaused;S.missionPaused=null;save();renderDash();toast('Missão retomada','success')}
 function finishMission(){if(!S.missionStart)return;$('saveAsName').value=S.mission.name+' - '+fmtDate(new Date());$('modalFinish').classList.add('active')}
 function abortFinish(){}
 function justFinish(){finMission();closeModal('modalFinish')}
 function saveAndFinish(){saveHist($('saveAsName').value.trim()||'Missão '+fmtDate(new Date()));finMission();closeModal('modalFinish')}
-function finMission(){addSysLog('Missão finalizada');S.mission.actualEnd=Date.now();S.missionStart=null;S.missionPaused=null;S.pauseAccum=0;save();renderDash();toast('Finalizada','ok')}
-function saveHist(name){S.saved.unshift({id:uuid(),name,date:new Date().toISOString(),mission:{...S.mission},teams:[...S.teams],crew:[...S.crew],passengers:[...S.passengers],logs:[...S.logs],waypoints:[...S.waypoints],comms:[...S.comms],weather:[...S.weather],cargo:[...S.cargo],resources:{...S.resources},shifts:{...S.shifts},teamOrder:[...S.teamOrder],missionStart:S.mission.actualStart,missionEnd:Date.now()});save();renderSaved();toast('Salva','ok')}
-function newMission(){if(S.missionStart){toast('Finalize a missão','err');return}$('modalNewMission').classList.add('active')}
-function newMissionKeep(){S.mission=null;S.logs=[];S.waypoints=[];S.comms=[];S.weather=[];S.passengers=[];S.cargo=[];S.missionStart=null;tempCargoPhotos=[];save();closeModal('modalNewMission');renderAll();toast('Dados limpos','ok')}
-function newMissionClean(){if(!confirm('Apagar TUDO?'))return;Object.assign(S,{mission:null,teams:[],crew:[],passengers:[],logs:[],waypoints:[],comms:[],weather:[],cargo:[],teamOrder:[],missionStart:null,resources:{fuel:100,water:100,food:7,engine:0,consumption:0}});tempCargoPhotos=[];save();closeModal('modalNewMission');renderAll();toast('Resetado','ok')}
-function addSysLog(m){S.logs.unshift({id:uuid(),type:'obs',text:`[SISTEMA] ${m}`,team:'—',time:Date.now(),gps:S.currentGps?`${toGMS(S.currentGps.lat,true)} / ${toGMS(S.currentGps.lng,false)}`:null});save()}
-function switchTab(n){const b=document.querySelector(`[data-tab="${n}"]`);if(b)b.click()}
-function handleCargoPhoto(input){if(!input.files||!input.files[0])return;const file=input.files[0];const img=new Image();const reader=new FileReader();reader.onload=function(e){img.onload=function(){const canvas=document.createElement('canvas');const ctx=canvas.getContext('2d');const maxSize=1200;let w=img.width,h=img.height;if(w>maxSize||h>maxSize){if(w>h){h=Math.round(h*maxSize/w);w=maxSize}else{w=Math.round(w*maxSize/h);h=maxSize}}canvas.width=w;canvas.height=h;ctx.drawImage(img,0,0,w,h);const cd=canvas.toDataURL('image/jpeg',0.7);const name=prompt('Nomeie esta foto:','Foto_'+(tempCargoPhotos.length+1));if(!name){input.value='';return}tempCargoPhotos.push({id:uuid(),name:name,data:cd});renderCargoPhotos();input.value='';toast(`Foto: ${Math.round(file.size/1024)}KB → ${Math.round(cd.length*0.75/1024)}KB`,'ok')};img.onerror=function(){toast('Erro ao processar','err');input.value=''};img.src=e.target.result};reader.readAsDataURL(file)}
-function delCargoPhoto(idx){tempCargoPhotos.splice(idx,1);renderCargoPhotos()}
-function renderCargoPhotos(){const grid=$('cargoPhotoGrid');let html='<label class="photo-add"><span style="font-size:24px">📷</span><span>Tirar Foto</span><input type="file" accept="image/*" capture="environment" onchange="handleCargoPhoto(this)"></label>';tempCargoPhotos.forEach((p,i)=>{html+=`<div class="photo-thumb"><img src="${p.data}" alt="${p.name}"><div class="photo-name">${p.name}</div>${S.role==='cmd'?`<div class="photo-del" onclick="delCargoPhoto(${i})">✕</div>`:''}</div>`});grid.innerHTML=html}
-function addCargo(){const guia=$('cgGuia').value.trim();if(!guia){toast('Informe a guia','err');return}const spec=$('cgSpec').value.trim();if(!spec){toast('Informe a especificação','err');return}S.cargo.push({id:uuid(),guia,spec,qtd:$('cgQtd').value.trim(),origem:$('cgOrigem').value.trim(),destino:$('cgDestino').value.trim(),emb:$('cgEmb').value.trim(),rec:$('cgRec').value.trim(),obs:$('cgObs').value.trim(),photos:[...tempCargoPhotos],time:Date.now()});$('cgGuia').value='';$('cgSpec').value='';$('cgQtd').value='';$('cgOrigem').value='';$('cgDestino').value='';$('cgEmb').value='';$('cgRec').value='';$('cgObs').value='';tempCargoPhotos=[];renderCargoPhotos();save();renderCargo();renderDash();toast('Carga adicionada','ok')}
-function delCargo(id){if(!confirm('Excluir?'))return;S.cargo=S.cargo.filter(c=>c.id!==id);save();renderCargo();renderDash()}
-function renderCargo(){if(!S.cargo.length){$('cargoList').innerHTML='<div class="empty">Nenhuma carga</div>';$('cargoCount').textContent='0';return}$('cargoList').innerHTML=S.cargo.map(c=>{const canDel=S.role==='cmd';let ph='';if(c.photos&&c.photos.length){ph='<div class="cargo-photos">'+c.photos.map(p=>`<div class="cargo-photo-mini" title="${p.name}"><img src="${p.data}" alt="${p.name}"></div>`).join('')+'</div>'}return`<div class="cargo-card"><div class="cargo-header"><div class="cargo-guia">📦 ${c.guia}</div>${canDel?`<button class="icon-btn danger" onclick="delCargo('${c.id}')">🗑</button>`:''}</div><div class="cargo-spec">${c.spec}</div><div class="cargo-details"><span>📊 Qtd: ${c.qtd||'—'}</span><span>📍 ${c.origem||'—'} → ${c.destino||'—'}</span><span>📤 Emb: ${c.emb||'—'}</span><span>📥 Rec: ${c.rec||'—'}</span></div>${c.obs?`<div style="font-size:10px;color:var(--text-dim);margin-bottom:6px">💬 ${c.obs}</div>`:''}${ph}<div style="font-size:9px;color:var(--text-dim);font-family:var(--font-mono);margin-top:6px">${fmtDT(new Date(c.time))}${c.photos&&c.photos.length?' · 📷 '+c.photos.length+' foto(s)':''}</div></div>`}).join('');$('cargoCount').textContent=S.cargo.length}
-function updateQ(){if(!S.missionStart||!S.teams.length||S.missionPaused){$('quarterBox').style.display='none';return}const n=new Date(),h=n.getHours(),m=n.getMinutes(),s=n.getSeconds();const[dH,dM]=S.shifts.dayStart.split(':').map(Number),[nH,nM]=S.shifts.nightStart.split(':').map(Number);const ds=dH*60+dM,ns=nH*60+nM,nm=h*60+m;const isN=(ns>ds)?(nm>=ns||nm<ds):(nm>=ns&&nm<ds);const sh=isN?S.shifts.nightHours:S.shifts.dayHours;const sm=isN?ns:ds;const qd=(sh*60)/S.teams.length;let el=nm-sm;if(el<0)el+=1440;const qi=Math.floor(el/qd)%S.teams.length;const qe=el%qd;const qr=qd-qe;const ord=S.teamOrder.length?S.teamOrder:S.teams.map(t=>t.id);const ti=qi%ord.length;const team=S.teams.find(t=>t.id===ord[ti]);if(!team){$('quarterBox').style.display='none';return}$('quarterBox').style.display='block';$('quarterBox').className='quarter-active'+(isN?' night':'');$('quarterIcon').textContent=isN?'🌙':'️';$('quarterType').textContent=isN?'QUARTO NOTURNO':'QUARTO DIURNO';$('quarterBadge').className='badge '+(isN?'night':'day');$('quarterBadge').textContent=isN?'NOTURNO':'DIURNO';$('quarterTeam').textContent='EQUIPE '+team.name.toUpperCase();$('quarterTeam').style.color=team.color;$('quarterCountdown').textContent=`${pad(Math.floor(qr/60))}:${pad(Math.floor(qr%60))}:${pad(60-s)}`;$('quarterProgress').style.width=(qe/qd*100)+'%'}
-function renderSch(){if(!S.teams.length){$('scheduleList').innerHTML='<div class="empty">Cadastre equipes</div>';$('scheduleCount').textContent='0';return}const ord=S.teamOrder.length?S.teamOrder:S.teams.map(t=>t.id);const[dH,dM]=S.shifts.dayStart.split(':').map(Number),[nH,nM]=S.shifts.nightStart.split(':').map(Number);const dm=dH*60+dM,nm=nH*60+nM;const dq=(S.shifts.dayHours*60)/S.teams.length,nq=(S.shifts.nightHours*60)/S.teams.length;let html='<div style="font-size:11px;color:var(--accent);margin-bottom:8px;letter-spacing:1px;text-transform:uppercase;font-weight:600">☀️ Diurno</div>';let c=dm;ord.forEach(tid=>{const t=S.teams.find(x=>x.id===tid);if(!t)return;const e=c+dq;html+=`<div class="schedule-row"><span class="schedule-time">${fM(c)}-${fM(e)}</span><span class="schedule-team"><span class="team-dot" style="color:${t.color};background:${t.color}"></span>${t.name}</span><span class="schedule-tag day">DIA</span></div>`;c=e});html+='<div style="font-size:11px;color:var(--info);margin:12px 0 8px;letter-spacing:1px;text-transform:uppercase;font-weight:600">🌙 Noturno</div>';c=nm;ord.forEach(tid=>{const t=S.teams.find(x=>x.id===tid);if(!t)return;const e=c+nq;html+=`<div class="schedule-row"><span class="schedule-time">${fM(c)}-${fM(e%1440)}</span><span class="schedule-team"><span class="team-dot" style="color:${t.color};background:${t.color}"></span>${t.name}</span><span class="schedule-tag night">NOITE</span></div>`;c=e});$('scheduleList').innerHTML=html;$('scheduleCount').textContent=(S.teams.length*2)+' turnos'}
-function fM(m){m=((m%1440)+1440)%1440;return`${pad(Math.floor(m/60))}:${pad(m%60)}`}
-function addTeam(){const n=$('teamName').value.trim(),c=$('teamColor').value;if(!n){toast('Nome','err');return}S.teams.push({id:uuid(),name:n,color:c});S.teamOrder.push(S.teams[S.teams.length-1].id);$('teamName').value='';save();renderTeams();renderSch();renderTS();renderTO();toast('Equipe adicionada','ok')}
-function delTeam(id){if(!confirm('Excluir?'))return;S.teams=S.teams.filter(t=>t.id!==id);S.teamOrder=S.teamOrder.filter(x=>x!==id);S.crew=S.crew.filter(c=>c.teamId!==id);save();renderTeams();renderCrew();renderSch();renderTS();renderTO()}
-function renderTeams(){if(!S.teams.length){$('teamList').innerHTML='<div class="empty">Nenhuma equipe</div>';$('teamCount').textContent='0';return}$('teamList').innerHTML=S.teams.map(t=>`<div class="list-item"><div class="list-icon" style="background:${t.color};color:#000;font-weight:700">${t.name[0].toUpperCase()}</div><div class="list-body"><div class="list-title">Equipe ${t.name}</div><div class="list-sub">${S.crew.filter(c=>c.teamId===t.id).length} membros</div></div><button class="icon-btn danger" onclick="delTeam('${t.id}')">🗑</button></div>`).join('');$('teamCount').textContent=S.teams.length}
-function renderTO(){const o=S.teamOrder.length?S.teamOrder:S.teams.map(t=>t.id);if(!o.length){$('teamOrderList').innerHTML='<div class="empty">Cadastre equipes</div>';return}$('teamOrderList').innerHTML=o.map((tid,i)=>{const t=S.teams.find(x=>x.id===tid);if(!t)return'';return`<div class="list-item drag-item" draggable="true" data-id="${tid}" ondragstart="window._dSrc='${tid}';this.classList.add('dragging')" ondragover="event.preventDefault();this.classList.add('drag-over')" ondrop="event.preventDefault();this.classList.remove('drag-over');const f=window._dSrc,to='${tid}';if(f===to)return;const a=S.teamOrder.length?[...S.teamOrder]:S.teams.map(t=>t.id);a.splice(a.indexOf(f),1);a.splice(a.indexOf(to),0,f);S.teamOrder=a;save();renderTO();renderSch()" ondragend="this.classList.remove('dragging');document.querySelectorAll('.drag-over').forEach(x=>x.classList.remove('drag-over'))"><span class="drag-handle">☰</span><div class="list-icon" style="background:${t.color};color:#000;font-weight:700">${i+1}</div><div class="list-body"><div class="list-title">Equipe ${t.name}</div><div class="list-sub">Posição ${i+1}</div></div></div>`}).join('')}
-function renderTS(){const o=S.teams.map(t=>`<option value="${t.id}">Equipe ${t.name}</option>`).join('');const e='<option value="">-- equipe --</option>';$('cTeam').innerHTML=e+o;$('logTeam').innerHTML=e+o}
-function addCrew(){const n=$('cName').value.trim();if(!n){toast('Nome','err');return}S.crew.push({id:uuid(),name:n,war:$('cWar').value.trim(),rank:$('cRank').value,role:$('cRole').value,teamId:$('cTeam').value,cabin:$('cCabin').value});$('cName').value='';$('cWar').value='';$('cRank').value='';$('cRole').value='';$('cTeam').value='';$('cCabin').value='';save();renderCrew();renderDash();toast('Adicionado','ok')}
+function finMission(){S.mission.actualEnd=Date.now();S.missionStart=null;S.missionPaused=null;S.pauseAccum=0;save();renderDash();toast('Missão finalizada','success')}
+function saveHist(name){S.saved.unshift({id:uuid(),name,date:new Date().toISOString(),mission:{...S.mission},teams:[...S.teams],crew:[...S.crew],passengers:[...S.passengers],logs:[...S.logs],waypoints:[...S.waypoints],cargo:[...S.cargo],resources:{...S.resources},shifts:{...S.shifts},teamOrder:[...S.teamOrder],missionStart:S.mission.actualStart,missionEnd:Date.now()});save();toast('Salva no histórico','success')}
+function newMission(){$('modalNewMission').classList.add('active')}
+function newMissionKeep(){S.mission=null;S.logs=[];S.waypoints=[];S.cargo=[];S.missionStart=null;tempCargoPhotos=[];save();closeModal('modalNewMission');renderAll();toast('Dados limpos','success')}
+function newMissionClean(){if(!confirm('Apagar TUDO?'))return;Object.assign(S,{mission:null,teams:[],crew:[],passengers:[],logs:[],waypoints:[],cargo:[],teamOrder:[],missionStart:null,resources:{fuel:100,water:100,food:7,engine:0,consumption:0}});tempCargoPhotos=[];save();closeModal('modalNewMission');renderAll();toast('Reset total','success')}
+function updateQ(){if(!S.missionStart||!S.teams.length||S.missionPaused){$('shiftDisplay').style.display='none';return}const n=new Date(),h=n.getHours(),m=n.getMinutes(),s=n.getSeconds();const[dH,dM]=S.shifts.dayStart.split(':').map(Number),[nH,nM]=S.shifts.nightStart.split(':').map(Number);const ds=dH*60+dM,ns=nH*60+nM,nm=h*60+m;const isN=(ns>ds)?(nm>=ns||nm<ds):(nm>=ns&&nm<ds);const sh=isN?S.shifts.nightHours:S.shifts.dayHours;const sm=isN?ns:ds;const qd=(sh*60)/S.teams.length;let el=nm-sm;if(el<0)el+=1440;const qi=Math.floor(el/qd)%S.teams.length;const qr=qd-(el%qd);const ord=S.teamOrder.length?S.teamOrder:S.teams.map(t=>t.id);const team=S.teams.find(t=>t.id===ord[qi%S.teams.length]);if(!team)return;$('shiftDisplay').style.display='flex';$('currentTeam').textContent=team.name;$('currentTeam').style.color=team.color;$('countdown').textContent=`${pad(Math.floor(qr/60))}:${pad(Math.floor(qr%60))}:${pad(60-s)}`}
+function addTeam(){const n=$('teamName').value.trim(),c=$('teamColor').value;if(!n)return;S.teams.push({id:uuid(),name:n,color:c});S.teamOrder.push(S.teams[S.teams.length-1].id);$('teamName').value='';save();renderTeams();renderTS();toast('Equipe adicionada','success')}
+function delTeam(id){if(!confirm('Excluir?'))return;S.teams=S.teams.filter(t=>t.id!==id);S.teamOrder=S.teamOrder.filter(x=>x!==id);S.crew=S.crew.filter(c=>c.teamId!==id);save();renderTeams();renderCrew();renderTS()}
+function renderTeams(){$('teamList').innerHTML=S.teams.map(t=>`<tr><td><span class="badge-team" style="background:${t.color}"></span></td><td>${t.name}</td><td>${S.crew.filter(c=>c.teamId===t.id).length}</td><td><button class="btn btn-sm btn-danger" onclick="delTeam('${t.id}')">Remover</button></td></tr>`).join('')}
+function renderTS(){const o=S.teams.map(t=>`<option value="${t.id}">${t.name}</option>`).join('');$('cTeam').innerHTML='<option value="">Selecione...</option>'+o;$('logTeam').innerHTML='<option value="">Selecione...</option>'+o}
+function addCrew(){const n=$('cName').value.trim();if(!n)return;S.crew.push({id:uuid(),name:n,war:$('cWar').value.trim(),rank:$('cRank').value,role:$('cRole').value,teamId:$('cTeam').value,cabin:$('cCabin').value});['cName','cWar','cRank','cRole','cTeam','cCabin'].forEach(i=>$(i).value='');save();renderCrew();renderDash();toast('Adicionado','success')}
 function delCrew(id){if(!confirm('Excluir?'))return;S.crew=S.crew.filter(c=>c.id!==id);save();renderCrew();renderDash()}
-function renderCrew(){if(!S.crew.length){$('crewList').innerHTML='<div class="empty">Nenhum tripulante</div>';$('crewCount').textContent='0';return}$('crewList').innerHTML=S.crew.map(c=>{const t=S.teams.find(x=>x.id===c.teamId);return`<div class="list-item"><div class="list-icon" style="background:${t?t.color:'#555'};color:#000;font-weight:700">${(c.war||c.name)[0].toUpperCase()}</div><div class="list-body"><div class="list-title">${c.rank?c.rank+' ':''}${c.war||c.name}</div><div class="list-sub">${c.role||'—'} · ${t?'Eq. '+t.name:'—'}</div>${c.cabin?`<div class="list-meta">🛏 ${c.cabin}</div>`:''}</div><button class="icon-btn danger" onclick="delCrew('${c.id}')">🗑</button></div>`}).join('');$('crewCount').textContent=S.crew.length}
-function addPassenger(){const n=$('pName').value.trim();if(!n){toast('Nome','err');return}S.passengers.push({id:uuid(),name:n,war:$('pWar').value.trim(),rank:$('pRank').value.trim(),om:$('pOM').value.trim(),birth:$('pBirth').value,cpf:$('pCPF').value.trim(),idt:$('pIDT').value.trim(),cabin:$('pCabin').value});$('pName').value='';$('pWar').value='';$('pRank').value='';$('pOM').value='';$('pBirth').value='';$('pCPF').value='';$('pIDT').value='';$('pCabin').value='';save();renderPax();renderDash();toast('Adicionado','ok')}
+function renderCrew(){$('crewList').innerHTML=S.crew.map(c=>{const t=S.teams.find(x=>x.id===c.teamId);return`<tr><td>${c.rank||'—'}</td><td>${c.war||c.name}</td><td>${c.role||'—'}</td><td>${t?t.name:'—'}</td><td>${c.cabin||'—'}</td><td><button class="btn btn-sm btn-danger" onclick="delCrew('${c.id}')">Remover</button></td></tr>`}).join('')}
+function addPassenger(){const n=$('pName').value.trim();if(!n)return;S.passengers.push({id:uuid(),name:n,war:$('pWar').value.trim(),rank:$('pRank').value.trim(),om:$('pOM').value.trim(),birth:$('pBirth').value,cpf:$('pCPF').value.trim(),idt:$('pIDT').value.trim(),cabin:$('pCabin').value});['pName','pWar','pRank','pOM','pBirth','pCPF','pIDT','pCabin'].forEach(i=>$(i).value='');save();renderPax();renderDash();toast('Adicionado','success')}
 function delPax(id){if(!confirm('Excluir?'))return;S.passengers=S.passengers.filter(p=>p.id!==id);save();renderPax();renderDash()}
-function renderPax(){if(!S.passengers.length){$('paxList').innerHTML='<div class="empty">Nenhum passageiro</div>';$('paxCount').textContent='0';return}$('paxList').innerHTML=S.passengers.map(p=>`<div class="list-item"><div class="list-icon">👤</div><div class="list-body"><div class="list-title">${p.rank?p.rank+' ':''}${p.war||p.name}</div><div class="list-sub">${p.om||''} ${p.cabin?'· '+p.cabin:''}</div><div class="list-meta">${p.cpf?'CPF:'+p.cpf:''} ${p.idt?'· IDT:'+p.idt:''}</div></div><button class="icon-btn danger" onclick="delPax('${p.id}')">🗑</button></div>`).join('');$('paxCount').textContent=S.passengers.length}
-function addLog(){const t=$('logText').value.trim();if(!t){toast('Descrição','err');return}const gps=S.currentGps?`${toGMS(S.currentGps.lat,true)} / ${toGMS(S.currentGps.lng,false)}`:null;const tm=S.teams.find(x=>x.id===$('logTeam').value);S.logs.unshift({id:uuid(),type:$('logType').value,text:t,team:tm?tm.name:'—',time:Date.now(),gps});$('logText').value='';save();renderLogs();renderDash();toast('Registrado','ok')}
-function delLog(id){if(!confirm('Excluir?'))return;S.logs=S.logs.filter(l=>l.id!==id);save();renderLogs();renderDash()}
-function renderLogs(){if(!S.logs.length){$('logList').innerHTML='<div class="empty">Nenhum registro</div>';$('logCount').textContent='0';return}const types={nav:'🧭 NAVEGAÇÃO',com:'📡 COMUNICAÇÃO',occ:'⚠️ OCORRÊNCIA',met:'🌦️ METEOROLOGIA',obs:'👁️ OBSERVAÇÃO'};$('logList').innerHTML=S.logs.map(l=>`<div class="log-entry ${l.type}"><div class="log-header"><span class="log-type ${l.type}">${types[l.type]}</span><span class="log-time">${fmtDT(new Date(l.time))}</span></div><div class="log-text">${l.text}</div><div class="log-meta"><span>👥 ${l.team}</span>${l.gps?`<span>📍 ${l.gps}</span>`:''}${S.role==='cmd'?`<button class="icon-btn danger" onclick="delLog('${l.id}')" style="margin-left:auto;width:24px;height:24px;font-size:10px">🗑</button>`:''}</div></div>`).join('');$('logCount').textContent=S.logs.length}
-function addWaypoint(){const n=$('wpName').value.trim();if(!n){toast('Nome','err');return}if(!S.currentGps){toast('GPS','err');return}S.waypoints.push({id:uuid(),name:n,type:$('wpType').value,note:$('wpNote').value.trim(),lat:S.currentGps.lat,lng:S.currentGps.lng,time:Date.now(),num:S.waypoints.length+1});$('wpName').value='';$('wpNote').value='';save();renderWP();toast('Marcado','ok')}
+function renderPax(){$('paxList').innerHTML=S.passengers.map(p=>`<tr><td>${p.rank||'—'}</td><td>${p.war||p.name}</td><td>${p.om||'—'}</td><td>${p.cpf||'—'}</td><td>${p.cabin||'—'}</td><td><button class="btn btn-sm btn-danger" onclick="delPax('${p.id}')">Remover</button></td></tr>`).join('')}
+function handleCargoPhoto(input){if(!input.files||!input.files[0])return;const file=input.files[0];const img=new Image();const reader=new FileReader();reader.onload=function(e){img.onload=function(){const canvas=document.createElement('canvas');const ctx=canvas.getContext('2d');const maxSize=800;let w=img.width,h=img.height;if(w>maxSize||h>maxSize){if(w>h){h=Math.round(h*maxSize/w);w=maxSize}else{w=Math.round(w*maxSize/h);h=maxSize}}canvas.width=w;canvas.height=h;ctx.drawImage(img,0,0,w,h);const cd=canvas.toDataURL('image/jpeg',0.7);const name=prompt('Nomeie a foto:','Foto_'+(tempCargoPhotos.length+1));if(!name){input.value='';return}tempCargoPhotos.push({id:uuid(),name:name,data:cd});renderCargoPhotos();input.value=''};img.src=e.target.result};reader.readAsDataURL(file)}
+function delCargoPhoto(idx){tempCargoPhotos.splice(idx,1);renderCargoPhotos()}
+function renderCargoPhotos(){$('cargoPhotoPreview').innerHTML=tempCargoPhotos.map((p,i)=>`<div style="position:relative"><img src="${p.data}" style="width:60px;height:60px;object-fit:cover;border-radius:4px;border:1px solid #e2e8f0"><button onclick="delCargoPhoto(${i})" style="position:absolute;top:-5px;right:-5px;background:#dc2626;color:#fff;border-radius:50%;width:16px;height:16px;font-size:10px;border:none;cursor:pointer">×</button></div>`).join('')}
+function addCargo(){const guia=$('cgGuia').value.trim();if(!guia)return;S.cargo.push({id:uuid(),guia,spec:$('cgSpec').value.trim(),qtd:$('cgQtd').value.trim(),origem:$('cgOrigem').value.trim(),destino:$('cgDestino').value.trim(),emb:$('cgEmb').value.trim(),rec:$('cgRec').value.trim(),obs:$('cgObs').value.trim(),photos:[...tempCargoPhotos],time:Date.now()});['cgGuia','cgSpec','cgQtd','cgOrigem','cgDestino','cgEmb','cgRec','cgObs'].forEach(i=>$(i).value='');tempCargoPhotos=[];renderCargoPhotos();save();renderCargo();renderDash();toast('Carga registrada','success')}
+function delCargo(id){if(!confirm('Excluir?'))return;S.cargo=S.cargo.filter(c=>c.id!==id);save();renderCargo();renderDash()}
+function renderCargo(){$('cargoList').innerHTML=S.cargo.map(c=>`<div style="border:1px solid #e2e8f0;border-radius:6px;padding:16px;margin-bottom:12px;background:#fff"><div style="display:flex;justify-content:space-between;margin-bottom:8px"><strong style="color:#0f172a">Guia Nº ${c.guia}</strong><span style="font-size:11px;color:#64748b">${fmtDT(new Date(c.time))}</span></div><div style="font-size:13px;color:#334155;margin-bottom:8px">${c.spec}</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;font-size:11px;color:#64748b;margin-bottom:8px"><span>Qtd: ${c.qtd||'—'}</span><span>Origem: ${c.origem||'—'}</span><span>Destino: ${c.destino||'—'}</span><span>Emb: ${c.emb||'—'}</span></div>${c.obs?`<div style="font-size:11px;color:#64748b;font-style:italic;margin-bottom:8px">Obs: ${c.obs}</div>`:''}${c.photos&&c.photos.length?`<div style="display:flex;gap:4px">${c.photos.map(p=>`<img src="${p.data}" title="${p.name}" style="width:40px;height:40px;object-fit:cover;border-radius:4px">`).join('')}</div>`:''}<div style="text-align:right;margin-top:8px"><button class="btn btn-sm btn-danger" onclick="delCargo('${c.id}')">Excluir Registro</button></div></div>`).join('')}
+function addLog(){const t=$('logText').value.trim();if(!t)return;const gps=S.currentGps?`${toGMS(S.currentGps.lat,true)} / ${toGMS(S.currentGps.lng,false)}`:null;const tm=S.teams.find(x=>x.id===$('logTeam').value);S.logs.unshift({id:uuid(),type:$('logType').value,text:t,team:tm?tm.name:'—',time:Date.now(),gps});$('logText').value='';save();renderLogs();toast('Registrado','success')}
+function delLog(id){if(!confirm('Excluir?'))return;S.logs=S.logs.filter(l=>l.id!==id);save();renderLogs()}
+function renderLogs(){$('logList').innerHTML=S.logs.map(l=>{const types={nav:'#0ea5e9',com:'#f59e0b',occ:'#ef4444',met:'#10b981',obs:'#64748b'};return`<div style="border-left:4px solid ${types[l.type]};padding-left:12px;margin-bottom:16px"><div style="display:flex;justify-content:space-between;font-size:11px;color:#64748b;margin-bottom:4px"><span style="text-transform:uppercase;font-weight:600">${l.type}</span><span>${fmtDT(new Date(l.time))}</span></div><div style="font-size:14px;color:#1e293b;margin-bottom:4px">${l.text}</div><div style="font-size:11px;color:#94a3b8">Eq: ${l.team} ${l.gps?'| GPS: '+l.gps:''}</div></div>`}).join('')}
+function addWaypoint(){const n=$('wpName').value.trim();if(!n)return;if(!S.currentGps){toast('Aguardando GPS','error');return}S.waypoints.push({id:uuid(),name:n,type:$('wpType').value,note:$('wpNote').value.trim(),lat:S.currentGps.lat,lng:S.currentGps.lng,time:Date.now(),num:S.waypoints.length+1});$('wpName').value='';$('wpNote').value='';save();renderWP();toast('Marcado','success')}
 function delWp(id){if(!confirm('Excluir?'))return;S.waypoints=S.waypoints.filter(w=>w.id!==id);save();renderWP()}
-function renderWP(){if(!S.waypoints.length){$('wpList').innerHTML='<div class="empty">Nenhum waypoint</div>';$('wpCount').textContent='0';return}const tp={check:'✓',start:'▶',end:'■',fuel:'⛽',danger:'⚠',anchor:'⚓'};$('wpList').innerHTML=S.waypoints.map(w=>`<div class="waypoint"><div class="wp-marker">${w.num}</div><div class="wp-body"><div class="wp-name">${tp[w.type]||''} ${w.name}</div><div class="wp-coords">${toGMS(w.lat,true)} / ${toGMS(w.lng,false)}</div>${w.note?`<div class="wp-time">${w.note}</div>`:''}<div class="wp-time">${fmtDT(new Date(w.time))}</div></div><button class="icon-btn danger" onclick="delWp('${w.id}')">🗑</button></div>`).join('');$('wpCount').textContent=S.waypoints.length+' pts'}
-function saveLogistics(){S.resources={fuel:parseInt($('resFuel').value)||0,water:parseInt($('resWater').value)||0,food:parseInt($('resFood').value)||0,engine:parseFloat($('resEngine').value)||0,consumption:parseFloat($('resConsumption').value)||0};save();renderRes();toast('Atualizado','ok')}
-function renderRes(){const r=S.resources;const au=r.consumption>0?(r.fuel/100*1000)/r.consumption:0;$('resourcesList').innerHTML=`<div class="resource"><div class="resource-header"><span class="resource-name">⛽ Combustível</span><span class="resource-value">${r.fuel}%</span></div><div class="resource-bar"><div class="resource-fill ${r.fuel<25?'crit':r.fuel<50?'warn':''}" style="width:${r.fuel}%"></div></div></div><div class="resource"><div class="resource-header"><span class="resource-name">💧 Água</span><span class="resource-value">${r.water}%</span></div><div class="resource-bar"><div class="resource-fill ${r.water<25?'crit':r.water<50?'warn':''}" style="width:${r.water}%"></div></div></div><div class="resource"><div class="resource-header"><span class="resource-name">🍞 Mantimentos</span><span class="resource-value">${r.food} dias</span></div><div class="resource-bar"><div class="resource-fill ${r.food<2?'crit':r.food<4?'warn':''}" style="width:${Math.min(r.food*14,100)}%"></div></div></div><div class="row"><span class="row-label">Horímetro</span><span class="row-value">${r.engine}h</span></div><div class="row"><span class="row-label">Consumo</span><span class="row-value">${r.consumption}L/h</span></div>${au>0?`<div class="row"><span class="row-label">Autonomia</span><span class="row-value">${au.toFixed(1)}h</span></div>`:''}`;$('resFuel').value=r.fuel;$('resWater').value=r.water;$('resFood').value=r.food;$('resEngine').value=r.engine;$('resConsumption').value=r.consumption}
-function addComms(){const m=$('comMsg').value.trim();if(!m){toast('Mensagem','err');return}S.comms.unshift({id:uuid(),freq:$('comFreq').value.trim(),contact:$('comContact').value.trim(),type:$('comType').value,msg:m,time:Date.now()});$('comMsg').value='';$('comFreq').value='';$('comContact').value='';save();renderComms();toast('Registrada','ok')}
-function delCom(id){if(!confirm('Excluir?'))return;S.comms=S.comms.filter(c=>c.id!==id);save();renderComms()}
-function renderComms(){if(!S.comms.length){$('comList').innerHTML='<div class="empty">Nenhuma comunicação</div>';$('comCount').textContent='0';return}const tp={routine:'ROTINA',report:'REPORTE',request:'SOLICITAÇÃO',emergency:'🚨 EMERGÊNCIA'};$('comList').innerHTML=S.comms.map(c=>`<div class="log-entry com"><div class="log-header"><span class="log-type com">${tp[c.type]||'ROTINA'}</span><span class="log-time">${fmtDT(new Date(c.time))}</span></div><div class="log-text"><strong>${c.contact||'?'}</strong> · ${c.freq||'?'}<br>${c.msg}</div>${S.role==='cmd'?`<button class="icon-btn danger" onclick="delCom('${c.id}')" style="float:right">🗑</button>`:''}</div>`).join('');$('comCount').textContent=S.comms.length}
-function saveWeather(){S.weather.unshift({id:uuid(),sky:$('wxSky').value,temp:$('wxTemp').value,vis:$('wxVis').value,wind:$('wxWind').value,windDir:$('wxWindDir').value,sea:$('wxSea').value,note:$('wxNote').value.trim(),time:Date.now()});$('wxNote').value='';save();renderWx();toast('Registrado','ok')}
-function delWx(id){if(!confirm('Excluir?'))return;S.weather=S.weather.filter(w=>w.id!==id);save();renderWx()}
-function renderWx(){if(!S.weather.length){$('wxList').innerHTML='<div class="empty">Nenhum registro</div>';return}$('wxList').innerHTML=S.weather.slice(0,10).map(w=>`<div class="log-entry met"><div class="log-header"><span class="log-type met">🌦️ METEO</span><span class="log-time">${fmtDT(new Date(w.time))}</span></div><div class="log-text" style="font-size:11px"><strong>${w.sky}</strong> · ${w.temp}°C · Vento:${w.windDir} ${w.wind} · Vis:${w.vis} · Rio:${w.sea}${w.note?'<br><em>'+w.note+'</em>':''}</div>${S.role==='cmd'?`<button class="icon-btn danger" onclick="delWx('${w.id}')" style="float:right">🗑</button>`:''}</div>`).join('')}
-const CKP=['Verificar documentação','Conferir tripulantes e passageiros','Testar comunicação VHF/HF','Verificar coletes salva-vidas','Conferir boias e salvatagem','Verificar combustível e autonomia','Checar água e mantimentos','Testar GPS e radar','Verificar luzes de navegação','Conferir equipamentos emergência','Verificar propulsão principal','Testar geradores','Conferir bombas de esgoto','Verificar armamento (se aplicável)','Briefing com tripulação','Definir escala de quartos','Verificar previsão meteorológica','Conferir cartas náuticas','Contato inicial com base','Registrar saída no diário'];
-function renderCK(){if(!S.checklists.pre)S.checklists.pre={};const d=CKP.filter((_,i)=>S.checklists.pre[i]).length;$('checkPreCount').textContent=`${d}/${CKP.length}`;$('checkPreList').innerHTML=CKP.map((item,i)=>{const ck=S.checklists.pre[i];return`<div class="check-item ${ck?'done':''}" onclick="toggleCK(${i})"><div class="check-box">${ck?'✓':''}</div><div class="check-text">${item}</div></div>`}).join('')}
-function toggleCK(i){if(S.role!=='cmd')return;S.checklists.pre[i]=!S.checklists.pre[i];save();renderCK()}
-function resetChecklist(t){if(!confirm('Resetar?'))return;S.checklists[t]={};save();renderCK()}
-function renderSaved(){if(!S.saved.length){$('savedList').innerHTML='<div class="empty">Nenhuma missão salva</div>';$('savedCount').textContent='0';return}$('savedList').innerHTML=S.saved.map(s=>`<div class="list-item"><div class="list-icon">📁</div><div class="list-body"><div class="list-title">${s.name}</div><div class="list-sub">${s.mission?.vessel||'—'} · ${s.crew?.length||0} trip.</div><div class="list-meta">${fmtDT(new Date(s.date))}</div></div><div class="list-actions"><button class="icon-btn" onclick="viewSaved('${s.id}')">👁</button><button class="icon-btn" onclick="loadSaved('${s.id}')">📥</button><button class="icon-btn danger" onclick="delSaved('${s.id}')">🗑</button></div></div>`).join('');$('savedCount').textContent=S.saved.length}
-function viewSaved(id){const s=S.saved.find(x=>x.id===id);if(!s)return;const d=s.missionEnd&&s.missionStart?(s.missionEnd-s.missionStart)/3600000:0;$('savedDetail').innerHTML=`<div style="font-size:12px;line-height:1.8"><div class="row"><span class="row-label">Nome</span><span class="row-value">${s.name}</span></div><div class="row"><span class="row-label">Embarcação</span><span class="row-value">${s.mission?.vessel||'—'}</span></div><div class="row"><span class="row-label">Duração</span><span class="row-value">${d.toFixed(1)}h</span></div><div class="row"><span class="row-label">Tripulantes</span><span class="row-value">${s.crew?.length||0}</span></div><div class="row"><span class="row-label">Cargas</span><span class="row-value">${s.cargo?.length||0}</span></div></div><div class="modal-actions"><button class="btn" onclick="closeModal('modalSaved')">Fechar</button><button class="btn btn-primary" onclick="loadSaved('${s.id}');closeModal('modalSaved')">Carregar</button></div>`;$('modalSaved').classList.add('active')}
-function loadSaved(id){const s=S.saved.find(x=>x.id===id);if(!s)return;if(S.missionStart){toast('Finalize a missão','err');return}if(!confirm('Carregar?'))return;Object.assign(S,{mission:s.mission||null,teams:s.teams||[],crew:s.crew||[],passengers:s.passengers||[],logs:s.logs||[],waypoints:s.waypoints||[],comms:s.comms||[],weather:s.weather||[],cargo:s.cargo||[],resources:s.resources||{fuel:100,water:100,food:7,engine:0,consumption:0},shifts:s.shifts||{dayHours:16,nightHours:8,dayStart:'06:00',nightStart:'22:00'},teamOrder:s.teamOrder||[]});save();renderAll();toast('Carregada','ok')}
-function delSaved(id){if(!confirm('Excluir?'))return;S.saved=S.saved.filter(s=>s.id!==id);save();renderSaved()}
-function renderDash(){$('heroTitle').textContent=S.mission?.name||'SEM MISSÃO ATIVA';$('heroVessel').textContent=S.mission?.vessel||'Configure uma missão';$('missionStatus').textContent=S.missionStart?(S.missionPaused?'PAUSADA':'EM EXECUÇÃO'):'PARADA';$('btnPause').style.display=S.missionStart&&!S.missionPaused?'flex':'none';$('btnResume').style.display=S.missionPaused?'flex':'none';$('btnFinish').style.display=S.missionStart?'flex':'none';$('statTeams').textContent=S.teams.length;$('statCrew').textContent=S.crew.length;$('statPax').textContent=S.passengers.length;$('statCargo').textContent=S.cargo?S.cargo.length:0}
-function generateReport(){if(!S.mission&&!S.logs.length&&!S.cargo?.length){toast('Sem dados','err');return}const html=buildReport();const isA=/android/i.test(navigator.userAgent);const isW=navigator.userAgent.includes('wv')||(navigator.userAgent.includes('Mobile')&&!navigator.userAgent.includes('Chrome'));if(isW||isA){try{const b=new Blob([html],{type:'text/html;charset=utf-8'});const u=URL.createObjectURL(b);const a=document.createElement('a');a.href=u;a.download=`RioOps_${Date.now()}.html`;a.style.display='none';document.body.appendChild(a);a.click();setTimeout(()=>{document.body.removeChild(a);URL.revokeObjectURL(u)},100);toast('Relatório baixado','ok')}catch(e){try{window.location.href='data:text/html;charset=utf-8,'+encodeURIComponent(html)}catch(e2){toast('Erro: '+e.message,'err')}}}else{const w=window.open('','_blank');if(w){w.document.write(html);w.document.close()}else{const b=new Blob([html],{type:'text/html'});const u=URL.createObjectURL(b);const a=document.createElement('a');a.href=u;a.download=`RioOps_${Date.now()}.html`;a.click();URL.revokeObjectURL(u)}}}
-function buildReport(){
-const m=S.mission||{};const now=new Date();
-let cargoSection='';
-if(S.cargo&&S.cargo.length){
-cargoSection=`<div class="section-card"><div class="section-header"><div class="icon-box">📦</div><div><h2>Cargas Transportadas</h2><span class="count-badge">${S.cargo.length} itens</span></div></div>
-<div class="cards-grid">${S.cargo.map(c=>{
-let photosHtml='';
-if(c.photos&&c.photos.length){photosHtml='<div class="photo-gallery">'+c.photos.slice(0,3).map(p=>`<img src="${p.data}" alt="${p.name}" title="${p.name}">`).join('')+(c.photos.length>3?`<div class="more-photos">+${c.photos.length-3}</div>`:'')+'</div>'}
-return`<div class="info-card"><div class="card-header"><strong>Guia Nº ${c.guia}</strong><span class="date-tag">${fmtDT(new Date(c.time))}</span></div><div class="card-body"><p class="spec-text">${c.spec}</p><div class="details-grid"><span>📊 ${c.qtd||'—'}</span><span>📍 ${c.origem||'—'} → ${c.destino||'—'}</span><span>📤 ${c.emb||'—'}</span><span>📥 ${c.rec||'—'}</span></div>${c.obs?`<p class="obs-text">💬 ${c.obs}</p>`:''}${photosHtml}</div></div>`}).join('')}</div></div>`}
-let crewSection='';
-if(S.crew.length){
-crewSection=`<div class="section-card"><div class="section-header"><div class="icon-box">👥</div><div><h2>Tripulação</h2><span class="count-badge">${S.crew.length} membros</span></div></div>
-<div class="table-container"><table><thead><tr><th>Posto</th><th>Nome de Guerra</th><th>Função</th><th>Equipe</th><th>Pernoite</th></tr></thead><tbody>${S.crew.map(c=>{const t=S.teams.find(x=>x.id===c.teamId);return`<tr><td><span class="rank-badge">${c.rank||'—'}</span></td><td><strong>${c.war||c.name}</strong></td><td>${c.role||'—'}</td><td>${t?`<span class="team-dot" style="background:${t.color}"></span> ${t.name}`:'—'}</td><td>${c.cabin||'—'}</td></tr>`}).join('')}</tbody></table></div></div>`}
-let paxSection='';
-if(S.passengers&&S.passengers.length){
-paxSection=`<div class="section-card"><div class="section-header"><div class="icon-box">🧳</div><div><h2>Passageiros</h2><span class="count-badge">${S.passengers.length} pessoas</span></div></div>
-<div class="table-container"><table><thead><tr><th>Posto</th><th>Nome</th><th>OM</th><th>CPF</th><th>IDT</th><th>Pernoite</th></tr></thead><tbody>${S.passengers.map(p=>`<tr><td><span class="rank-badge">${p.rank||'—'}</span></td><td><strong>${p.war||p.name}</strong></td><td>${p.om||'—'}</td><td class="mono">${p.cpf||'—'}</td><td class="mono">${p.idt||'—'}</td><td>${p.cabin||'—'}</td></tr>`).join('')}</tbody></table></div></div>`}
-let logSection='';
-if(S.logs.length){
-const tc={nav:'#0ea5e9',com:'#f59e0b',occ:'#ef4444',met:'#10b981',obs:'#6b7280'};
-const tn={nav:'Navegação',com:'Comunicação',occ:'Ocorrência',met:'Meteorologia',obs:'Observação'};
-logSection=`<div class="section-card"><div class="section-header"><div class="icon-box">📖</div><div><h2>Diário de Bordo</h2><span class="count-badge">${S.logs.length} registros</span></div></div>
-<div class="timeline">${S.logs.slice().reverse().slice(0,20).map(l=>{const color=tc[l.type]||'#6b7280';return`<div class="timeline-item" style="border-left-color:${color}"><div class="timeline-header"><span class="type-badge" style="background:${color}20;color:${color}">${tn[l.type]||l.type}</span><span class="time-stamp">${fmtDT(new Date(l.time))}</span></div><p class="log-content">${l.text}</p><div class="log-meta">👥 ${l.team} ${l.gps?'· 📍 '+l.gps:''}</div></div>`}).join('')}</div></div>`}
-let wpSection='';
-if(S.waypoints&&S.waypoints.length){
-wpSection=`<div class="section-card"><div class="section-header"><div class="icon-box">🧭</div><div><h2>Track de Navegação</h2><span class="count-badge">${S.waypoints.length} pontos</span></div></div>
-<div class="table-container"><table><thead><tr><th>#</th><th>Nome</th><th>Coordenadas (GMS)</th><th>Horário</th></tr></thead><tbody>${S.waypoints.map(w=>`<tr><td class="center"><strong>${w.num}</strong></td><td><strong>${w.name}</strong>${w.note?`<br><small>${w.note}</small>`:''}</td><td class="mono">${toGMS(w.lat,true)} / ${toGMS(w.lng,false)}</td><td class="mono">${fmtDT(new Date(w.time))}</td></tr>`).join('')}</tbody></table></div></div>`}
-let statsSection=`<div class="stats-grid">
-<div class="stat-card"><div class="stat-icon">⏱</div><div class="stat-info"><span class="stat-label">Duração da Missão</span><span class="stat-value">${S.missionStart&&S.mission.actualStart?(((S.mission.actualEnd||Date.now())-S.mission.actualStart)/3600000).toFixed(1)+' h':'—'}</span></div></div>
-<div class="stat-card"><div class="stat-icon">👥</div><div class="stat-info"><span class="stat-label">Tripulantes</span><span class="stat-value">${S.crew.length}</span></div></div>
-<div class="stat-card"><div class="stat-icon">🧳</div><div class="stat-info"><span class="stat-label">Passageiros</span><span class="stat-value">${S.passengers.length}</span></div></div>
-<div class="stat-card"><div class="stat-icon">📦</div><div class="stat-info"><span class="stat-label">Cargas</span><span class="stat-value">${S.cargo?S.cargo.length:0}</span></div></div>
-</div>`;
-return`<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Relatório Oficial - ${m.name||'8º BEC'}</title>
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Inter',sans-serif;background:#f8fafc;color:#1e293b;line-height:1.6;padding:20px}
-.container{max-width:1000px;margin:0 auto;background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 10px 40px rgba(0,0,0,0.1)}
-.cover{background:linear-gradient(135deg,#059669 0%,#10b981 50%,#34d399 100%);color:#fff;padding:80px 60px;text-align:center;position:relative;overflow:hidden}
-.cover::before{content:'';position:absolute;top:-50%;right:-20%;width:600px;height:600px;background:rgba(255,255,255,0.1);border-radius:50%}
-.cover::after{content:'';position:absolute;bottom:-30%;left:-10%;width:400px;height:400px;background:rgba(255,255,255,0.08);border-radius:50%}
-.cover-emblem{font-size:80px;margin-bottom:20px;position:relative;z-index:1}
-.cover-unit{font-size:48px;font-weight:700;letter-spacing:6px;margin-bottom:10px;position:relative;z-index:1}
-.cover-motto{font-size:20px;font-weight:500;letter-spacing:4px;opacity:0.9;margin-bottom:30px;position:relative;z-index:1}
-.cover-divider{width:100px;height:4px;background:#fff;margin:0 auto 30px;position:relative;z-index:1}
-.cover-title{font-size:28px;font-weight:600;margin-bottom:10px;position:relative;z-index:1}
-.cover-subtitle{font-size:16px;opacity:0.9;position:relative;z-index:1}
-.content{padding:40px 60px}
-.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;margin-bottom:40px}
-.stat-card{background:#f8fafc;border:2px solid #e2e8f0;border-radius:12px;padding:20px;display:flex;align-items:center;gap:16px;transition:all 0.2s}
-.stat-card:hover{border-color:#10b981;transform:translateY(-2px);box-shadow:0 4px 12px rgba(16,185,129,0.1)}
-.stat-icon{font-size:32px;width:60px;height:60px;background:#fff;border-radius:12px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,0.05)}
-.stat-info{flex:1}
-.stat-label{font-size:12px;color:#64748b;text-transform:uppercase;letter-spacing:1px;font-weight:600;margin-bottom:4px}
-.stat-value{font-size:24px;font-weight:700;color:#059669}
-.section-card{background:#fff;border:2px solid #e2e8f0;border-radius:12px;padding:30px;margin-bottom:30px;transition:all 0.2s}
-.section-card:hover{border-color:#10b981;box-shadow:0 4px 16px rgba(16,185,129,0.08)}
-.section-header{display:flex;align-items:center;gap:16px;margin-bottom:24px;padding-bottom:16px;border-bottom:2px solid #f1f5f9}
-.icon-box{width:50px;height:50px;background:linear-gradient(135deg,#059669,#10b981);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:24px;color:#fff}
-.section-header h2{font-size:20px;font-weight:700;color:#1e293b;margin-bottom:2px}
-.count-badge{font-size:12px;background:#ecfdf5;color:#059669;padding:4px 12px;border-radius:20px;font-weight:600}
-.cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
-.info-card{background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:20px;transition:all 0.2s}
-.info-card:hover{border-color:#10b981;transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,0.05)}
-.card-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
-.card-header strong{font-size:16px;color:#059669}
-.date-tag{font-size:11px;background:#fff;padding:4px 10px;border-radius:20px;color:#64748b;font-family:'JetBrains Mono',monospace}
-.spec-text{font-size:14px;color:#334155;margin-bottom:12px;line-height:1.5}
-.details-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:12px;color:#64748b;margin-bottom:12px}
-.obs-text{font-size:12px;color:#64748b;font-style:italic;margin-bottom:12px;padding:10px;background:#fff;border-radius:6px;border-left:3px solid #10b981}
-.photo-gallery{display:flex;gap:8px;margin-top:12px}
-.photo-gallery img{width:60px;height:60px;object-fit:cover;border-radius:6px;border:2px solid #e2e8f0}
-.more-photos{width:60px;height:60px;background:#f1f5f9;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:#64748b}
-.table-container{overflow-x:auto}
-table{width:100%;border-collapse:collapse;font-size:13px}
-th{background:#f8fafc;color:#475569;padding:12px 16px;text-align:left;font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:1px;border-bottom:2px solid #e2e8f0}
-td{padding:12px 16px;border-bottom:1px solid #f1f5f9;color:#334155}
-tr:hover{background:#f8fafc}
-.rank-badge{background:#ecfdf5;color:#059669;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600}
-.team-dot{width:10px;height:10px;border-radius:50%;display:inline-block;margin-right:6px}
-.mono{font-family:'JetBrains Mono',monospace;font-size:11px;color:#64748b}
-.center{text-align:center}
-.timeline{position:relative;padding-left:30px}
-.timeline::before{content:'';position:absolute;left:10px;top:0;bottom:0;width:2px;background:#e2e8f0}
-.timeline-item{position:relative;margin-bottom:20px;padding-left:20px}
-.timeline-item::before{content:'';position:absolute;left:-24px;top:6px;width:12px;height:12px;border-radius:50%;background:#fff;border:3px solid #10b981}
-.timeline-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
-.type-badge{font-size:11px;padding:4px 12px;border-radius:20px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px}
-.time-stamp{font-size:11px;color:#64748b;font-family:'JetBrains Mono',monospace}
-.log-content{font-size:14px;color:#334155;margin-bottom:6px;line-height:1.5}
-.log-meta{font-size:11px;color:#64748b;font-family:'JetBrains Mono',monospace}
-.footer{background:#f8fafc;padding:40px 60px;text-align:center;border-top:2px solid #e2e8f0}
-.footer-emblem{font-size:40px;margin-bottom:12px}
-.footer-text{font-size:16px;font-weight:700;color:#059669;letter-spacing:2px;margin-bottom:6px}
-.footer-sub{font-size:12px;color:#64748b;font-family:'JetBrains Mono',monospace}
-.print-btn{position:fixed;top:20px;right:20px;padding:14px 28px;background:linear-gradient(135deg,#059669,#10b981);color:#fff;border:none;border-radius:10px;font-family:'Inter',sans-serif;font-size:14px;font-weight:600;cursor:pointer;box-shadow:0 4px 16px rgba(5,150,105,0.3);transition:all 0.2s;z-index:1000}
-.print-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(5,150,105,0.4)}
-@media print{body{padding:0;background:#fff}.print-btn{display:none}.container{box-shadow:none;border-radius:0}.cover{page-break-after:always}.section-card{page-break-inside:avoid;break-inside:avoid}}
-</style></head><body>
-<button class="print-btn" onclick="window.print()">🖨️ Imprimir / PDF</button>
-<div class="container">
-<div class="cover">
-<div class="cover-emblem">⚓</div>
-<div class="cover-unit">8º BEC</div>
-<div class="cover-motto">« NAVEGAR É O NOSSO COMBATE! »</div>
-<div class="cover-divider"></div>
-<div class="cover-title">${m.name||'RELATÓRIO OPERACIONAL'}</div>
-<div class="cover-subtitle">Missão Fluvial · Gerado em ${fmtDT(now)}</div>
-</div>
-<div class="content">
-${statsSection}
-${cargoSection}
-${crewSection}
-${paxSection}
-${wpSection}
-${logSection}
-</div>
-<div class="footer">
-<div class="footer-emblem">⚓</div>
-<div class="footer-text">8º BEC · NAVEGAR É O NOSSO COMBATE!</div>
-<div class="footer-sub">RioOps PRO 2.0 · Documento gerado automaticamente · ${fmtDT(now)}</div>
-</div>
-</div>
-</body></html>`}
-function closeModal(id){$(id).classList.remove('active')}
-document.querySelectorAll('.modal').forEach(m=>{m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('active')})});
-async function tryWL(){try{if('wakeLock' in navigator)await navigator.wakeLock.request('screen')}catch(e){}}
-function renderAll(){renderDash();renderSch();renderTeams();renderTS();renderTO();renderCrew();renderPax();renderCargo();renderCargoPhotos();renderLogs();renderWP();renderRes();renderComms();renderWx();renderCK();renderSaved();if(S.mission){$('mName').value=S.mission.name||'';$('mVessel').value=S.mission.vessel||'';$('mArea').value=S.mission.area||'';$('mCode').value=S.mission.code||'';$('mObjective').value=S.mission.objective||''}$('dayHours').value=S.shifts.dayHours;$('nightHours').value=S.shifts.nightHours;$('dayStart').value=S.shifts.dayStart;$('nightStart').value=S.shifts.nightStart}
-window.onerror=function(m,u,l){console.error(m,u,l);const e=document.createElement('div');e.style.cssText='position:fixed;top:60px;left:8px;right:8px;background:#b04848;color:#fff;padding:10px;border-radius:8px;font-size:11px;z-index:9999';e.textContent='⚠ '+m;document.body.appendChild(e);setTimeout(()=>e.remove(),6000)};
+function renderWP(){$('wpList').innerHTML=S.waypoints.map(w=>`<tr><td>${w.num}</td><td>${w.name}</td><td style="font-family:'JetBrains Mono',monospace;font-size:11px">${toGMS(w.lat,true)} / ${toGMS(w.lng,false)}</td><td style="font-size:11px">${fmtTime(new Date(w.time))}</td><td><button class="btn btn-sm btn-danger" onclick="delWp('${w.id}')">Remover</button></td></tr>`).join('')}
+function saveLogistics(){S.resources={fuel:parseInt($('resFuel').value)||0,water:parseInt($('resWater').value)||0,food:parseInt($('resFood').value)||0,engine:parseFloat($('resEngine').value)||0,consumption:parseFloat($('resConsumption').value)||0};save();renderRes();toast('Atualizado','success')}
+function renderRes(){const r=S.resources;const au=r.consumption>0?(r.fuel/100*1000)/r.consumption:0;$('resourcesList').innerHTML=`<div class="grid-2"><div><div style="font-size:12px;color:#64748b;margin-bottom:4px">Combustível</div><div style="height:8px;background:#e2e8f0;border-radius:4px;overflow:hidden"><div style="height:100%;width:${r.fuel}%;background:${r.fuel<25?'#ef4444':r.fuel<50?'#f59e0b':'#10b981'}"></div></div><div style="font-size:11px;text-align:right;margin-top:2px">${r.fuel}%</div></div><div><div style="font-size:12px;color:#64748b;margin-bottom:4px">Água</div><div style="height:8px;background:#e2e8f0;border-radius:4px;overflow:hidden"><div style="height:100%;width:${r.water}%;background:${r.water<25?'#ef4444':r.water<50?'#f59e0b':'#10b981'}"></div></div><div style="font-size:11px;text-align:right;margin-top:2px">${r.water}%</div></div></div><div style="margin-top:16px;font-size:13px;color:#1e293b"><strong>Autonomia Estimada:</strong> ${au>0?au.toFixed(1)+' h':'Calcular consumo'}</div>`;$('resFuel').value=r.fuel;$('resWater').value=r.water;$('resFood').value=r.food;$('resEngine').value=r.engine;$('resConsumption').value=r.consumption}
+function renderDash(){$('missionStatus').textContent=S.missionStart?(S.missionPaused?'PAUSADA':'EM EXECUÇÃO'):'PARADA';$('btnPause').style.display=S.missionStart&&!S.missionPaused?'inline-flex':'none';$('btnResume').style.display=S.missionPaused?'inline-flex':'none';$('btnFinish').style.display=S.missionStart?'inline-flex':'none';$('statCrew').textContent=S.crew.length;$('statPax').textContent=S.passengers.length;$('statCargo').textContent=S.cargo?S.cargo.length:0}
+function renderAll(){renderDash();renderTeams();renderTS();renderCrew();renderPax();renderCargo();renderLogs();renderWP();renderRes();if(S.mission){$('mName').value=S.mission.name||'';$('mVessel').value=S.mission.vessel||'';$('mArea').value=S.mission.area||'';$('mCode').value=S.mission.code||'';$('mObjective').value=S.mission.objective||''}$('dayStart').value=S.shifts.dayStart;$('nightStart').value=S.shifts.nightStart;$('dayHours').value=S.shifts.dayHours;$('nightHours').value=S.shifts.nightHours}
+function generateReport(){if(!S.mission&&!S.logs.length&&!S.cargo?.length){toast('Sem dados','error');return}const m=S.mission||{};const now=new Date();let cargoHtml=S.cargo&&S.cargo.length?S.cargo.map(c=>`<div style="margin-bottom:20px;padding:15px;border:1px solid #e2e8f0;border-radius:6px"><div style="display:flex;justify-content:space-between;margin-bottom:10px"><strong style="font-size:16px;color:#0f172a">Guia Nº ${c.guia}</strong><span style="font-size:12px;color:#64748b">${fmtDT(new Date(c.time))}</span></div><p style="margin-bottom:10px;color:#334155">${c.spec}</p><div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;font-size:12px;color:#64748b;margin-bottom:10px"><span>Qtd: ${c.qtd||'—'}</span><span>Origem: ${c.origem||'—'}</span><span>Destino: ${c.destino||'—'}</span><span>Emb: ${c.emb||'—'}</span><span>Rec: ${c.rec||'—'}</span></div>${c.obs?`<p style="font-size:12px;color:#64748b;font-style:italic">Obs: ${c.obs}</p>`:''}${c.photos&&c.photos.length?`<div style="display:flex;gap:5px;margin-top:10px">${c.photos.slice(0,5).map(p=>`<img src="${p.data}" style="width:60px;height:60px;object-fit:cover;border:1px solid #e2e8f0">`).join('')}</div>`:''}</div>`).join(''):'';let crewHtml=S.crew.length?`<table style="width:100%;border-collapse:collapse;font-size:12px;margin-top:10px"><thead><tr style="background:#f8fafc"><th style="padding:8px;text-align:left;border-bottom:1px solid #e2e8f0">Posto</th><th style="padding:8px;text-align:left;border-bottom:1px solid #e2e8f0">Guerra</th><th style="padding:8px;text-align:left;border-bottom:1px solid #e2e8f0">Função</th><th style="padding:8px;text-align:left;border-bottom:1px solid #e2e8f0">Equipe</th><th style="padding:8px;text-align:left;border-bottom:1px solid #e2e8f0">Pernoite</th></tr></thead><tbody>${S.crew.map(c=>{const t=S.teams.find(x=>x.id===c.teamId);return`<tr><td style="padding:8px;border-bottom:1px solid #e2e8f0">${c.rank||'—'}</td><td style="padding:8px;border-bottom:1px solid #e2e8f0">${c.war||c.name}</td><td style="padding:8px;border-bottom:1px solid #e2e8f0">${c.role||'—'}</td><td style="padding:8px;border-bottom:1px solid #e2e8f0">${t?t.name:'—'}</td><td style="padding:8px;border-bottom:1px solid #e2e8f0">${c.cabin||'—'}</td></tr>`}).join('')}</tbody></table>`:'';let logHtml=S.logs.length?S.logs.slice().reverse().map(l=>`<div style="margin-bottom:15px;padding-left:15px;border-left:3px solid #0ea5e9"><div style="font-size:11px;color:#64748b;margin-bottom:4px">${fmtDT(new Date(l.time))} | ${l.type.toUpperCase()} | Eq: ${l.team}</div><div style="font-size:13px;color:#1e293b">${l.text}</div></div>`).join(''):'';const html=`<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><title>Relatório Operacional - ${m.name||'Rio Ops'}</title><style>@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');body{font-family:'Inter',sans-serif;color:#1e293b;line-height:1.5;padding:40px;max-width:800px;margin:0 auto}h1{font-size:24px;font-weight:700;color:#0f172a;margin-bottom:4px}h2{font-size:18px;font-weight:600;color:#0f172a;margin-top:30px;margin-bottom:15px;border-bottom:2px solid #0ea5e9;padding-bottom:8px}.header-info{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:30px;padding:20px;background:#f8fafc;border-radius:8px}.info-item{font-size:13px}.info-label{display:block;font-size:11px;text-transform:uppercase;color:#64748b;font-weight:600;margin-bottom:2px}.info-value{font-size:14px;font-weight:500}.footer{margin-top:40px;padding-top:20px;border-top:1px solid #e2e8f0;font-size:11px;color:#64748b;text-align:center}@media print{body{padding:20px}}</style></head><body><div class="header-info"><div class="info-item"><span class="info-label">Operação</span><span class="info-value">${m.name||'—'}</span></div><div class="info-item"><span class="info-label">Embarcação</span><span class="info-value">${m.vessel||'—'}</span></div><div class="info-item"><span class="info-label">Área</span><span class="info-value">${m.area||'—'}</span></div><div class="info-item"><span class="info-label">Data do Relatório</span><span class="info-value">${fmtDT(now)}</span></div></div><h1>RELATÓRIO OPERACIONAL</h1><h2>Manifesto de Cargas</h2>${cargoHtml||'<p style="color:#64748b">Nenhuma carga registrada.</p>'}<h2>Tripulação</h2>${crewHtml||'<p style="color:#64748b">Nenhuma tripulação registrada.</p>'}<h2>Diário de Ocorrências</h2>${logHtml||'<p style="color:#64748b">Nenhum registro no diário.</p>'}<div class="footer"><p>RIO OPS · Corporate River Operations System</p><p>Documento gerado automaticamente · Confidencial</p></div></body></html>`;const isA=/android/i.test(navigator.userAgent);const isW=navigator.userAgent.includes('wv')||(navigator.userAgent.includes('Mobile')&&!navigator.userAgent.includes('Chrome'));if(isW||isA){try{const b=new Blob([html],{type:'text/html;charset=utf-8'});const u=URL.createObjectURL(b);const a=document.createElement('a');a.href=u;a.download=`RioOps_Report_${Date.now()}.html`;a.style.display='none';document.body.appendChild(a);a.click();setTimeout(()=>{document.body.removeChild(a);URL.revokeObjectURL(u)},100);toast('Relatório baixado','success')}catch(e){toast('Erro ao gerar','error')}}else{const w=window.open('','_blank');if(w){w.document.write(html);w.document.close()}else{const b=new Blob([html],{type:'text/html'});const u=URL.createObjectURL(b);const a=document.createElement('a');a.href=u;a.download=`RioOps_Report_${Date.now()}.html`;a.click();URL.revokeObjectURL(u)}}}
 load();renderAll();if(S.role)enterApp();
-if('serviceWorker' in navigator&&!location.hostname.includes('claudeusercontent')&&location.protocol==='https:')window.addEventListener('load',()=>{navigator.serviceWorker.register('./sw.js').catch(()=>{})});
 </script>
 </body>
 </html>
+</content>
+</write_to_file>
