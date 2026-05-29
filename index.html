@@ -533,66 +533,66 @@ function renderDash(){$('heroTitle').textContent=S.mission?.name||'SEM MISSÃO A
 function generateReport(){if(!S.mission&&!S.logs.length&&!S.cargo?.length){toast('Sem dados','err');return}const html=buildReport();const isA=/android/i.test(navigator.userAgent);const isW=navigator.userAgent.includes('wv')||(navigator.userAgent.includes('Mobile')&&!navigator.userAgent.includes('Chrome'));if(isW||isA){try{const b=new Blob([html],{type:'text/html;charset=utf-8'});const u=URL.createObjectURL(b);const a=document.createElement('a');a.href=u;a.download=`RioOps_${Date.now()}.html`;a.style.display='none';document.body.appendChild(a);a.click();setTimeout(()=>{document.body.removeChild(a);URL.revokeObjectURL(u)},100);toast('Relatório baixado','ok')}catch(e){try{window.location.href='data:text/html;charset=utf-8,'+encodeURIComponent(html)}catch(e2){toast('Erro: '+e.message,'err')}}}else{const w=window.open('','_blank');if(w){w.document.write(html);w.document.close()}else{const b=new Blob([html],{type:'text/html'});const u=URL.createObjectURL(b);const a=document.createElement('a');a.href=u;a.download=`RioOps_${Date.now()}.html`;a.click();URL.revokeObjectURL(u)}}}
 function buildReport(){
 const m=S.mission||{};const now=new Date();
-// Paleta Oficial: Fundo Branco + Destaque Turquesa
-const C={bg:'#ffffff',card:'#f8fffe',accent:'#00bfa5',accentLight:'#e0f7f4',text:'#1a1a1a',dim:'#666666',border:'#e0e0e0',headerBg:'#004d40'};
+// Paleta Original Militar: Verde Oliva Escuro + Dourado
+const C={bg:'#0a1410',bg2:'#0f1d18',card:'#1a3329',accent:'#c9a961',accentDim:'#8a7340',text:'#e8e4d8',dim:'#a8a090',border:'#2d4a3c',headerBg:'#142822'};
 
 let cargoSection='';
 if(S.cargo&&S.cargo.length){
 cargoSection=`<div class="section"><div class="section-title">📦 CARGAS TRANSPORTADAS (${S.cargo.length})</div>${S.cargo.map(c=>{
 let photosHtml='';
-if(c.photos&&c.photos.length){photosHtml='<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px">'+c.photos.map(p=>`<div style="text-align:center"><img src="${p.data}" style="width:100%;border-radius:6px;border:2px solid ${C.accent};box-shadow:0 2px 6px rgba(0,0,0,0.1)"><div style="font-size:9px;color:${C.headerBg};margin-top:4px;font-weight:700;font-family:'JetBrains Mono',monospace">${p.name}</div></div>`).join('')+'</div>'}
+if(c.photos&&c.photos.length){photosHtml='<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px">'+c.photos.map(p=>`<div style="text-align:center"><img src="${p.data}" style="width:100%;border-radius:6px;border:2px solid ${C.accent};box-shadow:0 2px 8px rgba(0,0,0,0.3)"><div style="font-size:9px;color:${C.accent};margin-top:4px;font-weight:600;font-family:'JetBrains Mono',monospace">${p.name}</div></div>`).join('')+'</div>'}
 return`<div style="background:${C.card};border-left:5px solid ${C.accent};padding:16px;border-radius:6px;margin-bottom:14px;border:1px solid ${C.border}">
-<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;padding-bottom:8px;border-bottom:2px dashed ${C.accent}">
-<strong style="color:${C.headerBg};font-family:'Oswald',sans-serif;font-size:16px;letter-spacing:2px">📦 GUIA Nº ${c.guia}</strong>
-<span style="font-size:10px;color:${C.dim};font-family:'JetBrains Mono',monospace;background:${C.accentLight};padding:3px 8px;border-radius:4px">${fmtDT(new Date(c.time))}</span>
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;padding-bottom:8px;border-bottom:2px dashed ${C.accentDim}">
+<strong style="color:${C.accent};font-family:'Oswald',sans-serif;font-size:16px;letter-spacing:2px">📦 GUIA Nº ${c.guia}</strong>
+<span style="font-size:10px;color:${C.dim};font-family:'JetBrains Mono',monospace;background:${C.bg};padding:3px 8px;border-radius:4px">${fmtDT(new Date(c.time))}</span>
 </div>
-<div style="margin-bottom:8px;font-size:13px;color:${C.text};line-height:1.5"><strong style="color:${C.accent}">Especificação:</strong> ${c.spec}</div>
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:11px;color:${C.dim};margin-bottom:8px;background:#fff;padding:10px;border-radius:4px;border:1px solid ${C.border}">
+<div style="margin-bottom:8px;font-size:13px;color:${C.text};line-height:1.5"><strong style="color:${C.accentDim}">Especificação:</strong> ${c.spec}</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:11px;color:${C.dim};margin-bottom:8px;background:${C.bg};padding:10px;border-radius:4px;border:1px solid ${C.border}">
 <span>📊 <strong>Qtd:</strong> ${c.qtd||'—'}</span><span>📍 <strong>Origem:</strong> ${c.origem||'—'}</span>
 <span>🎯 <strong>Destino:</strong> ${c.destino||'—'}</span><span>📤 <strong>Embarque:</strong> ${c.emb||'—'}</span>
 <span>📥 <strong>Recebimento:</strong> ${c.rec||'—'}</span>
 </div>
-${c.obs?`<div style="font-size:11px;color:${C.dim};margin-bottom:8px;padding:8px;background:#fff;border-radius:4px;border-left:3px solid ${C.accent}">💬 <em>${c.obs}</em></div>`:''}
+${c.obs?`<div style="font-size:11px;color:${C.dim};margin-bottom:8px;padding:8px;background:${C.bg};border-radius:4px;border-left:3px solid ${C.accent}">💬 <em>${c.obs}</em></div>`:''}
 ${photosHtml}</div>`}).join('')}</div>`}
 
 let crewSection='';
 if(S.crew.length){
 crewSection=`<div class="section"><div class="section-title">👥 TRIPULAÇÃO (${S.crew.length})</div>
 <table><thead><tr><th>POSTO/GRAD</th><th>NOME DE GUERRA</th><th>FUNÇÃO</th><th>EQUIPE</th><th>PERNOITE</th></tr></thead>
-<tbody>${S.crew.map(c=>{const t=S.teams.find(x=>x.id===c.teamId);return`<tr><td style="font-weight:700;color:${C.headerBg}">${c.rank||'—'}</td><td style="color:${C.text}"><strong>${c.war||c.name}</strong></td><td style="color:${C.dim}">${c.role||'—'}</td><td style="color:${C.dim}">${t?t.name:'—'}</td><td style="color:${C.dim}">${c.cabin||'—'}</td></tr>`}).join('')}</tbody></table></div>`}
+<tbody>${S.crew.map(c=>{const t=S.teams.find(x=>x.id===c.teamId);return`<tr><td style="font-weight:600;color:${C.accent}">${c.rank||'—'}</td><td style="color:${C.text}"><strong>${c.war||c.name}</strong></td><td style="color:${C.dim}">${c.role||'—'}</td><td style="color:${C.dim}">${t?t.name:'—'}</td><td style="color:${C.dim}">${c.cabin||'—'}</td></tr>`}).join('')}</tbody></table></div>`}
 
 let paxSection='';
 if(S.passengers&&S.passengers.length){
 paxSection=`<div class="section"><div class="section-title">🧳 PASSAGEIROS (${S.passengers.length})</div>
 <table><thead><tr><th>POSTO/GRAD</th><th>NOME</th><th>OM</th><th>CPF</th><th>IDT</th><th>PERNOITE</th></tr></thead>
-<tbody>${S.passengers.map(p=>`<tr><td style="font-weight:700;color:${C.headerBg}">${p.rank||'—'}</td><td style="color:${C.text}"><strong>${p.war||p.name}</strong></td><td style="color:${C.dim}">${p.om||'—'}</td><td style="font-family:'JetBrains Mono',monospace;font-size:10px;color:${C.dim}">${p.cpf||'—'}</td><td style="font-family:'JetBrains Mono',monospace;font-size:10px;color:${C.dim}">${p.idt||'—'}</td><td style="color:${C.dim}">${p.cabin||'—'}</td></tr>`).join('')}</tbody></table></div>`}
+<tbody>${S.passengers.map(p=>`<tr><td style="font-weight:600;color:${C.accent}">${p.rank||'—'}</td><td style="color:${C.text}"><strong>${p.war||p.name}</strong></td><td style="color:${C.dim}">${p.om||'—'}</td><td style="font-family:'JetBrains Mono',monospace;font-size:10px;color:${C.dim}">${p.cpf||'—'}</td><td style="font-family:'JetBrains Mono',monospace;font-size:10px;color:${C.dim}">${p.idt||'—'}</td><td style="color:${C.dim}">${p.cabin||'—'}</td></tr>`).join('')}</tbody></table></div>`}
 
 let logSection='';
 if(S.logs.length){
-const typeColors={nav:'#00838f',com:'#00bfa5',occ:'#c62828',met:'#2e7d32',obs:'#666666'};
+const typeColors={nav:'#4a7a8f',com:'#c9a961',occ:'#b04848',met:'#4a8f5c',obs:'#6b6355'};
 const typeNames={nav:'NAVEGAÇÃO',com:'COMUNICAÇÃO',occ:'OCORRÊNCIA',met:'METEOROLOGIA',obs:'OBSERVAÇÃO'};
 logSection=`<div class="section"><div class="section-title">📖 DIÁRIO DE BORDO (${S.logs.length} REGISTROS)</div>
-${S.logs.slice().reverse().map(l=>{const color=typeColors[l.type]||C.dim;return`<div style="padding:14px 16px;background:#fff;border-left:5px solid ${color};border-radius:6px;margin-bottom:10px;border:1px solid ${C.border}">
+${S.logs.slice().reverse().map(l=>{const color=typeColors[l.type]||C.dim;return`<div style="padding:14px 16px;background:${C.card};border-left:5px solid ${color};border-radius:6px;margin-bottom:10px;border:1px solid ${C.border}">
 <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-<span style="font-weight:700;letter-spacing:2px;text-transform:uppercase;font-size:10px;color:${color};background:${color}15;padding:3px 10px;border-radius:4px">${typeNames[l.type]||l.type}</span>
-<span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:${C.dim};background:${C.accentLight};padding:3px 8px;border-radius:4px">${fmtDT(new Date(l.time))}</span>
+<span style="font-weight:700;letter-spacing:2px;text-transform:uppercase;font-size:10px;color:${color};background:${color}20;padding:3px 10px;border-radius:4px">${typeNames[l.type]||l.type}</span>
+<span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:${C.dim};background:${C.bg};padding:3px 8px;border-radius:4px">${fmtDT(new Date(l.time))}</span>
 </div>
 <div style="margin:6px 0;font-size:12px;color:${C.text};line-height:1.6">${l.text}</div>
-<div style="font-size:9px;color:${C.accent};font-family:'JetBrains Mono',monospace;display:flex;gap:12px;flex-wrap:wrap;margin-top:6px;padding-top:6px;border-top:1px dashed ${C.border}">
+<div style="font-size:9px;color:${C.accentDim};font-family:'JetBrains Mono',monospace;display:flex;gap:12px;flex-wrap:wrap;margin-top:6px;padding-top:6px;border-top:1px dashed ${C.border}">
 <span>👥 ${l.team}</span>${l.gps?`<span>📍 ${l.gps}</span>`:''}</div></div>`}).join('')}</div>`}
 
 let wpSection='';
 if(S.waypoints&&S.waypoints.length){
 wpSection=`<div class="section"><div class="section-title">🧭 TRACK DE NAVEGAÇÃO (${S.waypoints.length} PONTOS)</div>
 <table><thead><tr><th>#</th><th>NOME</th><th>COORDENADAS (GMS)</th><th>HORÁRIO</th></tr></thead>
-<tbody>${S.waypoints.map(w=>`<tr><td style="text-align:center;font-weight:700;color:${C.accent};font-size:14px">${w.num}</td><td style="color:${C.text}"><strong>${w.name}</strong>${w.note?`<br><span style="font-size:9px;color:${C.dim}">${w.note}</span>`:''}</td><td style="font-family:'JetBrains Mono',monospace;font-size:10px;color:${C.headerBg}">${toGMS(w.lat,true)} / ${toGMS(w.lng,false)}</td><td style="font-family:'JetBrains Mono',monospace;font-size:10px;color:${C.dim}">${fmtDT(new Date(w.time))}</td></tr>`).join('')}</tbody></table></div>`}
+<tbody>${S.waypoints.map(w=>`<tr><td style="text-align:center;font-weight:700;color:${C.accent};font-size:14px">${w.num}</td><td style="color:${C.text}"><strong>${w.name}</strong>${w.note?`<br><span style="font-size:9px;color:${C.dim}">${w.note}</span>`:''}</td><td style="font-family:'JetBrains Mono',monospace;font-size:10px;color:${C.accent}">${toGMS(w.lat,true)} / ${toGMS(w.lng,false)}</td><td style="font-family:'JetBrains Mono',monospace;font-size:10px;color:${C.dim}">${fmtDT(new Date(w.time))}</td></tr>`).join('')}</tbody></table></div>`}
 
 let commsSection='';
 if(S.comms&&S.comms.length){
 commsSection=`<div class="section"><div class="section-title">📡 COMUNICAÇÕES (${S.comms.length})</div>
-${S.comms.slice().reverse().map(c=>{const isEmerg=c.type==='emergency';return`<div style="padding:12px 16px;background:${isEmerg?'#ffebee':'#fff'};border-left:5px solid ${isEmerg?'#c62828':C.accent};border-radius:6px;margin-bottom:10px;border:1px solid ${C.border}">
+${S.comms.slice().reverse().map(c=>{const isEmerg=c.type==='emergency';return`<div style="padding:12px 16px;background:${isEmerg?'#2a1515':C.card};border-left:5px solid ${isEmerg?'#b04848':C.accent};border-radius:6px;margin-bottom:10px;border:1px solid ${C.border}">
 <div style="display:flex;justify-content:space-between;margin-bottom:6px">
-<span style="font-weight:700;letter-spacing:1px;text-transform:uppercase;font-size:10px;color:${isEmerg?'#c62828':C.accent}">${isEmerg?'🚨 EMERGÊNCIA':c.type==='routine'?'ROTINA':c.type==='report'?'REPORTE':'SOLICITAÇÃO'}</span>
+<span style="font-weight:700;letter-spacing:1px;text-transform:uppercase;font-size:10px;color:${isEmerg?'#b04848':C.accent}">${isEmerg?'🚨 EMERGÊNCIA':c.type==='routine'?'ROTINA':c.type==='report'?'REPORTE':'SOLICITAÇÃO'}</span>
 <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:${C.dim}">${fmtDT(new Date(c.time))}</span>
 </div>
 <div style="font-size:12px;color:${C.text}"><strong>${c.contact||'?'}</strong> · ${c.freq||'?'}<br>${c.msg}</div></div>`}).join('')}</div>`}
@@ -601,41 +601,45 @@ return`<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><title>Rela
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Inter',sans-serif;background:#f0f0f0;color:#1a1a1a;line-height:1.6;padding:20px}
-.container{max-width:900px;margin:0 auto;background:#ffffff;box-shadow:0 4px 20px rgba(0,0,0,0.1);overflow:hidden;border-top:8px solid #00bfa5}
-.header{background:#ffffff;color:#004d40;padding:50px 40px 40px;text-align:center;position:relative;border-bottom:4px solid #00bfa5}
-.header-emblem{font-size:64px;margin-bottom:12px;color:#00bfa5}
-.header-unit{font-family:'Oswald',sans-serif;font-size:48px;letter-spacing:8px;font-weight:700;color:#00bfa5;margin-bottom:4px}
-.header-motto{font-family:'Oswald',sans-serif;font-size:18px;letter-spacing:6px;color:#1a1a1a;text-transform:uppercase;margin-bottom:20px;font-weight:600}
-.header-divider{width:120px;height:4px;background:#00bfa5;margin:0 auto 20px}
-.header-doc{font-family:'Oswald',sans-serif;font-size:14px;letter-spacing:4px;color:#666;text-transform:uppercase;margin-bottom:6px}
-.header-mission{font-size:28px;margin-top:10px;letter-spacing:4px;font-family:'Oswald',sans-serif;color:#004d40;font-weight:700}
-.header-date{font-size:12px;margin-top:10px;color:#666;font-family:'JetBrains Mono',monospace}
-.section{padding:30px 35px;border-bottom:1px solid #e0e0e0}
+body{font-family:'Inter',sans-serif;background:#050a08;color:#e8e4d8;line-height:1.6;padding:20px}
+.container{max-width:900px;margin:0 auto;background:#0a1410;box-shadow:0 8px 32px rgba(0,0,0,0.5);overflow:hidden;border:3px solid #c9a961}
+.header{background:linear-gradient(180deg,#050a08 0%,#0a1410 60%,#142822 100%);color:#c9a961;padding:50px 40px 40px;text-align:center;position:relative;border-bottom:6px solid #c9a961}
+.header::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,transparent,#c9a961,transparent)}
+.header-emblem{font-size:64px;margin-bottom:12px;filter:drop-shadow(0 4px 12px rgba(201,169,97,0.3))}
+.header-unit{font-family:'Oswald',sans-serif;font-size:42px;letter-spacing:8px;font-weight:700;color:#c9a961;text-shadow:0 2px 8px rgba(0,0,0,0.5);margin-bottom:4px}
+.header-motto{font-family:'Oswald',sans-serif;font-size:18px;letter-spacing:6px;color:#e8e4d8;text-transform:uppercase;opacity:0.9;margin-bottom:20px;font-weight:500}
+.header-divider{width:120px;height:3px;background:linear-gradient(90deg,transparent,#c9a961,transparent);margin:0 auto 20px}
+.header-doc{font-family:'Oswald',sans-serif;font-size:14px;letter-spacing:4px;color:#a8a090;text-transform:uppercase;margin-bottom:6px}
+.header-mission{font-size:26px;margin-top:10px;letter-spacing:4px;font-family:'Oswald',sans-serif;color:#fff;font-weight:600}
+.header-date{font-size:12px;margin-top:10px;opacity:0.7;font-family:'JetBrains Mono',monospace;color:#a8a090}
+.section{padding:30px 35px;border-bottom:2px solid #2d4a3c}
 .section:last-child{border:none}
-.section-title{font-family:'Oswald',sans-serif;font-size:22px;color:#00bfa5;letter-spacing:4px;text-transform:uppercase;margin-bottom:18px;padding-bottom:10px;border-bottom:3px solid #00bfa5;display:inline-block;font-weight:700}
+.section-title{font-family:'Oswald',sans-serif;font-size:20px;color:#c9a961;letter-spacing:4px;text-transform:uppercase;margin-bottom:18px;padding-bottom:10px;border-bottom:3px solid #8a7340;display:inline-block;font-weight:600}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
-.field{padding:12px 16px;background:#f8fffe;border-left:4px solid #00bfa5;border-radius:6px;border:1px solid #e0f7f4}
-.field-label{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#00838f;margin-bottom:3px;font-weight:700}
-.field-value{font-size:14px;font-weight:600;color:#1a1a1a}
-table{width:100%;border-collapse:collapse;font-size:11px;margin-top:12px;border:1px solid #e0e0e0}
-th{background:#004d40;color:#ffffff;padding:12px 10px;text-align:left;font-family:'Oswald',sans-serif;letter-spacing:2px;text-transform:uppercase;font-size:10px;font-weight:600}
-td{padding:10px;border-bottom:1px solid #e0e0e0;color:#1a1a1a}
-tr:nth-child(even){background:#f8fffe}
-.footer{background:#ffffff;color:#666;padding:30px 35px;text-align:center;position:relative;border-top:4px solid #00bfa5}
-.footer-emblem{font-size:32px;margin-bottom:10px;color:#00bfa5}
-.footer-text{font-family:'Oswald',sans-serif;font-size:14px;letter-spacing:4px;color:#00bfa5;text-transform:uppercase;margin-bottom:6px;font-weight:700}
-.footer-sub{font-size:10px;color:#666;font-family:'JetBrains Mono',monospace}
-.print-btn{position:fixed;top:20px;right:20px;padding:14px 24px;background:#004d40;color:#fff;border:2px solid #00bfa5;border-radius:8px;font-family:'Oswald',sans-serif;letter-spacing:3px;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,0.2);font-size:13px;text-transform:uppercase;font-weight:600;z-index:1000}
+.field{padding:12px 16px;background:#0f1d18;border-left:4px solid #c9a961;border-radius:6px;border:1px solid #2d4a3c}
+.field-label{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#8a7340;margin-bottom:3px;font-weight:700}
+.field-value{font-size:14px;font-weight:600;color:#e8e4d8}
+table{width:100%;border-collapse:collapse;font-size:11px;margin-top:12px;border:1px solid #2d4a3c}
+th{background:#142822;color:#c9a961;padding:12px 10px;text-align:left;font-family:'Oswald',sans-serif;letter-spacing:2px;text-transform:uppercase;font-size:10px;font-weight:600;border-bottom:2px solid #8a7340}
+td{padding:10px;border-bottom:1px solid #2d4a3c;color:#e8e4d8}
+tr:nth-child(even){background:#0a1410}
+.footer{background:#050a08;color:#6b6355;padding:30px 35px;text-align:center;position:relative;border-top:6px solid #c9a961}
+.footer::before{content:'';position:absolute;bottom:0;left:0;right:0;height:4px;background:linear-gradient(90deg,transparent,#c9a961,transparent)}
+.footer-emblem{font-size:32px;margin-bottom:10px;opacity:0.6}
+.footer-text{font-family:'Oswald',sans-serif;font-size:12px;letter-spacing:4px;color:#c9a961;text-transform:uppercase;margin-bottom:6px}
+.footer-sub{font-size:10px;color:#6b6355;font-family:'JetBrains Mono',monospace}
+.print-btn{position:fixed;top:20px;right:20px;padding:14px 24px;background:#142822;color:#c9a961;border:2px solid #c9a961;border-radius:8px;font-family:'Oswald',sans-serif;letter-spacing:3px;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,0.4);font-size:13px;text-transform:uppercase;font-weight:600;z-index:1000}
 @media print{
   *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;color-adjust:exact!important}
-  body{background:#fff!important;padding:0}
-  .container{box-shadow:none;border-top:8px solid #00bfa5!important}
-  .header{border-bottom:4px solid #00bfa5!important}
-  .section-title{color:#00bfa5!important;border-bottom:3px solid #00bfa5!important}
-  th{background:#004d40!important;color:#fff!important}
-  .field{background:#f8fffe!important;border-left:4px solid #00bfa5!important}
-  .footer{border-top:4px solid #00bfa5!important}
+  body{background:#050a08!important;padding:0}
+  .container{box-shadow:none;border:3px solid #c9a961!important;background:#0a1410!important}
+  .header{background:#0a1410!important;border-bottom:6px solid #c9a961!important}
+  .section{background:#0a1410!important;border-bottom:2px solid #2d4a3c!important}
+  .field{background:#0f1d18!important;border:1px solid #2d4a3c!important;border-left:4px solid #c9a961!important}
+  th{background:#142822!important;color:#c9a961!important;border-bottom:2px solid #8a7340!important}
+  td{color:#e8e4d8!important;border-bottom:1px solid #2d4a3c!important}
+  tr:nth-child(even){background:#0a1410!important}
+  .footer{background:#050a08!important;border-top:6px solid #c9a961!important}
   .print-btn{display:none}
   img{max-width:100%!important;page-break-inside:avoid}
   .section{page-break-inside:avoid}
@@ -666,7 +670,7 @@ ${cargoSection}${crewSection}${paxSection}${wpSection}${logSection}${commsSectio
 <div class="footer-emblem">⚓</div>
 <div class="footer-text">8º BEC · NAVEGAR É O NOSSO COMBATE!</div>
 <div class="footer-sub">RioOps PRO 2.0 · Documento gerado automaticamente · ${fmtDT(now)}</div>
-<div style="margin-top:12px;font-size:9px;color:#00838f;letter-spacing:1px;font-weight:700">CLASSIFICAÇÃO: USO INTERNO · DISTRIBUIÇÃO RESTRITA</div>
+<div style="margin-top:12px;font-size:9px;color:#8a7340;letter-spacing:1px">CLASSIFICAÇÃO: USO INTERNO · DISTRIBUIÇÃO RESTRITA</div>
 </div></div></body></html>`}
 function closeModal(id){$(id).classList.remove('active')}
 document.querySelectorAll('.modal').forEach(m=>{m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('active')})});
